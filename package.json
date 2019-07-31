@@ -46,7 +46,7 @@
     "test:lint": "npx eslint --ext .ts --ext .tsx src/",
     "test:types": "npx tsc --skipLibCheck",
     "test:unit": "npx jest",
-    "dist": "npx build",
+    "dist": "npx electron-builder",
     "clean": "rm -rf dist && rm -rf .cache"
   },
   "repository": {
