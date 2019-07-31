@@ -15,9 +15,12 @@ steps:
     versionSpec: '12.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run test
-    npm run build
-    npm run dist
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      npm install
+      npm run test
+      npm run build
+      npm run dist
   displayName: 'Test, build and distribute'
