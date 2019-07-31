@@ -30,14 +30,10 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'npm install'
-  displayName: 'Install node modules'
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'npm test'
-  displayName: 'Test'
+    script: |
+      npm install
+      npm test
+  displayName: 'Install node modules & Test'
 
 - task: Bash@3
   inputs:
