@@ -44,7 +44,7 @@
     "build:node": "parcel build --target electron src/main.ts src/preload.ts",
     "test": "npm run test:lint && npm run test:types && npm run test:unit",
     "test:lint": "npx eslint --ext .ts --ext .tsx src/",
-    "test:types": "npx tsc --skipLibCheck",
+    "test:types": "npx tsc",
     "test:unit": "npx jest",
     "dist": "npx electron-builder",
     "clean": "rm -rf dist && rm -rf .cache"

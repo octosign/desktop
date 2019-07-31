@@ -13,7 +13,8 @@
         "noUnusedLocals": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
-        "noEmit": true
+        "noEmit": true,
+        "skipLibCheck": true
     },
     "include": ["src/**/*"],
     "exclude": [".git", "node_modules", "dist"]
