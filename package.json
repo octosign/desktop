@@ -2,10 +2,9 @@
   "name": "octosign",
   "version": "0.1.0",
   "description": "Desktop electronic signature software",
-  "main": "index.js",
+  "main": "dist/main.js",
   "dependencies": {
     "@types/mime-types": "^2.1.0",
-    "electron": "^6.0.0",
     "electron-is-dev": "^1.1.0",
     "jest-styled-components": "^7.0.0-beta.1",
     "mime-types": "^2.1.24",
@@ -19,6 +18,8 @@
     "@types/styled-components": "^4.1.18",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
+    "electron-builder": "^21.2.0",
+    "electron": "^6.0.0",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
@@ -95,8 +96,7 @@
     },
     "publish": {
       "provider": "github",
-      "owner": "durasj",
-      "releaseType": "draft"
+      "owner": "durasj"
     }
   }
 }
