@@ -30,11 +30,25 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: |
-      npm install
-      npm run test
-      npm run build
-      npm run dist
+    script: 'npm install'
+  displayName: 'Install node modules'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'npm test'
+  displayName: 'Test'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'npm run build'
+  displayName: 'Build'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: npm run dist
   env:
     GH_TOKEN: $(GH_TOKEN)
-  displayName: 'Test, build and distribute'
+  displayName: 'Create and upload distributables'
