@@ -40,7 +40,7 @@
     "build:ui": "parcel build --public-url ./ src/ui/index.html -d dist/ui",
     "build:node": "parcel build --target electron src/main.ts src/preload.ts",
     "test": "npm run test:lint && npm run test:types && npm run test:unit",
-    "test:lint": "eslint src/**",
+    "test:lint": "eslint \"src/**/*.ts\" \"src/**/*.tsx\"",
     "test:types": "tsc",
     "test:unit": "jest",
     "dist": "build",
