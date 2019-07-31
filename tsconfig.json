@@ -8,7 +8,7 @@
         "declaration": true,
         "jsx": "react",
         "lib": ["es2020", "dom"],
-        "types": ["node"],
+        "types": ["node", "jest"],
         "strict": true,
         "noUnusedLocals": true,
         "noImplicitReturns": true,
