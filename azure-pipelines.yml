@@ -1,19 +1,31 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
 - master
 
+strategy:
+  matrix:
+    linux:
+      imageName: 'ubuntu-latest'
+    mac:
+      imageName: 'macos-latest'
+    windows:
+      imageName: 'windows-latest'
+
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: $(imageName)
 
 steps:
 - task: NodeTool@0
   inputs:
     versionSpec: '12.x'
   displayName: 'Install Node.js'
+
+- task: CacheBeta@0
+  inputs:
+    key: |
+      $(Agent.OS)
+      $(Build.SourcesDirectory)/package-lock.json
+    path: '$(Build.SourcesDirectory)/node_modules'
+  displayName: 'Cache node_modules'
 
 - task: Bash@3
   inputs:
