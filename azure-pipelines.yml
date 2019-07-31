@@ -35,4 +35,6 @@ steps:
       npm run test
       npm run build
       npm run dist
+  env:
+    GH_TOKEN: $(GH_TOKEN)
   displayName: 'Test, build and distribute'
