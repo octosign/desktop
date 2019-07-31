@@ -19,21 +19,26 @@ steps:
     versionSpec: '12.x'
   displayName: 'Install Node.js'
 
-- task: CacheBeta@0
-  inputs:
-    key: |
-      $(Agent.OS)
-      $(Build.SourcesDirectory)/package-lock.json
-    path: '$(Build.SourcesDirectory)/node_modules'
-  displayName: 'Cache node_modules'
+# Temporary disabled caching due to issues on Mac and Linux (executable permissions?)
+#- task: CacheBeta@0
+#  inputs:
+#    key: |
+#      $(Agent.OS)
+#      $(Build.SourcesDirectory)/package-lock.json
+#    path: '$(Build.SourcesDirectory)/node_modules'
+#  displayName: 'Cache node_modules'
 
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: |
-      npm install
-      npm test
-  displayName: 'Install node modules & Test'
+    script: 'npm install'
+  displayName: 'Install node modules'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'npm test'
+  displayName: 'Test'
 
 - task: Bash@3
   inputs:
