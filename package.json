@@ -43,9 +43,9 @@
     "build:ui": "parcel build --public-url ./ src/ui/index.html -d dist/ui",
     "build:node": "parcel build --target electron src/main.ts src/preload.ts",
     "test": "npm run test:lint && npm run test:types && npm run test:unit",
-    "test:lint": "npx eslint --ext .ts --ext .tsx src/",
-    "test:types": "npx tsc",
-    "test:unit": "npx jest",
+    "test:lint": "npx --no-install eslint --ext .ts --ext .tsx src/",
+    "test:types": "npx --no-install tsc",
+    "test:unit": "npx --no-install jest",
     "dist": "npx electron-builder",
     "clean": "rm -rf dist && rm -rf .cache"
   },
