@@ -28,8 +28,8 @@ const FilesIcon = styled(LibraryAddTwoToneIcon)`
 
 const IntroPage = () => {
   const onDrop = useCallback(acceptedFiles => {
-    // Do something with the files
-    console.log(acceptedFiles);
+    // TODO: Do something with the files
+    window.OctoSign.sign(acceptedFiles[0].path);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
