@@ -78,6 +78,9 @@
     "files": [
       "dist${/*}"
     ],
+    "extraResources": [
+      "backends/*"
+    ],
     "directories": {
       "buildResources": "res",
       "output": "artifacts"
