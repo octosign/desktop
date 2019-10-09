@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
@@ -27,22 +27,42 @@ const FilesIcon = styled(LibraryAddTwoToneIcon)`
 `;
 
 const IntroPage = () => {
-  const onDrop = useCallback(acceptedFiles => {
-    // TODO: Do something with the files
-    window.OctoSign.sign(acceptedFiles[0].path);
+  const [isSigning, setIsSigning] = useState(false);
+
+  const onDrop = useCallback(async acceptedFiles => {
+    setIsSigning(true);
+
+    try {
+      await window.OctoSign.sign(acceptedFiles[0].path);
+    } catch (err) {
+      alert(err);
+    }
+
+    setIsSigning(false);
   }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: 'application/pdf',
+  });
 
   return (
     <Container {...getRootProps()} active={isDragActive}>
-      <input {...getInputProps()} />
-      <FilesIcon color={isDragActive ? 'secondary' : 'disabled'} />
-      <Box marginBottom={1.5}>
-        <Typography>Drag and drop some files here, or click to select files.</Typography>
-      </Box>
-      <Button variant="contained" color="primary">
-        Select files
-      </Button>
+      {isSigning ? (
+        <Box marginBottom={1.5}>
+          <Typography>Signing...</Typography>
+        </Box>
+      ) : (
+        <>
+          <input {...getInputProps()} />
+          <FilesIcon color={isDragActive ? 'secondary' : 'disabled'} />
+          <Box marginBottom={1.5}>
+            <Typography>Drag and drop some files here, or click to select files.</Typography>
+          </Box>
+          <Button variant="contained" color="primary">
+            Select files
+          </Button>
+        </>
+      )}
     </Container>
   );
 };

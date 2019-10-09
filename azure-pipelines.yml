@@ -49,6 +49,12 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
+    script: 'npm run build:backends'
+  displayName: 'Build backends'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
     script: npm run dist
   env:
     GH_TOKEN: $(GH_TOKEN)

@@ -20,6 +20,7 @@
     "@types/styled-components": "^4.1.19",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
+    "ajv": "^6.10.2",
     "electron": "^6.0.9",
     "electron-builder": "^21.2.0",
     "eslint": "^6.3.0",
@@ -34,7 +35,8 @@
     "react-dropzone": "^10.1.8",
     "styled-components": "^5.0.0-beta.8-groupsizefix",
     "typeface-roboto": "0.0.75",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "yaml": "^1.7.1"
   },
   "scripts": {
     "start": "electron ./dist/main.js",
@@ -42,6 +44,7 @@
     "build": "npm run build:node && npm run build:ui",
     "build:ui": "parcel build --public-url ./ src/ui/index.html -d dist/ui",
     "build:node": "parcel build --target electron src/main.ts src/preload.ts",
+    "build:backends": "node ./backends/build.js",
     "test": "npm run test:lint && npm run test:types && npm run test:unit",
     "test:lint": "npx --no-install eslint --ext .ts --ext .tsx src/",
     "test:types": "npx --no-install tsc",
@@ -79,7 +82,10 @@
       "dist${/*}"
     ],
     "extraResources": [
-      "backends/*"
+      {
+        "from": "backends/dist",
+        "to": "backends"
+      }
     ],
     "directories": {
       "buildResources": "res",
