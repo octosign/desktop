@@ -1,6 +1,6 @@
 {
-  "name": "octosign",
-  "version": "0.1.0",
+  "name": "com.octosign",
+  "version": "0.1.0-dev",
   "description": "Desktop electronic signature software",
   "main": "dist/main.js",
   "dependencies": {
