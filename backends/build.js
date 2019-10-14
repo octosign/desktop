@@ -9,6 +9,11 @@ const exec = util.promisify(require('child_process').exec);
  * Tests and builds backends so they are ready to be bundled
  */
 
+process.on('unhandledRejection', error => {
+  console.error(error);
+  process.exit(1);
+});
+
 // Load list of the backends
 fs.readdir('./backends', async function(err, items) {
   if (err) {
