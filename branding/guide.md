@@ -34,7 +34,7 @@ This type of the logo and the icon must only be used on a light pre-defined colo
 
 ## Colors
 The color palette will open once clicked on the image. 
-[![alt text](examples/Palette.png)](https://coolors.co/131515-eaf2ef-0b5369-1b9aaa-d1495b)
+[![alt text](examples/Palette.png)](https://coolors.co/app/0a0d14-ebeef4-1a1f33-0066ff-d13a44)
 
 ## Typography
 
