@@ -38,5 +38,5 @@ The color palette will open once clicked on the image.
 
 ## Typography
 
-### Montserrat
-This font is used for headlines.
+### Roboto
+This font is used everywhere.
