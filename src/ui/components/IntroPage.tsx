@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { useDropzone } from 'react-dropzone';
 import Box from '@material-ui/core/Box';
-import LibraryAddTwoToneIcon from '@material-ui/icons/LibraryAddTwoTone';
 import { lighten } from '@material-ui/core/styles';
+
+import Footer from './Footer';
+import FileCard from './FileCard';
 
 const Container = styled.div<{ active: boolean }>`
   width: 100%;
@@ -16,53 +17,64 @@ const Container = styled.div<{ active: boolean }>`
   flex-direction: column;
   background-color: ${p =>
     p.active ? lighten(p.theme.palette.secondary.main, 0.9) : p.theme.palette.background.default};
-  border: ${p => (p.active ? 0.25 : 0)}rem solid ${p => p.theme.palette.secondary.main};
-  transition: background-color 200ms ease-out, border 100ms ease-out;
+  border: 0.25rem solid
+    ${p => (p.active ? p.theme.palette.secondary.main : p.theme.palette.background.default)};
+  transition: background-color 0.15s ease-out, border 0.1s ease-out;
 `;
 
-const FilesIcon = styled(LibraryAddTwoToneIcon)`
-  font-size: 6rem;
-  margin-bottom: ${p => p.theme.spacing(4)};
-  transition: color 200ms ease-out;
+const Content = styled.div`
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Cards = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  max-height: calc(100vh - 7rem);
 `;
 
 const IntroPage = () => {
-  const [isSigning, setIsSigning] = useState(false);
+  const [files, setFiles] = useState<File[]>([]);
 
-  const onDrop = useCallback(async acceptedFiles => {
-    setIsSigning(true);
+  const onDrop = useCallback((acceptedFiles: File[]) => setFiles(acceptedFiles), []);
 
-    try {
-      await window.OctoSign.sign(acceptedFiles[0].path);
-    } catch (err) {
-      alert(err);
-    }
-
-    setIsSigning(false);
-  }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     onDrop,
+    multiple: true,
     accept: 'application/pdf',
+    onDragEnter: undefined,
+    onDragOver: undefined,
+    onDragLeave: undefined,
+    noClick: true,
   });
 
   return (
     <Container {...getRootProps()} active={isDragActive}>
-      {isSigning ? (
-        <Box marginBottom={1.5}>
-          <Typography>Signing...</Typography>
-        </Box>
-      ) : (
-        <>
-          <input {...getInputProps()} />
-          <FilesIcon color={isDragActive ? 'secondary' : 'disabled'} />
+      <input {...getInputProps()} />
+
+      <Content onClick={files.length === 0 ? open : undefined}>
+        {files.length === 0 ? (
           <Box marginBottom={1.5}>
-            <Typography>Drag and drop some files here, or click to select files.</Typography>
+            <Typography align="center" color={isDragActive ? 'secondary' : 'primary'} variant="h2">
+              {isDragActive ? 'Drop your files here' : 'Sign a new document'}
+            </Typography>
           </Box>
-          <Button variant="contained" color="primary">
-            Select files
-          </Button>
-        </>
-      )}
+        ) : (
+          <Cards>
+            {files.map(f => (
+              <FileCard key={f.name + f.lastModified + f.size} file={f} />
+            ))}
+          </Cards>
+        )}
+      </Content>
+
+      <Footer onSelectFiles={open} />
     </Container>
   );
 };

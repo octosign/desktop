@@ -1,6 +1,7 @@
-import { app, BrowserWindow, shell, session } from 'electron';
+import { app, BrowserWindow, shell, session, protocol } from 'electron';
 import { join } from 'path';
 import isDev from 'electron-is-dev';
+import interceptStreamProtocol from './main/interceptStreamProtocol';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -11,9 +12,15 @@ function createWindow() {
     throw new Error('No default session');
   }
 
+  protocol.interceptStreamProtocol('file', interceptStreamProtocol());
+
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 640,
+    minWidth: 860,
+    minHeight: 600,
+    autoHideMenuBar: true,
+    backgroundColor: '#fafafa',
     webPreferences: {
       contextIsolation: false,
       nodeIntegration: false,
@@ -21,22 +28,15 @@ function createWindow() {
     },
   });
   mainWindow.removeMenu();
-  mainWindow.webContents.session.webRequest.onHeadersReceived((details, callback) => {
-    callback({
-      responseHeaders: {
-        ...details.responseHeaders,
-        'Content-Security-Policy': ["default-src 'self' data"],
-      },
-    });
-  });
 
   mainWindow.loadFile('./ui/index.html');
 
-  if (isDev) {
-    mainWindow.webContents.openDevTools({
-      mode: 'detach',
-    });
-  }
+  //if (isDev) {
+  mainWindow.webContents.openDevTools({
+    mode: 'detach',
+    activate: true,
+  });
+  //}
 
   mainWindow.on('closed', function() {
     mainWindow = undefined;
