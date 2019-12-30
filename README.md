@@ -4,10 +4,10 @@
   </a>
 </p>
 
-<h3 align="center">Octosign</h3>
+<h3 align="center">Octosign - desktop electronic signature software</h3>
 
 <p align="center">
-  Desktop electronic signature software. Sign your document (PDF, DOC, JPG...) using image or cryptography (PAdES, CAdES, XAdES).
+  Sign your document (PDF, JPG...) using image or cryptography (PAdES, CAdES, XAdES).
   <br>
   <a href="https://octosign.com/downloads/"><strong>Download »</strong></a>
   <br>
