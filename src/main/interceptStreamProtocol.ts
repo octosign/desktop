@@ -42,8 +42,6 @@ function interceptStreamProtocol() {
       'X-XSS-Protection': '1; mode=block',
     };
 
-    console.log(filePath);
-
     if (!fs.existsSync(filePath)) {
       const stream404 = new Readable();
       stream404.push('File not found');

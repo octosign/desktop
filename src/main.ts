@@ -31,12 +31,12 @@ function createWindow() {
 
   mainWindow.loadFile('./ui/index.html');
 
-  //if (isDev) {
-  mainWindow.webContents.openDevTools({
-    mode: 'detach',
-    activate: true,
-  });
-  //}
+  if (isDev) {
+    mainWindow.webContents.openDevTools({
+      mode: 'detach',
+      activate: true,
+    });
+  }
 
   mainWindow.on('closed', function() {
     mainWindow = undefined;
