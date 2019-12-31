@@ -9,7 +9,7 @@
 <p align="center">
   Sign your document (PDF, JPG...) using image or cryptography (PAdES, CAdES, XAdES).
   <br>
-  <a href="https://octosign.com/downloads/"><strong>Download »</strong></a>
+  <a href="https://octosign.com/download/"><strong>Download »</strong></a>
   <br>
   <br>
   <a href="https://github.com/durasj/octosign/issues/new?template=bug.md">Report bug</a>

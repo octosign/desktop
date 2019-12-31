@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles';
-import 'typeface-roboto';
 
 import theme from './theme';
 import App from './components/App';
@@ -18,4 +17,5 @@ ReactDOM.render(
     </MuiThemeProvider>
   </>,
   document.getElementById('root'),
+  () => window.showWindow(),
 );

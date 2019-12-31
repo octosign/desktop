@@ -6,6 +6,8 @@ declare module 'preload' {
 
     interface Window {
       OctoSign: OctoSign;
+
+      showWindow: () => void;
     }
   }
 }
