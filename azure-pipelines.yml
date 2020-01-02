@@ -34,7 +34,7 @@ steps:
     script: |
       echo "JAVA_HOME=$JAVA_HOME"
       java -version
-  condition: eq(variables[System.Debug], true)
+  condition: eq(variables['System.Debug'], true)
   displayName: 'DEBUG: Show java home and version'
 
 # Temporary disabled caching due to issues on Mac and Linux (executable permissions?)
