@@ -4,11 +4,11 @@ trigger:
 strategy:
   matrix:
     linux:
-      imageName: 'ubuntu-latest'
+      imageName: 'ubuntu-18.04'
     mac:
-      imageName: 'macos-latest'
+      imageName: 'macOS-10.14'
     windows:
-      imageName: 'windows-latest'
+      imageName: 'windows-2019'
 
 pool:
   vmImage: $(imageName)
@@ -22,10 +22,12 @@ steps:
     versionSpec: '12.x'
   displayName: 'Install Node.js'
 
-- task: JavaToolInstaller@0
+# There should be ENV variables like "JAVA_HOME_11_X64" see https://github.com/microsoft/azure-pipelines-tasks/blob/a24321075eae67b13d0865e4199d5ef82d3effca/Tasks/Common/java-common/java-common.ts#L45
+- bash:
   inputs:
-    versionSpec: "11"
-  displayName: 'Set JDK to v11'
+    targetType: 'inline'
+    script: "echo '##vso[task.setvariable variable=JAVA_HOME]$JAVA_HOME_11_X64'"
+  displayName: 'Set JAVA_HOME to JDK v11'
 
 # Temporary disabled caching due to issues on Mac and Linux (executable permissions?)
 #- task: CacheBeta@0
