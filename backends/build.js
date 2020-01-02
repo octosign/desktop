@@ -52,12 +52,12 @@ fs.readdir('./backends', async function(err, items) {
     }
 
     // Copy distributables
-    const { err: cpErr, stderr: cpStdErr } = await exec('cp -R ./dist/* ../dist/' + backend, {
+    const { stderr: cpErr } = await exec('cp -R ./dist/* ../dist/' + backend, {
       cwd: backendPath,
     });
     if (cpErr) {
+      console.error('# ERROR: ');
       console.error(cpErr);
-      console.error(cpStdErr);
       process.exit(1);
     }
 
