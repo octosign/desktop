@@ -33,8 +33,9 @@ steps:
     targetType: 'inline'
     script: |
       echo "JAVA_HOME=$JAVA_HOME"
-      java --version
-  displayName: 'Show java home and version'
+      java -version
+  condition: eq($(System.Debug), true)
+  displayName: 'DEBUG: Show java home and version'
 
 # Temporary disabled caching due to issues on Mac and Linux (executable permissions?)
 #- task: CacheBeta@0
