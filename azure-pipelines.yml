@@ -26,8 +26,15 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: "echo '##vso[task.setvariable variable=JAVA_HOME]$JAVA_HOME_11_X64'"
+    script: 'echo "##vso[task.setvariable variable=JAVA_HOME;]$JAVA_HOME_11_X64"'
   displayName: 'Set JAVA_HOME to JDK v11'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "JAVA_HOME=$JAVA_HOME"
+      java --version
+  displayName: 'Show java home and version'
 
 # Temporary disabled caching due to issues on Mac and Linux (executable permissions?)
 #- task: CacheBeta@0
