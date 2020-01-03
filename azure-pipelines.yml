@@ -77,3 +77,10 @@ steps:
   env:
     GH_TOKEN: $(GH_TOKEN)
   displayName: 'Create and upload distributables'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: npx codecov --disable=gcov
+  env:
+    CODECOV_TOKEN: $(CODECOV_TOKEN)

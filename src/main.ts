@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, session } from 'electron';
+import { app, BrowserWindow, shell } from 'electron';
 import { join } from 'path';
 import isDev from 'electron-is-dev';
 
@@ -7,10 +7,6 @@ import isDev from 'electron-is-dev';
 let mainWindow: BrowserWindow | undefined;
 
 function createWindow() {
-  if (!session.defaultSession) {
-    throw new Error('No default session');
-  }
-
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 640,
@@ -49,8 +45,6 @@ app.on('ready', createWindow);
 // Prevent all navigation and creation of new windows
 app.on('web-contents-created', (event, contents) => {
   contents.on('will-navigate', event => event.preventDefault());
-});
-app.on('web-contents-created', (event, contents) => {
   contents.on('new-window', async (event, navigationUrl) => {
     event.preventDefault();
     await shell.openExternal(navigationUrl);

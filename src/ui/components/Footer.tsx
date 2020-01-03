@@ -62,7 +62,7 @@ const Link = styled.a`
 const Footer: FC<{ onSelectFiles: () => void }> = ({ onSelectFiles }) => (
   <Container>
     <Logo>
-      <a href="http://octosign.com" target="blank">
+      <a href="https://octosign.com" target="blank">
         <img src={logoMono} alt="Logo" />
       </a>
     </Logo>
@@ -77,7 +77,9 @@ const Footer: FC<{ onSelectFiles: () => void }> = ({ onSelectFiles }) => (
     </Middle>
 
     <Links>
-      <Link href="/">Help</Link>
+      <Link href="https://octosign.com/help" target="blank">
+        Help
+      </Link>
       <Link href="/">Settings</Link>
     </Links>
   </Container>
