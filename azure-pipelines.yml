@@ -91,6 +91,15 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
+    script: |
+      sudo apt-get update && sudo apt-get install libgconf-2-4 -y
+      xvfb-run --auto-servernum --server-args='-screen 0, 1600x900x24'
+  condition: eq(variables['Agent.OS'], 'Linux')
+  displayName: 'Prepare Linux for smoke test'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
     script: 'npm run test:smoke'
   displayName: 'Run smoke test'
 
