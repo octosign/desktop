@@ -5,13 +5,14 @@ module.exports = {
     '!**/node_modules/**',
     '!jest.config.js',
     '!**/*.d.ts',
+    '!mockWindowAPI.ts',
   ],
   coverageThreshold: {
     global: {
       branches: 80,
       functions: 80,
       lines: 80,
-      statements: -10,
+      statements: 80,
     },
   },
 };

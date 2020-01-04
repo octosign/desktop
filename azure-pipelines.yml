@@ -38,6 +38,7 @@ steps:
   displayName: 'DEBUG: Show java home and version'
 
 # Temporary disabled caching due to issues on Mac and Linux (executable permissions?)
+# We should cache ~/.npm and ~/.cache instead of node_modules as those are cypress and npm caches
 #- task: CacheBeta@0
 #  inputs:
 #    key: |
@@ -56,6 +57,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'npm test'
+  env:
+    PERCY_TOKEN: $(PERCY_TOKEN)
   displayName: 'Test'
 
 - task: Bash@3
