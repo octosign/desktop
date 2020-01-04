@@ -38,6 +38,7 @@ steps:
   displayName: 'DEBUG: Show java home and version'
 
 # Temporary disabled caching due to issues on Mac and Linux (executable permissions?)
+# https://github.com/durasj/octosign/issues/4
 # We should cache ~/.npm and ~/.cache instead of node_modules as those are cypress and npm caches
 #- task: CacheBeta@0
 #  inputs:
@@ -88,19 +89,20 @@ steps:
     GH_TOKEN: $(GH_TOKEN)
   displayName: 'Create and upload distributables'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: sudo apt-get update && sudo apt-get install libgconf-2-4 -y
-  condition: eq(variables['Agent.OS'], 'Linux')
-  displayName: 'Prepare Linux for smoke test'
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'xvfb-run --auto-servernum --server-args="-screen 0, 1600x900x24" "npm run test:smoke"'
-  displayName: 'Run smoke test'
-  condition: eq(variables['Agent.OS'], 'Linux')
+# We are currently not able to run smoke test on the Linux
+# https://github.com/durasj/octosign/issues/11
+#- task: Bash@3
+#  inputs:
+#    targetType: 'inline'
+#    script: sudo apt-get update && sudo apt-get install libgconf-2-4 -y
+#  condition: eq(variables['Agent.OS'], 'Linux')
+#  displayName: 'Prepare Linux for smoke test'
+#- task: Bash@3
+#  inputs:
+#    targetType: 'inline'
+#    script: 'xvfb-run --auto-servernum --server-args="-screen 0, 1600x900x24" "npm run test:smoke"'
+#  displayName: 'Run smoke test'
+#  condition: eq(variables['Agent.OS'], 'Linux')
 
 - task: Bash@3
   inputs:
