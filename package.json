@@ -107,7 +107,13 @@
       "target": "default"
     },
     "win": {
-      "target": "nsis-web"
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "license": "LICENSE"
     },
     "linux": {
       "target": [
