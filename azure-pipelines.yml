@@ -91,6 +91,12 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
+    script: 'npm run test:smoke'
+  displayName: 'Run smoke test'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
     script: npx codecov --disable=gcov
   env:
     CODECOV_TOKEN: $(CODECOV_TOKEN)

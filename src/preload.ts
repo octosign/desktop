@@ -12,3 +12,10 @@ window.showWindow = () => {
   const currentWindow = remote.getCurrentWindow();
   currentWindow.show();
 };
+
+// Allow require for spectron
+if (process.env.SPECTRON === '1') {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  window.spectronRequire = require;
+}

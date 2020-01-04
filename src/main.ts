@@ -17,7 +17,7 @@ function createWindow() {
     backgroundColor: '#fafafa',
     webPreferences: {
       contextIsolation: false,
-      nodeIntegration: false,
+      nodeIntegration: process.env.SPECTRON === '1',
       preload: join(__dirname, 'preload.js'),
     },
   });
