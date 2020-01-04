@@ -11,7 +11,7 @@ describe('FileCard', () => {
     const file: File = {
       name: 'testFile.pdf',
       path: 'testFile.pdf',
-      lastModified: 1,
+      lastModified: 1578103935000 + new Date().getTimezoneOffset() * 60 * 1000,
       size: 456132,
       type: 'application/pdf',
       slice: () => new Blob(),
@@ -27,7 +27,7 @@ describe('FileCard', () => {
 
     expect(() => getByText(file.name)).not.toThrow();
     expect(() => getByText(`Type: ${file.type}`)).not.toThrow();
-    expect(() => getByText('Last modified: 01/01/1970, 1:00 AM')).not.toThrow();
+    expect(() => getByText('Last modified: 01/04/2020, 2:12 AM')).not.toThrow();
   });
 
   it('Displays human readable file size', () => {
