@@ -84,3 +84,5 @@ steps:
     script: npx codecov --disable=gcov
   env:
     CODECOV_TOKEN: $(CODECOV_TOKEN)
+  condition: eq(variables['Agent.OS	'], 'Linux')
+  displayName: 'Upload code coverage'
