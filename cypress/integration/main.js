@@ -30,12 +30,6 @@ describe('Main Screen', function() {
       .should('have.attr', 'target', 'blank')
       .should('have.attr', 'href')
       .and('contain', 'octosign.com/help');
-
-    cy.get('img[alt="Logo"]').trigger('mouseover');
-    cy.percySnapshot();
-
-    cy.contains('Help').trigger('mouseover');
-    cy.percySnapshot();
   });
 
   it('Allows selecting file by drag and drop', function() {
@@ -50,7 +44,7 @@ describe('Main Screen', function() {
 
     cy.contains('Drop your files here');
 
-    cy.percySnapshot();
+    cy.percySnapshot('Main Screen Allows selecting file by drag and drop - over');
 
     cy.contains('Drop your files here').trigger('drop', {
       force: true,
@@ -63,7 +57,7 @@ describe('Main Screen', function() {
     cy.contains('Size: 3 B');
     cy.contains('Last modified: 01/01/1970');
 
-    cy.percySnapshot();
+    cy.percySnapshot('Main Screen Allows selecting file by drag and drop - drop');
   });
 
   it('Allows selecting file by clicking anywhere and on the button', function() {
