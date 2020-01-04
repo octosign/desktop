@@ -1,7 +1,7 @@
 import React from 'react';
 
-import IntroPage from './IntroPage';
+import MainScreen from './MainScreen';
 
-const App = () => <IntroPage />;
+const App = () => <MainScreen />;
 
 export default App;

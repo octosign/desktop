@@ -3,15 +3,15 @@ import { render, fireEvent, act, waitForElement } from '@testing-library/react';
 import { MuiThemeProvider } from '@material-ui/core';
 import { ThemeProvider } from 'styled-components';
 
-import IntroPage from './IntroPage';
+import MainScreen from './MainScreen';
 import theme from '../theme';
 
-describe('IntroPage', () => {
+describe('MainScreen', () => {
   it('Recognizes dragging of file', async () => {
     const { getByText, container } = render(
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
-          <IntroPage />
+          <MainScreen />
         </ThemeProvider>
       </MuiThemeProvider>,
     );
@@ -27,7 +27,7 @@ describe('IntroPage', () => {
     const { getByText } = render(
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
-          <IntroPage />
+          <MainScreen />
         </ThemeProvider>
       </MuiThemeProvider>,
     );
@@ -41,7 +41,7 @@ describe('IntroPage', () => {
     const { getByText, container } = render(
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
-          <IntroPage />
+          <MainScreen />
         </ThemeProvider>
       </MuiThemeProvider>,
     );
@@ -62,7 +62,7 @@ describe('IntroPage', () => {
     const { getByAltText } = render(
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
-          <IntroPage />
+          <MainScreen />
         </ThemeProvider>
       </MuiThemeProvider>,
     );

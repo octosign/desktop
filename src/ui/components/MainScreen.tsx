@@ -39,7 +39,7 @@ const Cards = styled.div`
   max-height: calc(100vh - 7rem);
 `;
 
-const IntroPage = () => {
+const MainScreen = () => {
   const [files, setFiles] = useState<File[]>([]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => setFiles(acceptedFiles), []);
@@ -79,4 +79,4 @@ const IntroPage = () => {
   );
 };
 
-export default IntroPage;
+export default MainScreen;

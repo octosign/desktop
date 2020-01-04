@@ -12,7 +12,7 @@ export default class BackendManager {
   public async list() {
     const backends = await readdir(this.backendsPath);
     return Promise.all(
-      backends.map(async slug => {
+      backends.map(async () => {
         return new Backend();
       }),
     );

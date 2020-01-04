@@ -56,5 +56,5 @@ describe('Footer', () => {
     expect(anchor.target).toBe('blank');
   });
 
-  it.todo('Contains link to Settings that opens Settings page');
+  it.todo('Contains link to Settings that opens Settings screen');
 });

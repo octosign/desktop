@@ -7,6 +7,7 @@ describe('UI Index', () => {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const ReactDOMServer = require('react-dom/server');
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const renderMock = jest.fn((element, container?, callback?) =>
         ReactDOMServer.renderToString(element),
       );
