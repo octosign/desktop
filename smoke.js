@@ -3,6 +3,11 @@
 const path = require('path');
 const Application = require('spectron').Application;
 
+process.on('unhandledRejection', error => {
+  console.error(error);
+  process.exit(1);
+});
+
 (async () => {
   let execPath;
   switch (process.platform) {
