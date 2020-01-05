@@ -1,0 +1,38 @@
+{
+  "$id": "https://octosign.com/backend.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Backend",
+  "type": "object",
+  "required": ["name", "exec", "build"],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "repository": {
+      "type": "string",
+      "description": "Optional link to the backend repository."
+    },
+    "version": {
+      "type": "string",
+      "description": "SemVer compatible version number.",
+      "default": "dev"
+    },
+    "author": {
+      "type": "string",
+    },
+    "license": {
+      "type": "string",
+    },
+    "exec": {
+      "type": "string",
+      "description": "Command that should be executed when calling backend to perform some operation."
+    },
+    "build": {
+      "type": "string",
+      "description": "Command that is executed to build the backend."
+    }
+  }
+}

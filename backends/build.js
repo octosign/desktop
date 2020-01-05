@@ -4,6 +4,9 @@ const { join } = require('path');
 const yaml = require('yaml');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
+const Ajv = require('ajv');
+
+const schema = require('./backend.schema.json');
 
 /**
  * Tests and builds backends so they are ready to be bundled
@@ -37,11 +40,17 @@ fs.readdir('./backends', async function(err, items) {
     }
 
     const backendPath = join('./backends', backend);
-    const metaFilePath = join(backendPath, 'backend.yaml');
+    const metaFilePath = join(backendPath, 'backend.yml');
     const metaFile = fs.readFileSync(metaFilePath, { encoding: 'utf-8' });
     const metaInfo = yaml.parse(metaFile);
 
-    // TODO: Add schema validation
+    const ajv = new Ajv();
+
+    if (!ajv.validate(schema, metaInfo)) {
+      console.error('Backend configuration did not pass schema check');
+      console.error(ajv.errors);
+      process.exit(1);
+    }
 
     // Call build script
     const { err, stderr } = await exec(metaInfo.build, { cwd: backendPath });
