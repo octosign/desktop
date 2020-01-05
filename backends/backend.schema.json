@@ -21,10 +21,10 @@
       "default": "dev"
     },
     "author": {
-      "type": "string",
+      "type": "string"
     },
     "license": {
-      "type": "string",
+      "type": "string"
     },
     "exec": {
       "type": "string",
