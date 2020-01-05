@@ -3,6 +3,7 @@ const mockWindowAPI = (window: Window) => {
     sign: () => undefined,
   };
 
+  window.apiReady = Promise.resolve();
   window.showWindow = () => undefined;
 };
 

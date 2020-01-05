@@ -1,12 +1,22 @@
 import { remote } from 'electron';
+import { join } from 'path';
+import isDev from 'electron-is-dev';
 
-import Backend from './main/Backend';
+import BackendManager from './main/BackendManager';
 
-const backend = new Backend();
+const backendsPath = isDev
+  ? join(remote.app.getAppPath(), '../backends/dist')
+  : join(remote.app.getAppPath(), '../backends');
 
-window.OctoSign = {
-  sign: path => backend.sign(path),
-};
+window.apiReady = (async () => {
+  const manager = new BackendManager(backendsPath);
+  await manager.load();
+  const backend = manager.get('dss');
+
+  window.OctoSign = {
+    sign: path => backend.sign(path),
+  };
+})();
 
 window.showWindow = () => {
   const currentWindow = remote.getCurrentWindow();

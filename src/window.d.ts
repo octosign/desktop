@@ -7,6 +7,7 @@ declare module 'preload' {
     interface Window {
       OctoSign: OctoSign;
 
+      apiReady: Promise<void>;
       showWindow: () => void;
     }
   }
