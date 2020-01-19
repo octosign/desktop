@@ -1,3 +1,6 @@
 [submodule "backends/dss"]
 	path = backends/dss
 	url = https://github.com/durasj/octosign-dss
+[submodule "backends/image"]
+	path = backends/image
+	url = https://github.com/durasj/octosign-image.git
