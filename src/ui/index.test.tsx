@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { SFCElement } from 'react';
+import ReactDOMServer from 'react-dom/server';
 
 describe('UI Index', () => {
   it('Renders App and assigns showWindow to be called after that', () => {
     jest.isolateModules(() => {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const ReactDOMServer = require('react-dom/server');
-
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const renderMock = jest.fn((element, container?, callback?) =>
         ReactDOMServer.renderToString(element),
@@ -31,5 +29,20 @@ describe('UI Index', () => {
 
       delete window.showWindow;
     });
+  });
+
+  it('Mocks window API if in dev env and is not available', () => {
+    const nodeEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'development';
+    // @ts-ignore
+    window.OctoSign = undefined;
+
+    require('./index');
+
+    expect(window.OctoSign).toBeDefined();
+
+    process.env.NODE_ENV = nodeEnv;
+    // @ts-ignore
+    window.OctoSign = undefined;
   });
 });

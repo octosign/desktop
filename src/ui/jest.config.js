@@ -4,4 +4,6 @@ module.exports = {
   moduleNameMapper: {
     '^.*\\.svg$': '<rootDir>../../__mocks__/statics.ts',
   },
+  setupFiles: ['./jest.setup.js'],
+  clearMocks: true,
 };

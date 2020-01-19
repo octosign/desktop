@@ -4,6 +4,7 @@ import yaml from 'yaml';
 
 import Backend from './Backend';
 import BackendConfig from '../shared/BackendConfig';
+import BackendState from '../shared/BackendState';
 
 export default class BackendManager {
   private readonly backendsPath: string;
@@ -29,10 +30,19 @@ export default class BackendManager {
   }
 
   /**
-   * Get all loaded backends
+   * Get all loaded backends and their state, sorted by identifier
    */
   public list() {
-    return this.backends;
+    return Object.entries(this.backends)
+      .map(
+        entry =>
+          ({
+            slug: entry[0],
+            config: entry[1].getConfig(),
+            available: true,
+          } as BackendState),
+      )
+      .sort((a, b) => (a.slug > b.slug ? 1 : b.slug > a.slug ? -1 : 0));
   }
 
   /**
@@ -51,6 +61,8 @@ export default class BackendManager {
 
     // We have to adjust the path separators to the current platform
     configInfo.exec = configInfo.exec.replace(/\//g, sep);
+    // And remove possible .exe on non-Windows platforms
+    if (process.platform !== 'win32') configInfo.exec = configInfo.exec.replace('.exe', '');
 
     return new Backend(configInfo, backendPath);
   }

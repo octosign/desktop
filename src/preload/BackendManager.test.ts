@@ -30,26 +30,28 @@ describe('Backend Manager', () => {
 
     await manager.load();
 
-    expect(await manager.list()).toStrictEqual({
-      stamper: new Backend(
-        {
-          name: 'Stamper',
-          version: '0.1.0',
-          exec: `.${sep}stamp`,
-          build: './dist',
-        },
-        join('backends/stamper'),
-      ),
-      signer: new Backend(
-        {
+    expect(await manager.list()).toStrictEqual([
+      {
+        available: true,
+        config: {
           name: 'Signer',
           version: '9001.0.0',
           exec: `.${sep}sign`,
           build: './build',
         },
-        join('backends/signer'),
-      ),
-    });
+        slug: 'signer',
+      },
+      {
+        available: true,
+        config: {
+          name: 'Stamper',
+          version: '0.1.0',
+          exec: `.${sep}stamp`,
+          build: './dist',
+        },
+        slug: 'stamper',
+      },
+    ]);
   });
 
   it('Retrieves loaded backend', async () => {
@@ -68,5 +70,42 @@ describe('Backend Manager', () => {
         join('backends/stamper'),
       ),
     );
+  });
+
+  it('Removes .exe from exec if not on windows', async () => {
+    const BackendManager = require('./BackendManager').default;
+    const manager = new BackendManager('./backends');
+
+    readFileMock
+      .mockReturnValueOnce(`name: Stamper\nexec: ./stamp.exe\nbuild: ./dist`)
+      .mockReturnValueOnce(`name: Signer\nexec: ./sign.exe\nbuild: ./build`);
+
+    const platform = process.platform;
+
+    Object.defineProperty(process, 'platform', { value: 'win32' });
+    await manager.load();
+
+    expect(await manager.get('stamper')).toStrictEqual(
+      new Backend(
+        { name: 'Stamper', version: 'dev', exec: `.${sep}stamp.exe`, build: './dist' },
+        join('backends/stamper'),
+      ),
+    );
+
+    readFileMock
+      .mockReturnValueOnce(`name: Stamper\nexec: ./stamp.exe\nbuild: ./dist`)
+      .mockReturnValueOnce(`name: Signer\nexec: ./sign.exe\nbuild: ./build`);
+
+    Object.defineProperty(process, 'platform', { value: 'darwin' });
+    await manager.load();
+
+    expect(await manager.get('stamper')).toStrictEqual(
+      new Backend(
+        { name: 'Stamper', version: 'dev', exec: `.${sep}stamp`, build: './dist' },
+        join('backends/stamper'),
+      ),
+    );
+
+    Object.defineProperty(process, 'platform', { value: platform });
   });
 });

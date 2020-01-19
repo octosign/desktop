@@ -1,19 +1,26 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React from 'react';
 import { render, fireEvent, act, waitForElement } from '@testing-library/react';
-import { MuiThemeProvider } from '@material-ui/core';
-import { ThemeProvider } from 'styled-components';
 
 import MainScreen from './MainScreen';
-import theme from '../theme';
+import mockWindowAPI from '../mockWindowAPI';
+import Providers from './Providers';
 
 describe('MainScreen', () => {
+  beforeAll(() => {
+    mockWindowAPI(window);
+  });
+
+  afterAll(() => {
+    // @ts-ignore
+    window.OctoSign = undefined;
+  });
+
   it('Recognizes dragging of file', async () => {
     const { getByText, container } = render(
-      <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <MainScreen />
-        </ThemeProvider>
-      </MuiThemeProvider>,
+      <Providers>
+        <MainScreen />
+      </Providers>,
     );
 
     act(() => {
@@ -23,13 +30,11 @@ describe('MainScreen', () => {
     await waitForElement(() => getByText('Drop your files here'));
   });
 
-  it('Opens selection on click', () => {
+  it.skip('Opens selection on click', () => {
     const { getByText } = render(
-      <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <MainScreen />
-        </ThemeProvider>
-      </MuiThemeProvider>,
+      <Providers>
+        <MainScreen />
+      </Providers>,
     );
 
     fireEvent.click(getByText('Sign a new document'));
@@ -39,14 +44,12 @@ describe('MainScreen', () => {
 
   it('Displays dropped file', async () => {
     const { getByText, container } = render(
-      <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <MainScreen />
-        </ThemeProvider>
-      </MuiThemeProvider>,
+      <Providers>
+        <MainScreen />
+      </Providers>,
     );
 
-    const file = new File([''], 'file.pdf');
+    const file = new File([''], 'filename.pdf');
 
     const formElement = container.querySelector('input[type="file"]');
     Object.defineProperty(formElement, 'files', { value: [file] });
@@ -55,18 +58,18 @@ describe('MainScreen', () => {
       fireEvent.drop(formElement as Element);
     });
 
-    await waitForElement(() => getByText('file.pdf'));
+    await waitForElement(() => getByText('filename'));
   });
 
-  it('Has footer (with Logo)', () => {
+  it.todo('Displays choosing of backends if file is chosen');
+
+  it('Has footer (with Logo)', async () => {
     const { getByAltText } = render(
-      <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <MainScreen />
-        </ThemeProvider>
-      </MuiThemeProvider>,
+      <Providers>
+        <MainScreen />
+      </Providers>,
     );
 
-    expect(() => getByAltText('Logo')).not.toThrow();
+    await waitForElement(() => getByAltText('Logo'));
   });
 });

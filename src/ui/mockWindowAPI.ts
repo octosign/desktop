@@ -1,6 +1,10 @@
 const mockWindowAPI = (window: Window) => {
   window.OctoSign = {
-    sign: () => undefined,
+    list: () => Promise.resolve([]),
+    set: () => Promise.resolve(),
+    meta: () => Promise.resolve(),
+    sign: () => Promise.resolve(),
+    verify: () => Promise.resolve(),
   };
 
   window.apiReady = Promise.resolve();

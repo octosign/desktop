@@ -9,7 +9,6 @@ const theme = createMuiTheme({
       main: '#0066FF',
     },
   },
-  spacing: factor => `${0.5 * factor}rem`,
   shape: {
     borderRadius: 16,
   },

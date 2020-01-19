@@ -69,8 +69,10 @@ describe('Main', () => {
     expect(loadFile).toHaveBeenCalledWith(expect.any(String));
     expect(openDevTools).toHaveBeenCalled();
     expect(mainWindowOn).toHaveBeenCalledWith('closed', expect.any(Function));
-    // TODO: Find a way to check if the window was set to undefined
     mainWindowOn.mock.calls[0][1]();
+
+    // TODO: Find a way to check if the window was set to undefined
+    // expect()
   });
 
   it('Handles navigation events', () => {

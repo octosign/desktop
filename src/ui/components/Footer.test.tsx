@@ -1,19 +1,15 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { MuiThemeProvider } from '@material-ui/core';
-import { ThemeProvider } from 'styled-components';
 
 import Footer from './Footer';
-import theme from '../theme';
+import Providers from './Providers';
 
 describe('Footer', () => {
   it('Contains logo that opens octosign.com', () => {
     const { getByAltText } = render(
-      <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <Footer onSelectFiles={() => 0} />
-        </ThemeProvider>
-      </MuiThemeProvider>,
+      <Providers>
+        <Footer onSelectFiles={() => 0} />
+      </Providers>,
     );
 
     const logo = getByAltText('Logo');
@@ -27,11 +23,9 @@ describe('Footer', () => {
     const onSelectFilesMock = jest.fn();
 
     const { getByText } = render(
-      <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <Footer onSelectFiles={onSelectFilesMock} />
-        </ThemeProvider>
-      </MuiThemeProvider>,
+      <Providers>
+        <Footer onSelectFiles={onSelectFilesMock} />
+      </Providers>,
     );
 
     fireEvent.click(getByText('Select files'));
@@ -43,11 +37,9 @@ describe('Footer', () => {
 
   it('Contains link to Help that opens octosign.com/help', () => {
     const { getByText } = render(
-      <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <Footer onSelectFiles={() => 0} />
-        </ThemeProvider>
-      </MuiThemeProvider>,
+      <Providers>
+        <Footer onSelectFiles={() => 0} />
+      </Providers>,
     );
 
     const anchor = getByText('Help') as HTMLAnchorElement;

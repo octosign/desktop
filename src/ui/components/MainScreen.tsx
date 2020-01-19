@@ -7,6 +7,7 @@ import { lighten } from '@material-ui/core/styles';
 
 import Footer from './Footer';
 import FileCard from './FileCard';
+import BackendChooser from './BackendChooser';
 
 const Container = styled.div<{ active: boolean }>`
   width: 100%;
@@ -35,6 +36,7 @@ const Cards = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
   overflow-y: auto;
   max-height: calc(100vh - 7rem);
 `;
@@ -58,6 +60,8 @@ const MainScreen = () => {
     <Container {...getRootProps()} active={isDragActive}>
       <input {...getInputProps()} />
 
+      <BackendChooser show={files.length > 0} />
+
       <Content onClick={files.length === 0 ? open : undefined}>
         {files.length === 0 ? (
           <Box marginBottom={1.5}>
@@ -68,7 +72,7 @@ const MainScreen = () => {
         ) : (
           <Cards>
             {files.map(f => (
-              <FileCard key={f.name + f.lastModified + f.size} file={f} />
+              <FileCard key={f.path} file={f} />
             ))}
           </Cards>
         )}

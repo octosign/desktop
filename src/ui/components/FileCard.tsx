@@ -7,6 +7,11 @@ import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import styled from 'styled-components';
 import { format } from 'date-fns';
+import mime from 'mime-types';
+import { useSnackbar } from 'notistack';
+
+import Prompt from './Prompt';
+import PromptRequest from '../../shared/PromptRequest';
 
 const Status = styled(Chip)<{ state: 'default' | 'signing' }>`
   width: 100%;
@@ -23,22 +28,44 @@ const Status = styled(Chip)<{ state: 'default' | 'signing' }>`
 
 const CardContainer = styled(Card)`
   margin: 0.5rem;
+  width: 360px;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 const FileCard: FC<{ file: File }> = ({ file }) => {
   const [signing, setSigning] = useState(false);
+  const [promptRequest, setPromptRequest] = useState<{
+    request: PromptRequest;
+    onResponse: (response: string | undefined) => void;
+  }>();
+  const { enqueueSnackbar } = useSnackbar();
 
   const onSign = useCallback(async () => {
     setSigning(true);
 
     try {
-      await window.OctoSign.sign(file.path);
+      await window.OctoSign.sign(
+        file.path,
+        message => enqueueSnackbar(message, { variant: 'error' }),
+        request =>
+          new Promise(resolve => {
+            setPromptRequest({
+              request,
+              onResponse: resolve,
+            });
+          }),
+      );
     } catch (err) {
+      // TODO: This means it'll remain in previous state
       alert(err);
     }
 
     setSigning(false);
-  }, []);
+  }, [enqueueSnackbar, file.path]);
 
   const hrFileSize = (bytes: number) => {
     if (bytes === 0) return '0 B';
@@ -49,30 +76,43 @@ const FileCard: FC<{ file: File }> = ({ file }) => {
     return parseFloat((bytes / Math.pow(1000, unit)).toFixed(2)) + ' ' + units[unit];
   };
 
+  const ext = mime.extension(file.type);
+  const name = ext !== false ? file.name.replace(/\.[^/.]+$/, '') : file.name;
+
   return (
-    <CardContainer>
-      <CardContent>
-        <Typography variant="h5" component="h2" gutterBottom>
-          {file.name}
-        </Typography>
+    <>
+      <Prompt file={file} request={promptRequest} />
 
-        <Status
-          state={signing ? 'signing' : 'default'}
-          label={signing ? 'Signing...' : 'Unsigned'}
-        />
+      <CardContainer>
+        <CardContent>
+          <TitleContainer>
+            <Typography variant="h5" component="h2" gutterBottom noWrap title={file.name}>
+              {name}
+            </Typography>
+            {ext !== false && (
+              <Typography variant="h5" component="span" gutterBottom title={file.name}>
+                .{ext.toUpperCase()}
+              </Typography>
+            )}
+          </TitleContainer>
 
-        <Typography color="textSecondary">Type: {file.type}</Typography>
-        <Typography color="textSecondary">Size: {hrFileSize(file.size)}</Typography>
-        <Typography color="textSecondary">
-          Last modified: {format(file.lastModified, 'Pp')}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button onClick={onSign} color="secondary">
-          Sign
-        </Button>
-      </CardActions>
-    </CardContainer>
+          <Status
+            state={signing ? 'signing' : 'default'}
+            label={signing ? 'Signing...' : 'Unsigned'}
+          />
+
+          <Typography color="textSecondary">Size: {hrFileSize(file.size)}</Typography>
+          <Typography color="textSecondary">
+            Last modified: {format(file.lastModified, 'Pp')}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button onClick={onSign} color="secondary" disabled={signing}>
+            Sign
+          </Button>
+        </CardActions>
+      </CardContainer>
+    </>
   );
 };
 

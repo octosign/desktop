@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
-import logoMono from '../static/logo.svg';
+import logo from '../static/logo.svg';
 import Box from '@material-ui/core/Box';
 
 const Container = styled.div`
@@ -63,7 +63,7 @@ const Footer: FC<{ onSelectFiles: () => void }> = ({ onSelectFiles }) => (
   <Container>
     <Logo>
       <a href="https://octosign.com" target="blank">
-        <img src={logoMono} alt="Logo" />
+        <img src={logo} alt="Logo" />
       </a>
     </Logo>
 
