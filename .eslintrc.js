@@ -6,6 +6,9 @@ module.exports = {
         'plugin:prettier/recommended',
         'plugin:react/recommended',
     ],
+    plugins: [
+        'react-hooks'
+    ],
     parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
@@ -14,8 +17,10 @@ module.exports = {
         },
     },
     rules: {
-        "@typescript-eslint/explicit-function-return-type": 0,
-        "react/prop-types": [0]
+        '@typescript-eslint/explicit-function-return-type': 0,
+        'react/prop-types': [0],
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn'
     },
     settings: {
         react: {
