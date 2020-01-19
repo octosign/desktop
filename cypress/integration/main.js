@@ -1,4 +1,4 @@
-const testFile = new File(['123'], 'file.pdf', { lastModified: 1 });
+const testFile = new File(['123'], 'filename.pdf', { lastModified: 1 });
 
 describe('Main Screen', function() {
   it('Contains intro text, file selection controls, links and logo', function() {
@@ -51,9 +51,8 @@ describe('Main Screen', function() {
       dataTransfer: { files: [testFile], types: ['Files'] },
     });
 
-    cy.contains('file.pdf');
+    cy.contains('filename');
     cy.contains('Unsigned');
-    cy.contains('application/pdf');
     cy.contains('Size: 3 B');
     cy.contains('Last modified: 01/01/1970');
 
@@ -70,9 +69,8 @@ describe('Main Screen', function() {
       cy.wrap(el).trigger('change', { force: true });
     });
 
-    cy.contains('file.pdf');
+    cy.contains('filename');
     cy.contains('Unsigned');
-    cy.contains('application/pdf');
     cy.contains('Size: 3 B');
     cy.contains('Last modified: 01/01/1970');
   });
