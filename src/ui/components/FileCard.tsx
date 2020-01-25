@@ -59,9 +59,11 @@ const FileCard: FC<{ file: File }> = ({ file }) => {
             });
           }),
       );
+      // TODO: Change state instead
+      enqueueSnackbar('Document was signed successfully', { variant: 'success' });
     } catch (err) {
       // TODO: This means it'll remain in previous state
-      alert(err);
+      enqueueSnackbar('Document was not signed successfully', { variant: 'error' });
     }
 
     setSigning(false);
