@@ -2,7 +2,7 @@
 import fs from 'fs-extra';
 
 import Backend from './Backend';
-import { join, sep } from 'path';
+import { join } from 'path';
 
 const readFileMock = jest.fn();
 describe('Backend Manager', () => {
@@ -36,7 +36,7 @@ describe('Backend Manager', () => {
         config: {
           name: 'Signer',
           version: '9001.0.0',
-          exec: `.${sep}sign`,
+          exec: `./sign`,
           build: './build',
         },
         slug: 'signer',
@@ -46,7 +46,7 @@ describe('Backend Manager', () => {
         config: {
           name: 'Stamper',
           version: '0.1.0',
-          exec: `.${sep}stamp`,
+          exec: `./stamp`,
           build: './dist',
         },
         slug: 'stamper',
@@ -66,7 +66,7 @@ describe('Backend Manager', () => {
 
     expect(await manager.get('stamper')).toStrictEqual(
       new Backend(
-        { name: 'Stamper', version: 'dev', exec: `.${sep}stamp`, build: './dist' },
+        { name: 'Stamper', version: 'dev', exec: `./stamp`, build: './dist' },
         join('backends/stamper'),
       ),
     );
@@ -87,7 +87,7 @@ describe('Backend Manager', () => {
 
     expect(await manager.get('stamper')).toStrictEqual(
       new Backend(
-        { name: 'Stamper', version: 'dev', exec: `.${sep}stamp.exe`, build: './dist' },
+        { name: 'Stamper', version: 'dev', exec: `./stamp.exe`, build: './dist' },
         join('backends/stamper'),
       ),
     );
@@ -101,7 +101,7 @@ describe('Backend Manager', () => {
 
     expect(await manager.get('stamper')).toStrictEqual(
       new Backend(
-        { name: 'Stamper', version: 'dev', exec: `.${sep}stamp`, build: './dist' },
+        { name: 'Stamper', version: 'dev', exec: `./stamp`, build: './dist' },
         join('backends/stamper'),
       ),
     );

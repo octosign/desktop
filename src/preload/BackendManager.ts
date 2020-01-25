@@ -1,5 +1,5 @@
 import { readdir, readFile } from 'fs-extra';
-import { join, sep } from 'path';
+import { join } from 'path';
 import yaml from 'yaml';
 
 import Backend from './Backend';
