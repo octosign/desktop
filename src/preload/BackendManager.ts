@@ -59,9 +59,7 @@ export default class BackendManager {
     const configFile = await readFile(configFilePath, { encoding: 'utf-8' });
     const configInfo = yaml.parse(configFile) as BackendConfig;
 
-    // We have to adjust the path separators to the current platform
-    configInfo.exec = configInfo.exec.replace(/\//g, sep);
-    // And remove possible .exe on non-Windows platforms
+    // We have to remove possible .exe on non-Windows platforms
     if (process.platform !== 'win32') configInfo.exec = configInfo.exec.replace('.exe', '');
 
     return new Backend(configInfo, backendPath);
