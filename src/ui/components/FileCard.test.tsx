@@ -7,14 +7,13 @@ import Providers from './Providers';
 
 describe('FileCard', () => {
   it('Displays file name, type, last modified date', () => {
-    const file: File = {
+    const file = {
       name: 'testFile.pdf',
       path: 'testFile.pdf',
       lastModified: 1578103935000 + new Date().getTimezoneOffset() * 60 * 1000,
       size: 456132,
       type: 'application/pdf',
-      slice: () => new Blob(),
-    };
+    } as File;
 
     const { getByText } = render(
       <Providers>
@@ -28,14 +27,14 @@ describe('FileCard', () => {
   });
 
   it('Displays human readable file size', () => {
-    const file: File = {
+    const file = {
       name: 'testFile.pdf',
       path: 'testFile.pdf',
       lastModified: 1,
       size: 456132,
       type: 'application/pdf',
       slice: () => new Blob(),
-    };
+    } as File;
 
     const { getByText, rerender } = render(
       <Providers>
@@ -55,14 +54,14 @@ describe('FileCard', () => {
   });
 
   it('Supports files of unknown type', () => {
-    const file: File = {
+    const file = {
       name: 'testFile.tss',
       path: 'testFile.tss',
       lastModified: 1578103935000 + new Date().getTimezoneOffset() * 60 * 1000,
       size: 456132,
       type: 'unknown/tss',
       slice: () => new Blob(),
-    };
+    } as File;
 
     const { getByText } = render(
       <Providers>
@@ -76,14 +75,14 @@ describe('FileCard', () => {
   });
 
   it('Allows signing', () => {
-    const file: File = {
+    const file = {
       name: 'testFile.pdf',
       path: 'path/file.pdf',
       lastModified: 1,
       size: 456132,
       type: 'application/pdf',
       slice: () => new Blob(),
-    };
+    } as File;
     jest.useFakeTimers();
     const signMock = jest.fn(() => new Promise(resolve => setTimeout(resolve)));
     // @ts-ignore
@@ -119,14 +118,14 @@ describe('FileCard', () => {
   });
 
   it('Displays errors during signing', () => {
-    const file: File = {
+    const file = {
       name: 'testFile.pdf',
       path: 'path/file.pdf',
       lastModified: 1,
       size: 456132,
       type: 'application/pdf',
       slice: () => new Blob(),
-    };
+    } as File;
     jest.useFakeTimers();
     const signMock = jest.fn<Promise<void>, Parameters<typeof window.OctoSign.sign>>(
       () => new Promise(resolve => setTimeout(resolve)),
