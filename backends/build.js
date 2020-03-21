@@ -12,6 +12,8 @@ const schema = require('./backend.schema.json');
  * Tests and builds backends so they are ready to be bundled
  */
 
+const skipFailed = process.argv.some(arg => arg === '--skip-failed');
+
 process.on('unhandledRejection', error => {
   console.error(error);
   process.exit(1);
@@ -53,11 +55,26 @@ fs.readdir('./backends', async function(err, items) {
     }
 
     // Call build script
-    const { err, stderr } = await exec(metaInfo.build, { cwd: backendPath });
-    if (err) {
-      console.error(err);
-      console.error(stderr);
-      process.exit(1);
+    try {
+      const { err, stderr } = await exec(metaInfo.build, { cwd: backendPath });
+      if (err) {
+        console.error(err);
+        console.error(stderr);
+        if (skipFailed) {
+          console.error(`Backend "${backend}" was skipped due to error and won't be included.`);
+          continue;
+        } else {
+          process.exit(1);
+        }
+      }
+    } catch (e) {
+      if (skipFailed) {
+        console.error(e);
+        console.error(`Backend "${backend}" was skipped uue to error and won't be included.`);
+        continue;
+      } else {
+        throw e;
+      }
     }
 
     // Copy distributables
@@ -72,4 +89,6 @@ fs.readdir('./backends', async function(err, items) {
 
     console.log(`Finished building backend "${backend}"`);
   }
+
+  console.log('Finished building all backends');
 });
