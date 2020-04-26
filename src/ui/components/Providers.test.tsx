@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { useTheme } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import { useSnackbar } from 'notistack';
 
 import Providers from './Providers';

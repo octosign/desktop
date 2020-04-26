@@ -1,5 +1,5 @@
 import theme from './theme';
-import { createMuiTheme } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 describe('Theme', () => {
   it('Creates Mui theme', () => {
