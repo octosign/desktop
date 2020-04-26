@@ -23,7 +23,7 @@ const Container = styled.div`
 
 const Logo = styled.div`
   align-self: center;
-  width: 10rem;
+  width: 14rem;
 
   img {
     width: 3.5rem;
@@ -47,8 +47,10 @@ const Middle = styled.div`
 `;
 
 const Links = styled.div`
+  display: flex;
+  justify-content: flex-end;
   align-self: center;
-  width: 10rem;
+  width: 14rem;
 `;
 
 const Link = styled.a`

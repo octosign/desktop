@@ -129,7 +129,10 @@ const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) =
             {t('Size: {{size}}', { size: hrFileSize(file.size) })}
           </Typography>
           <Typography color="textSecondary">
-            {t('Last modified: {{date}}', { date: format(file.lastModified, 'Pp') })}
+            {t('Last modified: {{date}}', {
+              date: format(file.lastModified, 'Pp'),
+              interpolation: { escapeValue: false },
+            })}
           </Typography>
         </CardContent>
         <CardActions>{signButton}</CardActions>

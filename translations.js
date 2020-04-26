@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { resolve } = require('path');
+const { resolve, basename } = require('path');
 const { readdir, readFile, writeFile } = require('fs-extra');
 const Scanner = require('i18next-scanner');
-const { i18nextToPo } = require('i18next-conv');
+const { i18nextToPo, gettextToI18next } = require('i18next-conv');
 
 // From Florian Klampfer
 async function* getFiles(dir) {
@@ -34,5 +34,20 @@ if (process.argv[2] === 'extract') {
 
     const converted = await i18nextToPo('en', JSON.stringify(parser.get().en.translation));
     await writeFile('./translations/en-US.po', converted);
+  })();
+}
+
+if (process.argv[2] === 'build') {
+  (async () => {
+    for await (const file of getFiles('./translations')) {
+      // Skip template
+      if (file.endsWith('en-US.po')) continue;
+
+      const code = basename(file, '.po');
+
+      const converted = await gettextToI18next(code, await readFile(file, 'utf-8'));
+
+      await writeFile(`./src/translations/${code}.json`, converted);
+    }
   })();
 }
