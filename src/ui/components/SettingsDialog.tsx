@@ -14,11 +14,13 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import BackendState from '../../shared/BackendState';
 import parseAuthor from '../../shared/parseAuthor';
 import debounce from '../../shared/debounce';
 import { OptionValues } from '../../preload/Settings';
+import { languages } from '../../shared/i18nSetup';
 
 interface Props {
   open: boolean;
@@ -90,6 +92,7 @@ const SettingsDialog: FC<Props> = ({ open, backends, onClose }) => {
     },
     [values],
   );
+  const { t, i18n } = useTranslation();
 
   return (
     <AlmostFullScreenDialog
@@ -101,7 +104,7 @@ const SettingsDialog: FC<Props> = ({ open, backends, onClose }) => {
       data-cy="settings"
     >
       <Header>
-        <Title variant="h2">Settings</Title>
+        <Title variant="h2">{t('Settings')}</Title>
 
         <Button
           autoFocus
@@ -111,31 +114,31 @@ const SettingsDialog: FC<Props> = ({ open, backends, onClose }) => {
           tabIndex={0}
           aria-label="close"
         >
-          Close
+          {t('Close')}
         </Button>
       </Header>
 
       <DialogContent>
         <Typography variant="overline" display="block" gutterBottom>
-          General
+          {t('General')}
         </Typography>
 
         <Grid container spacing={1}>
           <Grid item sm={4} md={3}>
             <FormControl variant="outlined" fullWidth size="small">
-              <InputLabel id="settings-language-label">Language</InputLabel>
+              <InputLabel id="settings-language-label">{t('Language')}</InputLabel>
               <Select
                 labelId="settings-language-label"
                 id="settings-language"
-                value={'auto'}
-                onChange={() => 0}
-                label="Language"
+                value={i18n.language}
+                onChange={({ target }) => i18n.changeLanguage(target.value as string)}
+                label={t('Language')}
               >
-                <MenuItem value="auto">
-                  <em>Automatic</em>
-                </MenuItem>
-                {/* TODO: Generate from list of available languages with i18n */}
-                <MenuItem value="en">English</MenuItem>
+                {languages.map(({ code, name }) => (
+                  <MenuItem key={code} value={code}>
+                    {name}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Grid>
@@ -143,12 +146,15 @@ const SettingsDialog: FC<Props> = ({ open, backends, onClose }) => {
 
         {backends.map(({ slug, config, options }) => {
           const author = config.author ? parseAuthor(config.author) : undefined;
+          // TODO: Translate
           const authorName = author?.name ? `by ${author.name}` : '';
           const hasAuthorExtra = author && (author.email || author.web);
           const authorExtra =
             hasAuthorExtra && ` (${[author?.email, author?.web].filter(i => i).join(', ')})`;
           const byAuthor = author && ` ${authorName}${authorExtra}`;
+          // TODO: Translate
           const licensedUnder = config.license && ` Licensed under ${config.license}.`;
+          // TODO: Translate
           const codeAtRepository = config.repository && (
             <>
               {' '}

@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"mime-version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2020-04-26T22:37:55.235Z\n"
+"PO-Revision-Date: 2020-04-26T22:37:55.235Z\n"
+
+msgid "Unreachable"
+msgstr ""
+
+msgid "Errored during operation: \"{{error}}\"."
+msgstr ""
+
+msgid "Failed to establish communication with signing component."
+msgstr ""
+
+msgid "Can not parse image format"
+msgstr ""
+
+msgid "Document was signed successfully"
+msgstr ""
+
+msgid "Document was not signed successfully"
+msgstr ""
+
+msgid "Signing in progress"
+msgstr ""
+
+msgid "File type not supported"
+msgstr ""
+
+msgid "Sign"
+msgstr ""
+
+msgid "Signing..."
+msgstr ""
+
+msgid "Unsigned"
+msgstr ""
+
+msgid "Size: {{size}}"
+msgstr ""
+
+msgid "Last modified: {{date}}"
+msgstr ""
+
+msgid "Drop your files here"
+msgstr ""
+
+msgid "Sign a new document"
+msgstr ""
+
+msgid "Logo"
+msgstr ""
+
+msgid "Select files"
+msgstr ""
+
+msgid "or drag and drop your files anywhere"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Previous page"
+msgstr ""
+
+msgid "Next page"
+msgstr ""
+
+msgid "You need to draw your signature or select file."
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Pick page and position for you signature"
+msgstr ""
+
+msgid "Draw your signature or pick saved image"
+msgstr ""
+
+msgid ""
+"Prompt type \"{{type}}\" is not yet supported. Please open a feature "
+"request on the Octosign repository."
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "Language"
+msgstr ""

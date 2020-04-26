@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { useTranslation } from 'react-i18next';
 
 import PositionableSignature from './PositionableSignature';
 
@@ -106,6 +107,7 @@ const PositionPrompt: FC<Props> = ({ onChange, file, signature }) => {
     },
     [onChangeCallback],
   );
+  const { t } = useTranslation();
 
   return (
     <Container>
@@ -119,7 +121,7 @@ const PositionPrompt: FC<Props> = ({ onChange, file, signature }) => {
           <Button
             onClick={() => setPageNumber(pageNumber - 1)}
             disabled={pageNumber === 1}
-            aria-label="Previous page"
+            aria-label={t('Previous page')}
           >
             <NavigateBeforeIcon />
           </Button>
@@ -129,7 +131,7 @@ const PositionPrompt: FC<Props> = ({ onChange, file, signature }) => {
           <Button
             onClick={() => setPageNumber(pageNumber + 1)}
             disabled={pageNumber === totalPages}
-            aria-label="Next page"
+            aria-label={t('Next page')}
           >
             <NavigateNextIcon />
           </Button>

@@ -5,6 +5,7 @@ import { file } from 'tmp-promise';
 import mime from 'mime-types';
 import { writeFile } from 'fs-extra';
 
+import i18n from './shared/i18nSetup';
 import BackendManager from './preload/BackendManager';
 import Backend from './preload/Backend';
 import Settings from './preload/Settings';
@@ -50,7 +51,7 @@ window.showWindow = () => {
 window.createTmpImage = async data => {
   const parts = data.split(',');
   const header = parts[0].match(/data:(.*);base64/);
-  if (!header) throw new Error('Can not parse image format');
+  if (!header) throw new Error(i18n.t('Can not parse image format'));
   const ext = mime.extension(header[1]);
   const { path } = await file({ postfix: `.${ext}` });
   const buffer = Buffer.from(parts[1], 'base64');

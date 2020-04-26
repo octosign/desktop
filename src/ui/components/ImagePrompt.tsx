@@ -3,6 +3,7 @@ import SignatureCanvas, { SignatureCanvasAPI } from 'react-signature-canvas';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import { useTranslation } from 'react-i18next';
 
 import pencilCursor from '../static/pencil-cursor.svg';
 import LabelButton from './LabelButton';
@@ -35,6 +36,7 @@ const InvisibleButtonInput = styled.input`
 
 const ImagePrompt: FC<Props> = ({ onChange, onCanvasData }) => {
   const apiRef = useRef<SignatureCanvasAPI>();
+  const { t } = useTranslation();
 
   return (
     <Container>
@@ -51,7 +53,7 @@ const ImagePrompt: FC<Props> = ({ onChange, onCanvasData }) => {
           color="default"
           aria-label="small contained default button group"
         >
-          <Button onClick={() => apiRef.current?.clear()}>Clear</Button>
+          <Button onClick={() => apiRef.current?.clear()}>{t('Clear')}</Button>
           <LabelButton htmlFor="button-signature-file" label="Choose image" groupPosition="right" />
         </ButtonGroup>
       </Controls>

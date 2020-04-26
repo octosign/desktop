@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-
-import Button from '@material-ui/core/Button';
-import logo from '../static/logo.svg';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import { useTranslation } from 'react-i18next';
+
+import logo from '../static/logo.svg';
 
 interface Props {
   onSelectFiles: () => void;
@@ -64,32 +65,36 @@ const Link = styled.a`
   }
 `;
 
-const Footer: FC<Props> = ({ onSelectFiles, onOpenSettings }) => (
-  <Container>
-    <Logo>
-      <a href="https://octosign.com" target="blank">
-        <img src={logo} alt="Logo" />
-      </a>
-    </Logo>
+const Footer: FC<Props> = ({ onSelectFiles, onOpenSettings }) => {
+  const { t } = useTranslation();
 
-    <Middle>
-      <Button variant="contained" color="primary" onClick={onSelectFiles}>
-        Select files
-      </Button>
-      <Box m={1} fontSize="1rem" fontWeight="500" color="text.secondary">
-        or drag and drop your files anywhere
-      </Box>
-    </Middle>
+  return (
+    <Container>
+      <Logo>
+        <a href="https://octosign.com" target="blank">
+          <img src={logo} alt={t('Logo')} />
+        </a>
+      </Logo>
 
-    <Links>
-      <Link href="https://octosign.com/help" target="blank">
-        Help
-      </Link>
-      <Link href="#settings" onClick={onOpenSettings}>
-        Settings
-      </Link>
-    </Links>
-  </Container>
-);
+      <Middle>
+        <Button variant="contained" color="primary" onClick={onSelectFiles}>
+          {t('Select files')}
+        </Button>
+        <Box m={1} fontSize="1rem" fontWeight="500" color="text.secondary">
+          {t('or drag and drop your files anywhere')}
+        </Box>
+      </Middle>
+
+      <Links>
+        <Link href="https://octosign.com/help" target="blank">
+          {t('Help')}
+        </Link>
+        <Link href="#settings" onClick={onOpenSettings}>
+          {t('Settings')}
+        </Link>
+      </Links>
+    </Container>
+  );
+};
 
 export default React.memo(Footer);

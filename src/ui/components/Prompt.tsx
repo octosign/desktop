@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
+import { useTranslation } from 'react-i18next';
 
 import PromptRequest from '../../shared/PromptRequest';
 import Position from './PositionPrompt';
@@ -36,6 +37,7 @@ const Prompt: FC<Props> = ({ request, file }) => {
   const [value, setValue] = useState<string>();
   const [canvasData, setCanvasData] = useState<string>();
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!request) {
@@ -49,7 +51,9 @@ const Prompt: FC<Props> = ({ request, file }) => {
   const onConfirm = useCallback(
     async (finalValue?: string, useCanvasData = false) => {
       if (useCanvasData && !canvasData) {
-        enqueueSnackbar('You need to draw your signature or select file.', { variant: 'warning' });
+        enqueueSnackbar(t('You need to draw your signature or select file.'), {
+          variant: 'warning',
+        });
         return;
       }
 
@@ -60,7 +64,7 @@ const Prompt: FC<Props> = ({ request, file }) => {
       setOpen(false);
       setValue(undefined);
     },
-    [request, canvasData, enqueueSnackbar],
+    [t, request, canvasData, enqueueSnackbar],
   );
 
   let title = request?.request.question;
@@ -78,7 +82,7 @@ const Prompt: FC<Props> = ({ request, file }) => {
           autoFocus
           margin="dense"
           id="prompt-field"
-          label={request.request.promptType === 'password' ? 'Password' : 'Text'}
+          label={request.request.promptType === 'password' ? t('Password') : t('Text')}
           type={request.request.promptType}
           onChange={e => setValue(e.target.value)}
           defaultValue={request.request.defaultValue}
@@ -89,7 +93,7 @@ const Prompt: FC<Props> = ({ request, file }) => {
 
     case 'position':
       fullScreen = true;
-      title = 'Pick page and position for you signature';
+      title = t('Pick page and position for you signature');
       content = (
         <Position
           onChange={setValue}
@@ -100,7 +104,7 @@ const Prompt: FC<Props> = ({ request, file }) => {
       break;
 
     case 'image':
-      title = 'Draw your signature or pick saved image';
+      title = t('Draw your signature or pick saved image');
       fullWidth = false;
       useCanvasData = true;
       content = (
@@ -115,10 +119,13 @@ const Prompt: FC<Props> = ({ request, file }) => {
 
     default:
       maxWidth = 'sm';
+      const type = request?.request.promptType;
       content = (
         <DialogContentText>
-          Prompt type &quot;{request?.request.promptType}&quot; is not yet supported. Please open a
-          feature request on the Octosign repository.
+          {t(
+            'Prompt type "{{type}}" is not yet supported. Please open a feature request on the Octosign repository.',
+            { type },
+          )}
         </DialogContentText>
       );
       break;
@@ -149,7 +156,7 @@ const Prompt: FC<Props> = ({ request, file }) => {
               </IconButton>
               <FullscreenTitle variant="h6">{title}</FullscreenTitle>
               <Button autoFocus color="inherit" onClick={() => onConfirm(value, useCanvasData)}>
-                Confirm
+                {t('Confirm')}
               </Button>
             </Toolbar>
           </AppBar>
@@ -160,9 +167,9 @@ const Prompt: FC<Props> = ({ request, file }) => {
           <DialogTitle id="prompt-dialog-title">{title}</DialogTitle>
           <DialogContent>{content}</DialogContent>
           <DialogActions>
-            <Button onClick={() => onConfirm()}>Cancel</Button>
+            <Button onClick={() => onConfirm()}>{t('Cancel')}</Button>
             <Button onClick={() => onConfirm(value, useCanvasData)} color="primary">
-              Confirm
+              {t('Confirm')}
             </Button>
           </DialogActions>
         </>
