@@ -1,64 +1,56 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React from 'react';
 import { render, wait, waitForElement, fireEvent } from '@testing-library/react';
 
 import BackendChooser from './BackendChooser';
 import Providers from './Providers';
 
-describe('BackendChooser', () => {
-  beforeAll(() => {
-    // @ts-ignore
-    window.OctoSign = {
-      list: jest.fn(() =>
-        Promise.resolve([
-          {
-            slug: 'dss',
-            config: { name: 'Advanced signature' },
-            available: 'Not really',
-          },
-          {
-            slug: 'image',
-            config: { name: 'Image signature' },
-            available: true,
-          },
-          {
-            slug: 'third',
-            config: { name: 'Third backend' },
-            available: true,
-          },
-        ]),
-      ),
-      set: jest.fn(() => Promise.resolve()),
-    };
-  });
+const backends = [
+  {
+    slug: 'dss',
+    config: { name: 'Advanced signature', version: '', exec: '', build: '' },
+    available: 'Not really',
+  },
+  {
+    slug: 'image',
+    config: { name: 'Image signature', version: '', exec: '', build: '' },
+    available: true as true,
+  },
+  {
+    slug: 'third',
+    config: { name: 'Third backend', version: '', exec: '', build: '' },
+    available: true as true,
+  },
+];
 
-  it('Gets list of backends and sets first available one but does not render on show false', async () => {
+describe('BackendChooser', () => {
+  it('Does not render on show false', async () => {
     const { getByText } = render(
       <Providers>
-        <BackendChooser show={false} />
+        <BackendChooser show={false} backends={backends} setChosenBackend={() => 0} />
       </Providers>,
     );
 
-    await wait(() => expect(window.OctoSign.list).toHaveBeenCalled());
-    await wait(() => expect(window.OctoSign.set).toHaveBeenCalledWith('image'));
     await wait(() => expect(() => getByText('Image signature')).toThrow());
   });
 
   it('Displays list of backends', async () => {
     const { getByText } = render(
       <Providers>
-        <BackendChooser show={true} />
+        <BackendChooser show={true} backends={backends} setChosenBackend={() => 0} />
       </Providers>,
     );
 
     await waitForElement(() => getByText('Advanced signature'));
     await waitForElement(() => getByText('Image signature'));
+    await waitForElement(() => getByText('Third backend'));
   });
 
   it('Allows changing to different backend that is not disabled', async () => {
+    const setChosenBackend = jest.fn();
+
     const { getByText } = render(
       <Providers>
-        <BackendChooser show={true} />
+        <BackendChooser show={true} backends={backends} setChosenBackend={setChosenBackend} />
       </Providers>,
     );
 
@@ -69,13 +61,15 @@ describe('BackendChooser', () => {
     fireEvent.click(dss);
     fireEvent.click(third);
 
-    await wait(() => expect(window.OctoSign.set).toHaveBeenCalledWith('third'));
+    await wait(() => expect(setChosenBackend).toHaveBeenCalledWith('third'));
 
     fireEvent.click(dss);
     fireEvent.click(image);
 
-    await wait(() => expect(window.OctoSign.set).toHaveBeenCalledWith('image'));
+    await wait(() => expect(setChosenBackend).toHaveBeenCalledWith('image'));
 
-    expect(window.OctoSign.set).toHaveBeenCalledTimes(3);
+    expect(setChosenBackend).toHaveBeenCalledTimes(2);
   });
+
+  it.todo('Shows tooltip for unavailable backend');
 });

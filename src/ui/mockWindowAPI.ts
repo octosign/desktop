@@ -12,35 +12,45 @@ const dssBackend = {
     version: '0.1.0',
   },
   slug: 'dss',
+  options: [
+    {
+      id: 'dllPath',
+      label: 'PKCS #11 Library Path',
+      defaultValue: 'some/path.dll',
+    },
+  ],
 };
 
 const imageBackend = {
   available: true,
   config: {
-    author: 'Jakub Ďuraš <jakub@duras.me>',
+    author: '(duras.me)',
     build: 'bash -e ./build.sh',
     description:
       'Signs PDFs using chosen image or drawn signature. Based on the unipdf library from FoxyUtils ehf licensed under the AGPLv3.',
     exec: './main',
-    license: 'GNU Affero General Public License v3.0',
     name: 'Simple image signature',
-    repository: 'https://github.com/durasj/octosign-image',
-    version: '0.1.0',
+    version: '0.2.0',
   },
   slug: 'image',
+  supports: ['application/pdf'],
 };
 
 const mockWindowAPI = (window: Window) => {
   window.OctoSign = {
     list: () => Promise.resolve([dssBackend, imageBackend]),
     set: () => Promise.resolve(),
-    meta: () => Promise.resolve(),
     sign: () => Promise.resolve(),
     verify: () => Promise.resolve(),
+    getOptionValues: () => ({ dss: { dllPath: 'dll/path.dll' } }),
+    setOptionValues: () => {
+      return;
+    },
   };
 
   window.apiReady = Promise.resolve();
   window.showWindow = () => undefined;
+  window.getVersion = () => '0.3.0-dev';
 };
 
 export default mockWindowAPI;

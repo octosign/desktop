@@ -7,10 +7,6 @@ declare module 'preload' {
     interface OctoSign {
       list(): Promise<BackendState[]>;
       set(slug: string): Promise<void>;
-      meta(
-        onError: (message: string) => void,
-        onPrompt: (request: PromptRequest) => Promise<string | undefined>,
-      ): Promise<unknown>;
       sign(
         filePath: string,
         onError: (message: string) => void,
@@ -21,6 +17,8 @@ declare module 'preload' {
         onError: (message: string) => void,
         onPrompt: (request: PromptRequest) => Promise<string | undefined>,
       ): Promise<unknown>;
+      getOptionValues(): { [backendSlug: string]: { [key: string]: string } };
+      setOptionValues(values: OptionValues): void;
     }
 
     interface Window {
@@ -38,6 +36,10 @@ declare module 'preload' {
        * Create tmp file for base64-encoded image and return its path
        */
       createTmpImage: (data: string) => Promise<string>;
+      /**
+       * Get application version
+       */
+      getVersion: () => string;
     }
   }
 }

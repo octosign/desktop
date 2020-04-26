@@ -296,4 +296,169 @@ describe('Communication', () => {
 
     expect(result).toStrictEqual(['Multi', 'line']);
   });
+
+  it('Handles meta STDOUT RESULT', async () => {
+    const communication = new Communication(
+      (processMock as unknown) as ChildProcess,
+      () => 0,
+      () => Promise.resolve(''),
+      () => Promise.resolve(''),
+    ).handle('meta');
+
+    const onStdOut = processMock.stdout.on.mock.calls.find(c => c[0] === 'data');
+    const onStdOutCallback = onStdOut && onStdOut[1];
+    if (!onStdOutCallback) throw new Error('Callback not defined');
+
+    const onExitCall = processMock.once.mock.calls.find(c => c[0] === 'exit');
+    const onExitCallback = onExitCall && onExitCall[1];
+    if (!onExitCallback) throw new Error('Callback not defined');
+
+    await onStdOutCallback('--RESULT--\n');
+    await onStdOutCallback('OK\n');
+    await onStdOutCallback('SUPPORTS:application/pdf\n');
+    await onStdOutCallback('OPTIONS:testKey"Please fill this out"("def")\n');
+    await onStdOutCallback('--RESULT--\n');
+
+    onExitCallback(0);
+
+    const result = await communication;
+
+    expect(result).toStrictEqual({
+      status: 'OK',
+      supports: ['application/pdf'],
+      options: [
+        {
+          id: 'testKey',
+          label: 'Please fill this out',
+          defaultValue: 'def',
+        },
+      ],
+    });
+  });
+
+  it('Handles meta STDOUT RESULT with only error', async () => {
+    const communication = new Communication(
+      (processMock as unknown) as ChildProcess,
+      () => 0,
+      () => Promise.resolve(''),
+      () => Promise.resolve(''),
+    ).handle('meta');
+
+    const onStdOut = processMock.stdout.on.mock.calls.find(c => c[0] === 'data');
+    const onStdOutCallback = onStdOut && onStdOut[1];
+    if (!onStdOutCallback) throw new Error('Callback not defined');
+
+    const onExitCall = processMock.once.mock.calls.find(c => c[0] === 'exit');
+    const onExitCallback = onExitCall && onExitCall[1];
+    if (!onExitCallback) throw new Error('Callback not defined');
+
+    await onStdOutCallback('--RESULT--\n');
+    await onStdOutCallback('Error happens\n');
+    await onStdOutCallback('--RESULT--\n');
+
+    onExitCallback(0);
+
+    const result = await communication;
+
+    expect(result).toStrictEqual({
+      status: 'Error happens',
+      options: undefined,
+      supports: undefined,
+    });
+  });
+
+  it('Handles meta STDOUT RESULT with empty options and supports', async () => {
+    const communication = new Communication(
+      (processMock as unknown) as ChildProcess,
+      () => 0,
+      () => Promise.resolve(''),
+      () => Promise.resolve(''),
+    ).handle('meta');
+
+    const onStdOut = processMock.stdout.on.mock.calls.find(c => c[0] === 'data');
+    const onStdOutCallback = onStdOut && onStdOut[1];
+    if (!onStdOutCallback) throw new Error('Callback not defined');
+
+    const onExitCall = processMock.once.mock.calls.find(c => c[0] === 'exit');
+    const onExitCallback = onExitCall && onExitCall[1];
+    if (!onExitCallback) throw new Error('Callback not defined');
+
+    await onStdOutCallback('--RESULT--\n');
+    await onStdOutCallback('Error happens\n');
+    await onStdOutCallback('SUPPORTS:\n');
+    await onStdOutCallback('OPTIONS:\n');
+    await onStdOutCallback('--RESULT--\n');
+
+    onExitCallback(0);
+
+    const result = await communication;
+
+    expect(result).toStrictEqual({
+      status: 'Error happens',
+      options: undefined,
+      supports: undefined,
+    });
+  });
+
+  it('Handles verify STDOUT RESULT with known status and details', async () => {
+    const communication = new Communication(
+      (processMock as unknown) as ChildProcess,
+      () => 0,
+      () => Promise.resolve(''),
+      () => Promise.resolve(''),
+    ).handle('verify');
+
+    const onStdOut = processMock.stdout.on.mock.calls.find(c => c[0] === 'data');
+    const onStdOutCallback = onStdOut && onStdOut[1];
+    if (!onStdOutCallback) throw new Error('Callback not defined');
+
+    const onExitCall = processMock.once.mock.calls.find(c => c[0] === 'exit');
+    const onExitCallback = onExitCall && onExitCall[1];
+    if (!onExitCallback) throw new Error('Callback not defined');
+
+    await onStdOutCallback('--RESULT--\n');
+    await onStdOutCallback('SIGNED\n');
+    await onStdOutCallback('More\n');
+    await onStdOutCallback('Details\n');
+    await onStdOutCallback('--RESULT--\n');
+
+    onExitCallback(0);
+
+    const result = await communication;
+
+    expect(result).toStrictEqual({
+      status: 'SIGNED',
+      details: 'More\nDetails',
+    });
+  });
+
+  it('Handles verify STDOUT RESULT with unknown status without details', async () => {
+    const communication = new Communication(
+      (processMock as unknown) as ChildProcess,
+      () => 0,
+      () => Promise.resolve(''),
+      () => Promise.resolve(''),
+    ).handle('verify');
+
+    const onStdOut = processMock.stdout.on.mock.calls.find(c => c[0] === 'data');
+    const onStdOutCallback = onStdOut && onStdOut[1];
+    if (!onStdOutCallback) throw new Error('Callback not defined');
+
+    const onExitCall = processMock.once.mock.calls.find(c => c[0] === 'exit');
+    const onExitCallback = onExitCall && onExitCall[1];
+    if (!onExitCallback) throw new Error('Callback not defined');
+
+    await onStdOutCallback('--RESULT--\n');
+    await onStdOutCallback('ELSE\n');
+    await onStdOutCallback('--RESULT--\n');
+
+    onExitCallback(0);
+
+    const result = await communication;
+
+    expect(result).toStrictEqual({
+      status: 'UNKNOWN',
+      details: undefined,
+    });
+  });
 });

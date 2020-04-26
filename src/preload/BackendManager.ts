@@ -5,6 +5,7 @@ import yaml from 'yaml';
 import Backend from './Backend';
 import BackendConfig from '../shared/BackendConfig';
 import BackendState from '../shared/BackendState';
+import { BackendMetadata } from '../shared/BackendResults';
 
 export default class BackendManager {
   private readonly backendsPath: string;
@@ -13,6 +14,11 @@ export default class BackendManager {
    * Loaded backends
    */
   private readonly backends: { [slug: string]: Backend } = {};
+
+  /**
+   * Last retrieved metadata for a backend
+   */
+  private readonly metadata: { [slug: string]: BackendMetadata } = {};
 
   public constructor(backendsPath: string) {
     this.backendsPath = backendsPath;
@@ -27,6 +33,10 @@ export default class BackendManager {
     await Promise.all(
       backends.map(async slug => (this.backends[slug] = await this.loadBackend(slug))),
     );
+
+    await Promise.all(
+      backends.map(async slug => (this.metadata[slug] = await this.fetchMetadata(slug))),
+    );
   }
 
   /**
@@ -34,14 +44,16 @@ export default class BackendManager {
    */
   public list() {
     return Object.entries(this.backends)
-      .map(
-        entry =>
-          ({
-            slug: entry[0],
-            config: entry[1].getConfig(),
-            available: true,
-          } as BackendState),
-      )
+      .map(([slug, backend]) => {
+        const metadata = this.metadata[slug];
+        return {
+          slug: slug,
+          config: backend.getConfig(),
+          available: metadata.status === 'OK' ? true : metadata.status,
+          supports: metadata.supports,
+          options: metadata.options,
+        } as BackendState;
+      })
       .sort((a, b) => (a.slug > b.slug ? 1 : b.slug > a.slug ? -1 : 0));
   }
 
@@ -50,6 +62,10 @@ export default class BackendManager {
    */
   public get(slug: string) {
     return this.backends[slug];
+  }
+
+  public listMetadata() {
+    return this.metadata;
   }
 
   private async loadBackend(slug: string) {
@@ -63,5 +79,11 @@ export default class BackendManager {
     if (process.platform !== 'win32') configInfo.exec = configInfo.exec.replace('.exe', '');
 
     return new Backend(configInfo, backendPath);
+  }
+
+  private async fetchMetadata(slug: string) {
+    const response = await this.backends[slug].meta();
+
+    return response ? response : { status: 'Unreachable' };
   }
 }

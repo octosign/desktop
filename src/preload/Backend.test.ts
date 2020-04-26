@@ -116,7 +116,7 @@ describe('Backend', () => {
       '/backends/test',
     );
 
-    await backend.meta(onError);
+    await backend.sign('some/file.pdf', onError);
 
     const passedOnError = communicationMock.mock.calls[0][1];
     passedOnError('Your computer is on fire. Sorry!');
@@ -136,7 +136,7 @@ describe('Backend', () => {
       '/backends/test',
     );
 
-    await backend.meta(undefined, onPrompt);
+    await backend.sign('some/file.pdf', undefined, onPrompt);
     showSaveDialog.mockReturnValueOnce({ filePath: '/save/path', canceled: false });
     showOpenDialog.mockReturnValueOnce({ filePaths: ['/open/path'], canceled: false });
 
@@ -175,7 +175,7 @@ describe('Backend', () => {
       '/backends/test',
     );
 
-    await backend.meta(undefined, onPrompt);
+    await backend.sign('some/file.pdf', undefined, onPrompt);
     showSaveDialog.mockReturnValueOnce({ canceled: true });
     showOpenDialog.mockReturnValueOnce({ filePaths: [], canceled: true });
 
@@ -206,7 +206,7 @@ describe('Backend', () => {
       '/backends/test',
     );
 
-    await backend.meta(undefined, onPrompt);
+    await backend.sign('some/file.pdf', undefined, onPrompt);
 
     const passedOnPrompt = communicationMock.mock.calls[0][2];
     let promptResult = await passedOnPrompt({
@@ -225,6 +225,41 @@ describe('Backend', () => {
       question: 'Is there a meaning of life?',
     });
     expect(promptResult).toBe('');
+  });
+
+  it('Does not support errors or prompts during meta operation', async () => {
+    const Backend = require('./Backend').default;
+    const onError = jest.fn();
+    const onPrompt = jest.fn<boolean | undefined, unknown[]>(() => true);
+
+    const backend = new Backend(
+      {
+        name: 'Test',
+        exec: './backend',
+        dist: './dist',
+      },
+      '/backends/test',
+    );
+
+    await backend.meta(onError, onPrompt);
+
+    const passedOnPrompt = communicationMock.mock.calls[0][2];
+    const promptResult = await passedOnPrompt({
+      promptType: 'boolean',
+      question: 'Is there a meaning of life?',
+    });
+    expect(onPrompt).not.toHaveBeenCalled();
+    expect(promptResult).toBe('');
+
+    const consoleWarn = console.warn;
+    console.warn = jest.fn();
+
+    const passedOnError = communicationMock.mock.calls[0][1];
+    passedOnError('Your computer is on fire. Sorry!');
+    expect(onError).not.toHaveBeenCalled();
+    expect(console.warn).toHaveBeenCalledWith(expect.stringContaining('Unsupported error'));
+
+    console.warn = consoleWarn;
   });
 
   it.todo('Handles get option');
