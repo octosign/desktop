@@ -1,0 +1,122 @@
+# 
+# Translators:
+# Jakub Duras <jakub@duras.me>, 2020
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2020-04-26T22:37:55.235Z\n"
+"PO-Revision-Date: 2020-04-26 22:47+0000\n"
+"Last-Translator: Jakub Duras <jakub@duras.me>, 2020\n"
+"Language-Team: Slovak (Slovakia) (https://www.transifex.com/jakub-duras/teams/108443/sk_SK/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sk_SK\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+"mime-version: 1.0\n"
+
+msgid "Unreachable"
+msgstr "Nedosiahnuteľný"
+
+msgid "Errored during operation: \"{{error}}\"."
+msgstr "Počas operácie nastala chyba: \"{{error}}\"."
+
+msgid "Failed to establish communication with signing component."
+msgstr "Nepodarilo sa nadviazať komunikáciu s podpisovacím komponentom."
+
+msgid "Can not parse image format"
+msgstr "Nepodarilo sa spracovať formát obrázku"
+
+msgid "Document was signed successfully"
+msgstr "Dokument bol úspešne podpísaný"
+
+msgid "Document was not signed successfully"
+msgstr "Dokument nebol úspešne podpísaný"
+
+msgid "Signing in progress"
+msgstr "Prebieha podpisovanie"
+
+msgid "File type not supported"
+msgstr "Typ súboru nie je podporovaný"
+
+msgid "Sign"
+msgstr "Podpísať"
+
+msgid "Signing..."
+msgstr "Podpisovanie..."
+
+msgid "Unsigned"
+msgstr "Nepodpísaný"
+
+msgid "Size: {{size}}"
+msgstr "Veľkosť: {{size}}"
+
+msgid "Last modified: {{date}}"
+msgstr "Naposledy upravený: {{date}}"
+
+msgid "Drop your files here"
+msgstr "Pustite sem súbory"
+
+msgid "Sign a new document"
+msgstr "Podpíšte nový dokument"
+
+msgid "Logo"
+msgstr "Logo"
+
+msgid "Select files"
+msgstr "Vybrať súbory"
+
+msgid "or drag and drop your files anywhere"
+msgstr "alebo kdekoľvek chyťte a pusťte súbory"
+
+msgid "Help"
+msgstr "Pomoc"
+
+msgid "Settings"
+msgstr "Nastavenia"
+
+msgid "Clear"
+msgstr "Vyčistiť"
+
+msgid "Previous page"
+msgstr "Predošlá stránka"
+
+msgid "Next page"
+msgstr "Ďalšia stránka"
+
+msgid "You need to draw your signature or select file."
+msgstr "Musíte nakresliť svoj podpis alebo vybrať súbor."
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Pick page and position for you signature"
+msgstr "Vyberte stránku a pozíciu pre váš podpis"
+
+msgid "Draw your signature or pick saved image"
+msgstr "Nakreslite svoj podpis alebo vyberte obrázok"
+
+msgid ""
+"Prompt type \"{{type}}\" is not yet supported. Please open a feature request"
+" on the Octosign repository."
+msgstr ""
+"Prompt typu \"{{type}}\" ešte nie je podporovaný. Prosím otvorte požiadavku "
+"o pridanie na Octosign repozitári."
+
+msgid "Confirm"
+msgstr "Potvrdiť"
+
+msgid "Cancel"
+msgstr "Zrušiť"
+
+msgid "Close"
+msgstr "Zatvoriť"
+
+msgid "General"
+msgstr "Všeobecné"
+
+msgid "Language"
+msgstr "Jazyk"
