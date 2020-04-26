@@ -1,7 +1,8 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import React, { useCallback, useState, useEffect, useRef, useMemo } from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
 import { useDropzone } from 'react-dropzone';
 import { lighten } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 import Footer from './Footer';
 import BackendChooser from './BackendChooser';
@@ -23,6 +24,15 @@ const Container = styled.div<{ active: boolean }>`
   transition: background-color 0.15s ease-out, border 0.1s ease-out;
 `;
 
+const GlobalStyle = createGlobalStyle`
+  .MuiTooltip-tooltip {
+    background-color: ${p => (p.theme as Theme).palette.common.white};
+    color: rgba(0, 0, 0, 0.87);
+    box-shadow: ${p => (p.theme as Theme).shadows[1]};
+    font-size: 12px;
+  }
+`;
+
 const MainScreen = () => {
   const apiReady = useRef(false);
   const [backends, setBackends] = useState<BackendState[]>([]);
@@ -40,6 +50,10 @@ const MainScreen = () => {
   useEffect(() => {
     chosenBackend && window.OctoSign.set(chosenBackend);
   }, [chosenBackend]);
+  const backend = useMemo(() => backends.find(b => b.slug === chosenBackend), [
+    chosenBackend,
+    backends,
+  ]);
 
   const [settingsOpened, setSettingsOpened] = useState(false);
   const onSettingsOpen = useCallback(() => setSettingsOpened(true), []);
@@ -51,7 +65,6 @@ const MainScreen = () => {
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     onDrop,
     multiple: true,
-    accept: 'application/pdf',
     onDragEnter: undefined,
     onDragOver: undefined,
     onDragLeave: undefined,
@@ -60,6 +73,7 @@ const MainScreen = () => {
 
   return (
     <Container {...getRootProps()} active={isDragActive}>
+      <GlobalStyle />
       <input {...getInputProps()} />
 
       <BackendChooser
@@ -69,7 +83,12 @@ const MainScreen = () => {
         setChosenBackend={setChosenBackend}
       />
 
-      <FilesArea files={files} isDragActive={isDragActive} openPicker={open} />
+      <FilesArea
+        files={files}
+        isDragActive={isDragActive}
+        openPicker={open}
+        supports={backend?.supports || []}
+      />
 
       <SettingsDialog open={settingsOpened} backends={backends} onClose={onSettingsClose} />
 

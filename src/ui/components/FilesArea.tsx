@@ -8,6 +8,7 @@ import FileCard from './FileCard';
 interface Props {
   files: File[];
   isDragActive: boolean;
+  supports: string[];
   openPicker: () => void;
 }
 
@@ -29,24 +30,22 @@ const Cards = styled.div`
   max-height: calc(100vh - 7rem);
 `;
 
-const FilesArea: FC<Props> = ({ files, isDragActive, openPicker }) => {
-  return (
-    <Container onClick={files.length === 0 ? openPicker : undefined}>
-      {files.length === 0 ? (
-        <Box marginBottom={1.5}>
-          <Typography align="center" color={isDragActive ? 'secondary' : 'primary'} variant="h2">
-            {isDragActive ? 'Drop your files here' : 'Sign a new document'}
-          </Typography>
-        </Box>
-      ) : (
-        <Cards>
-          {files.map(f => (
-            <FileCard key={f.path || f.name} file={f} />
-          ))}
-        </Cards>
-      )}
-    </Container>
-  );
-};
+const FilesArea: FC<Props> = ({ files, isDragActive, openPicker, supports }) => (
+  <Container onClick={files.length === 0 ? openPicker : undefined}>
+    {files.length === 0 ? (
+      <Box marginBottom={1.5}>
+        <Typography align="center" color={isDragActive ? 'secondary' : 'primary'} variant="h2">
+          {isDragActive ? 'Drop your files here' : 'Sign a new document'}
+        </Typography>
+      </Box>
+    ) : (
+      <Cards>
+        {files.map(f => (
+          <FileCard key={f.path || f.name} file={f} supported={supports.includes(f.type)} />
+        ))}
+      </Cards>
+    )}
+  </Container>
+);
 
 export default React.memo(FilesArea);

@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
+import Tooltip from '@material-ui/core/Tooltip';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 import mime from 'mime-types';
@@ -36,7 +37,7 @@ const TitleContainer = styled.div`
   flex-direction: row;
 `;
 
-const FileCard: FC<{ file: File }> = ({ file }) => {
+const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) => {
   const [signing, setSigning] = useState(false);
   const [promptRequest, setPromptRequest] = useState<{
     request: PromptRequest;
@@ -81,6 +82,21 @@ const FileCard: FC<{ file: File }> = ({ file }) => {
   const ext = mime.extension(file.type);
   const name = ext !== false ? file.name.replace(/\.[^/.]+$/, '') : file.name;
 
+  const signButton =
+    signing || !supported ? (
+      <Tooltip title={signing ? 'Signing in progress' : 'File type not supported'}>
+        <span>
+          <Button onClick={onSign} color="secondary" disabled>
+            Sign
+          </Button>
+        </span>
+      </Tooltip>
+    ) : (
+      <Button onClick={onSign} color="secondary">
+        Sign
+      </Button>
+    );
+
   return (
     <>
       <Prompt file={file} request={promptRequest} />
@@ -108,11 +124,7 @@ const FileCard: FC<{ file: File }> = ({ file }) => {
             Last modified: {format(file.lastModified, 'Pp')}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button onClick={onSign} color="secondary" disabled={signing}>
-            Sign
-          </Button>
-        </CardActions>
+        <CardActions>{signButton}</CardActions>
       </CardContainer>
     </>
   );
