@@ -10,7 +10,7 @@ describe('FileCard', () => {
     const file = {
       name: 'testFile.pdf',
       path: 'testFile.pdf',
-      lastModified: 1578103935000 + new Date().getTimezoneOffset() * 60 * 1000,
+      lastModified: 1578103935000 + new Date(1578103935000).getTimezoneOffset() * 60 * 1000,
       size: 456132,
       type: 'application/pdf',
     } as File;
@@ -57,7 +57,7 @@ describe('FileCard', () => {
     const file = {
       name: 'testFile.tss',
       path: 'testFile.tss',
-      lastModified: 1578103935000 + new Date().getTimezoneOffset() * 60 * 1000,
+      lastModified: 1578103935000 + new Date(1578103935000).getTimezoneOffset() * 60 * 1000,
       size: 456132,
       type: 'unknown/tss',
       slice: () => new Blob(),

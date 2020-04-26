@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 

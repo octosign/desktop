@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import React from 'react';
 import { render, wait } from '@testing-library/react';
 import interact from 'interactjs';

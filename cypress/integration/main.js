@@ -1,7 +1,7 @@
 const testFile = new File(['123'], 'filename.pdf', { lastModified: 1 });
 
-describe('Main Screen', function() {
-  it('Contains intro text, file selection controls, links and logo', function() {
+describe('Main Screen', function () {
+  it('Contains intro text, file selection controls, links and logo', function () {
     cy.visit('/');
 
     cy.title().should('be', 'Octosign');
@@ -17,7 +17,7 @@ describe('Main Screen', function() {
     cy.percySnapshot();
   });
 
-  it('Navigates to octosign.com on logo and help', function() {
+  it('Navigates to octosign.com on logo and help', function () {
     cy.visit('/');
 
     cy.get('img[alt="Logo"]')
@@ -32,7 +32,7 @@ describe('Main Screen', function() {
       .and('contain', 'octosign.com/help');
   });
 
-  it('Allows selecting file by drag and drop', function() {
+  it('Allows selecting file by drag and drop', function () {
     cy.visit('/');
 
     cy.contains('Sign a new document');
@@ -59,7 +59,7 @@ describe('Main Screen', function() {
     cy.percySnapshot('Main Screen Allows selecting file by drag and drop - drop');
   });
 
-  it('Allows selecting file by clicking anywhere and on the button', function() {
+  it('Allows selecting file by clicking anywhere and on the button', function () {
     cy.visit('/');
 
     cy.get('input[type="file"]').then(el => {

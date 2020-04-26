@@ -44,9 +44,12 @@ Then, assuming you have the latest LTS version of [Node.js](https://nodejs.org/)
 
 ```shell
 npm install
+npm run build:backends -- --skip-failed
 npm run build
 npm start
 ```
+
+Backends that couldn't be built will be skipped. This helps getting the app up and running even if all backend-specific toolsets are not available (like JDK or Go). Those backends obviously won't be available so you can fix your local ENV looking at the logged errors if you want.
 
 ## Contributing
 
