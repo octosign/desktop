@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { SnackbarProvider } from 'notistack';
 
 import theme from '../theme';
+import '../../shared/i18nSetup';
 
 const Providers: FC = ({ children }) => (
   <MuiThemeProvider theme={theme}>
