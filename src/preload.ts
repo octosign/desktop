@@ -7,6 +7,8 @@ import { writeFile } from 'fs-extra';
 
 import BackendManager from './preload/BackendManager';
 import Backend from './preload/Backend';
+import Settings from './preload/Settings';
+import { BackendOption } from './shared/BackendResults';
 
 const backendsPath = isDev
   ? join(remote.app.getAppPath(), '../backends/dist')
@@ -16,15 +18,27 @@ window.apiReady = (async () => {
   const manager = new BackendManager(backendsPath);
   await manager.load();
   let backend: Backend;
+  let backendSlug: string;
+
+  const metadata = manager.listMetadata();
+  const allOptions = Object.keys(metadata).reduce((acc, key) => {
+    const options = metadata[key].options;
+    if (options) acc[key] = options;
+    return acc;
+  }, {} as { [key: string]: BackendOption[] });
+  const settings = new Settings(allOptions);
+  const onGetOption = (id: string) => settings.get(`${backendSlug}.${id}`);
 
   window.OctoSign = {
     list: async () => manager.list(),
     set: async slug => {
       backend = await manager.get(slug);
+      backendSlug = slug;
     },
-    meta: (onError, onPrompt) => backend?.meta(onError, onPrompt),
-    sign: (path, onError, onPrompt) => backend?.sign(path, onError, onPrompt),
-    verify: (path, onError, onPrompt) => backend?.verify(path, onError, onPrompt),
+    sign: (path, onError, onPrompt) => backend?.sign(path, onError, onPrompt, onGetOption),
+    verify: (path, onError, onPrompt) => backend?.verify(path, onError, onPrompt, onGetOption),
+    getOptionValues: () => settings.get(),
+    setOptionValues: values => settings.set(values),
   };
 })();
 
@@ -45,6 +59,8 @@ window.createTmpImage = async data => {
 
   return path;
 };
+
+window.getVersion = () => remote.app.getVersion();
 
 // Allow require for spectron
 if (process.env.SPECTRON === '1') {

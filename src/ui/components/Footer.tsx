@@ -5,6 +5,11 @@ import Button from '@material-ui/core/Button';
 import logo from '../static/logo.svg';
 import Box from '@material-ui/core/Box';
 
+interface Props {
+  onSelectFiles: () => void;
+  onOpenSettings: () => void;
+}
+
 const Container = styled.div`
   height: 5rem;
   width: 100%;
@@ -59,7 +64,7 @@ const Link = styled.a`
   }
 `;
 
-const Footer: FC<{ onSelectFiles: () => void }> = ({ onSelectFiles }) => (
+const Footer: FC<Props> = ({ onSelectFiles, onOpenSettings }) => (
   <Container>
     <Logo>
       <a href="https://octosign.com" target="blank">
@@ -80,9 +85,11 @@ const Footer: FC<{ onSelectFiles: () => void }> = ({ onSelectFiles }) => (
       <Link href="https://octosign.com/help" target="blank">
         Help
       </Link>
-      <Link href="/">Settings</Link>
+      <Link href="#settings" onClick={onOpenSettings}>
+        Settings
+      </Link>
     </Links>
   </Container>
 );
 
-export default Footer;
+export default React.memo(Footer);

@@ -8,7 +8,7 @@ describe('Footer', () => {
   it('Contains logo that opens octosign.com', () => {
     const { getByAltText } = render(
       <Providers>
-        <Footer onSelectFiles={() => 0} />
+        <Footer onSelectFiles={() => 0} onOpenSettings={() => 0} />
       </Providers>,
     );
 
@@ -24,7 +24,7 @@ describe('Footer', () => {
 
     const { getByText } = render(
       <Providers>
-        <Footer onSelectFiles={onSelectFilesMock} />
+        <Footer onSelectFiles={onSelectFilesMock} onOpenSettings={() => 0} />
       </Providers>,
     );
 
@@ -38,7 +38,7 @@ describe('Footer', () => {
   it('Contains link to Help that opens octosign.com/help', () => {
     const { getByText } = render(
       <Providers>
-        <Footer onSelectFiles={() => 0} />
+        <Footer onSelectFiles={() => 0} onOpenSettings={() => 0} />
       </Providers>,
     );
 
@@ -48,5 +48,17 @@ describe('Footer', () => {
     expect(anchor.target).toBe('blank');
   });
 
-  it.todo('Contains link to Settings that opens Settings screen');
+  it('Contains link to Settings that opens Settings screen', () => {
+    const onOpenSettingsMock = jest.fn();
+
+    const { getByText } = render(
+      <Providers>
+        <Footer onSelectFiles={() => 0} onOpenSettings={onOpenSettingsMock} />
+      </Providers>,
+    );
+
+    fireEvent.click(getByText('Settings'));
+
+    expect(onOpenSettingsMock).toHaveBeenCalled();
+  });
 });

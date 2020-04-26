@@ -1,55 +1,66 @@
-describe('Settings Screen', function() {
-  it('Contains title', function() {
+describe('Settings Screen', function () {
+  it('Can be opened and closed', function () {
     cy.visit('/');
 
-    cy.title().should('be', 'Octosign');
+    cy.get('[data-cy=settings]').should('not.be.visible');
 
     cy.contains('Settings').click();
 
-    cy.contains('Select files').should('not.exist');
+    cy.get('[data-cy=settings]').should('be.visible');
 
-    cy.contains('Settings');
+    cy.contains('Close').should('be.visible');
 
-    cy.title().should('be', 'Octosign');
+    cy.get('[data-cy=settings]')
+      .contains('Settings')
+      .should('be.visible')
+      .should('have.prop', 'tagName')
+      .should('eq', 'H2');
 
     cy.percySnapshot();
-  });
-
-  it('Allows getting back to Main Screen', function() {
-    cy.visit('/');
-
-    cy.contains('Settings').click();
-
-    cy.contains('Select files').should('not.exist');
 
     cy.contains('Close').click();
 
-    cy.contains('Select files');
+    cy.get('[data-cy=settings]').should('not.be.visible');
   });
 
-  it('Contains list of backends with info', function() {
+  it('Contains general info and language select', function () {
     cy.visit('/');
-
     cy.contains('Settings').click();
 
-    cy.contains('Select files').should('not.exist');
+    cy.contains('Octosign v0.3.0-dev');
+    cy.contains('General');
+    cy.contains('Language');
+  });
+
+  it('Contains list of backends with info', function () {
+    cy.visit('/');
+    cy.contains('Settings').click();
 
     // First backend
-    cy.contains('Advanced signature');
-    cy.contains('Advanced electronic signature description');
-    cy.contains('Version 0.1.0');
-    cy.contains('Jakub Ďuraš');
-    cy.contains('GNU LGPL v2.1');
-    // TODO: Add checking link on the author
+    cy.contains('Advanced electronic signature');
+    cy.contains('Advanced electronic signature usable on PDF');
+    cy.contains('v0.1.0 by Jakub Ďuraš (jakub@duras.me)');
+    cy.contains('Licensed under GNU Lesser General Public License v2.1.');
+    cy.contains('Source code available at repository.');
+    // TODO: Add check for the repository link.
+
+    // Second backend
+    cy.contains('Simple image signature');
+    cy.contains('Signs PDFs using chosen image');
+    cy.contains('v0.2.0 (duras.me)');
   });
 
-  it('Contains settings for the backend', function() {
+  it('Contains settings for the backend', function () {
     cy.visit('/');
 
     cy.contains('Settings').click();
 
-    cy.contains('Select files').should('not.exist');
-
-    // TODO: Add checking for field that can be modified
+    cy.contains('PKCS #11 Library Path')
+      .closest('div')
+      .find('input')
+      .should('have.value', 'dll/path.dll')
+      .clear()
+      .type('different/path.dll')
+      .should('have.value', 'different/path.dll');
   });
 });

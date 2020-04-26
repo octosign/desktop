@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -6,6 +6,13 @@ import DoneIcon from '@material-ui/icons/Done';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 import BackendState from '../../shared/BackendState';
+
+interface Props {
+  show: boolean;
+  backends: BackendState[];
+  chosenBackend?: string;
+  setChosenBackend: (slug: string) => void;
+}
 
 const Container = styled.div`
   .MuiChip-root:not(:first-child) {
@@ -22,20 +29,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const BackendChooser: FC<{ show: boolean }> = ({ show }) => {
-  const [backends, setBackends] = useState<BackendState[]>([]);
-  const [chosenBackend, setChosenBackend] = useState<string>();
-  useEffect(() => {
-    window.OctoSign.list().then(backends => {
-      setBackends(backends);
-      const firstAvailable = backends.find(b => b.available === true);
-      setChosenBackend(firstAvailable?.slug);
-    });
-  }, []);
-  useEffect(() => {
-    chosenBackend && window.OctoSign.set(chosenBackend);
-  }, [chosenBackend]);
-
+const BackendChooser: FC<Props> = ({ show, backends, chosenBackend, setChosenBackend }) => {
   const chips = backends.map(backend => {
     if (backend.available !== true) {
       return (
@@ -69,4 +63,4 @@ const BackendChooser: FC<{ show: boolean }> = ({ show }) => {
   ) : null;
 };
 
-export default BackendChooser;
+export default React.memo(BackendChooser);

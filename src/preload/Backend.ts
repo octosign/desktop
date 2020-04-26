@@ -4,6 +4,7 @@ import BackendConfig from '../shared/BackendConfig';
 import Communication from './Communication';
 import PromptRequest from '../shared/PromptRequest';
 import Exec from './Exec';
+import { BackendMetadata, SignatureStatus } from '../shared/BackendResults';
 
 class Backend {
   private readonly config: BackendConfig;
@@ -18,41 +19,48 @@ class Backend {
     return this.config;
   }
 
-  public meta(
-    onError: (message: string) => void,
-    onPrompt: (request: PromptRequest) => Promise<string | undefined>,
-  ) {
-    return this.handle('meta', onError, onPrompt);
+  public meta() {
+    return this.handle(
+      'meta',
+      msg => console.warn(`Unsupported error during meta operation: "${msg}"`),
+      () => Promise.resolve(undefined),
+      () => Promise.resolve(''),
+    ) as Promise<BackendMetadata | undefined>;
   }
 
   public sign(
     filePath: string,
     onError: (message: string) => void,
     onPrompt: (request: PromptRequest) => Promise<string | undefined>,
+    onGetOption: (id: string) => Promise<string>,
   ) {
-    return this.handle('sign', onError, onPrompt, filePath);
+    return this.handle('sign', onError, onPrompt, onGetOption, filePath);
   }
 
   public verify(
     filePath: string,
     onError: (message: string) => void,
     onPrompt: (request: PromptRequest) => Promise<string | undefined>,
+    onGetOption: (id: string) => Promise<string>,
   ) {
-    return this.handle('verify', onError, onPrompt, filePath);
+    return this.handle('verify', onError, onPrompt, onGetOption, filePath) as Promise<
+      SignatureStatus | undefined
+    >;
   }
 
   private handle(
-    operation: string,
+    operation: 'meta' | 'sign' | 'verify',
     onError: (message: string) => void,
     onPrompt: (request: PromptRequest) => Promise<string | undefined>,
+    onGetOption: (id: string) => Promise<string>,
     filePath?: string,
   ) {
     return new Communication(
       Exec.run(this.path, this.config.exec, operation, filePath),
       onError,
       request => this.handlePrompt(request, onPrompt),
-      id => this.handleGetOption(id),
-    ).handle();
+      id => onGetOption(id),
+    ).handle(operation !== 'sign' ? operation : undefined);
   }
 
   /**
@@ -82,15 +90,6 @@ class Backend {
         const response = await onPrompt(request);
         return response || '';
     }
-  }
-
-  /**
-   * Handles all requests by retrieving saved option
-   */
-  private async handleGetOption(id: string) {
-    // TODO: Add retrieving of options from settings
-
-    return id;
   }
 }
 

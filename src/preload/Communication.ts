@@ -4,6 +4,7 @@ import { Readable, Writable } from 'stream';
 
 import debounce from '../shared/debounce';
 import PromptRequest from '../shared/PromptRequest';
+import { BackendMetadata, BackendOption, SignatureStatus } from '../shared/BackendResults';
 
 /**
  * Handles communication with child process following the protocol
@@ -33,13 +34,23 @@ class Communication {
     this.onGetOption = onGetOption;
   }
 
-  public async handle() {
+  public async handle(resultType?: 'meta' | 'verify') {
     return new Promise((resolve, reject) => {
       let result: string[] | undefined = undefined;
 
       const exitListener = (code: number) => {
         this.cleanUp();
-        code === 0 ? resolve(result) : reject(code);
+        if (code !== 0) {
+          return reject(code);
+        }
+
+        if (resultType === 'meta') {
+          resolve(result ? this.processMetaResult(result) : undefined);
+        } else if (resultType === 'verify') {
+          resolve(result ? this.processVerifyResult(result) : undefined);
+        } else {
+          resolve(result);
+        }
       };
       const errorListener = (err: Error) => {
         this.cleanUp();
@@ -134,6 +145,46 @@ class Communication {
 
   private respond(stdin: Writable, delimiter: string, message: string[]) {
     stdin.write([`--${delimiter}--`, ...message, `--${delimiter}--`, ''].join('\n'));
+  }
+
+  private processMetaResult(result: string[]): BackendMetadata {
+    const [status, ...extraLines] = result;
+    const supportsLine = extraLines.find(line => line.startsWith('SUPPORTS:'));
+    const optionsLine = extraLines.find(line => line.startsWith('OPTIONS:'));
+    const supports = supportsLine
+      ? supportsLine
+          .replace('SUPPORTS:', '')
+          .split(' ')
+          .map(mime => mime.trim())
+          .filter(type => type)
+      : undefined;
+    const options: BackendOption[] | undefined = optionsLine
+      ? Array.from(optionsLine.replace('OPTIONS:', '').matchAll(/(\w+)"(.+?)"\("(.+?)"\)/g)).map(
+          match =>
+            ({
+              id: match[1],
+              label: match[2],
+              defaultValue: match[3],
+            } as BackendOption),
+        )
+      : undefined;
+
+    return {
+      status,
+      supports: supports && supports.length > 0 ? supports : undefined,
+      options: options && options.length > 0 ? options : undefined,
+    };
+  }
+
+  private processVerifyResult(result: string[]): SignatureStatus {
+    const [status, ...extraLines] = result;
+
+    return {
+      status: ['SIGNED', 'UNSIGNED', 'UNKNOWN'].includes(status)
+        ? (status as SignatureStatus['status'])
+        : 'UNKNOWN',
+      details: extraLines.length > 0 ? extraLines.join('\n') : undefined,
+    };
   }
 }
 

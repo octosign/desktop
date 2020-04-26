@@ -1,13 +1,13 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import Typography from '@material-ui/core/Typography';
 import { useDropzone } from 'react-dropzone';
-import Box from '@material-ui/core/Box';
 import { lighten } from '@material-ui/core/styles';
 
 import Footer from './Footer';
-import FileCard from './FileCard';
 import BackendChooser from './BackendChooser';
+import SettingsDialog from './SettingsDialog';
+import BackendState from '../../shared/BackendState';
+import FilesArea from './FilesArea';
 
 const Container = styled.div<{ active: boolean }>`
   width: 100%;
@@ -23,27 +23,29 @@ const Container = styled.div<{ active: boolean }>`
   transition: background-color 0.15s ease-out, border 0.1s ease-out;
 `;
 
-const Content = styled.div`
-  flex: 1;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Cards = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  overflow-y: auto;
-  max-height: calc(100vh - 7rem);
-`;
-
 const MainScreen = () => {
-  const [files, setFiles] = useState<File[]>([]);
+  const apiReady = useRef(false);
+  const [backends, setBackends] = useState<BackendState[]>([]);
+  const [chosenBackend, setChosenBackend] = useState<string>();
+  useEffect(() => {
+    (async () => {
+      await window.apiReady;
+      apiReady.current = true;
+      const backends = await window.OctoSign.list();
+      setBackends(backends);
+      const firstAvailable = backends.find(b => b.available === true);
+      setChosenBackend(firstAvailable?.slug);
+    })();
+  }, []);
+  useEffect(() => {
+    chosenBackend && window.OctoSign.set(chosenBackend);
+  }, [chosenBackend]);
 
+  const [settingsOpened, setSettingsOpened] = useState(false);
+  const onSettingsOpen = useCallback(() => setSettingsOpened(true), []);
+  const onSettingsClose = useCallback(() => setSettingsOpened(false), []);
+
+  const [files, setFiles] = useState<File[]>([]);
   const onDrop = useCallback((acceptedFiles: File[]) => setFiles(acceptedFiles), []);
 
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
@@ -60,25 +62,18 @@ const MainScreen = () => {
     <Container {...getRootProps()} active={isDragActive}>
       <input {...getInputProps()} />
 
-      <BackendChooser show={files.length > 0} />
+      <BackendChooser
+        show={files.length > 0}
+        backends={backends}
+        chosenBackend={chosenBackend}
+        setChosenBackend={setChosenBackend}
+      />
 
-      <Content onClick={files.length === 0 ? open : undefined}>
-        {files.length === 0 ? (
-          <Box marginBottom={1.5}>
-            <Typography align="center" color={isDragActive ? 'secondary' : 'primary'} variant="h2">
-              {isDragActive ? 'Drop your files here' : 'Sign a new document'}
-            </Typography>
-          </Box>
-        ) : (
-          <Cards>
-            {files.map(f => (
-              <FileCard key={f.path} file={f} />
-            ))}
-          </Cards>
-        )}
-      </Content>
+      <FilesArea files={files} isDragActive={isDragActive} openPicker={open} />
 
-      <Footer onSelectFiles={open} />
+      <SettingsDialog open={settingsOpened} backends={backends} onClose={onSettingsClose} />
+
+      <Footer onSelectFiles={open} onOpenSettings={onSettingsOpen} />
     </Container>
   );
 };
