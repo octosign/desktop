@@ -3,12 +3,12 @@
 const debounce = <F extends Function>(func: F, wait = 250): F => {
   let timeout: NodeJS.Timeout;
 
-  return function(this: any, ...args: any[]) {
+  return function (this: any, ...args: any[]) {
     clearTimeout(timeout);
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const context = this;
 
-    timeout = globalThis.setTimeout(function() {
+    timeout = globalThis.setTimeout(function () {
       func.apply(context, args);
     }, wait);
   } as any;

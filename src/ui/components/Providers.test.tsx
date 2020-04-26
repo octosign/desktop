@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { useTheme } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 
@@ -25,9 +25,15 @@ describe('Providers', () => {
   it('Allow using snackbar', () => {
     const Component = () => {
       const { enqueueSnackbar } = useSnackbar();
-      enqueueSnackbar('Hello there from snackbar');
 
-      return <span>I will display snackbar</span>;
+      return (
+        <>
+          <button onClick={() => enqueueSnackbar('Hello there from snackbar')}>
+            Get me snackbar
+          </button>
+          <span>I will display snackbar</span>
+        </>
+      );
     };
 
     const { getByText } = render(
@@ -35,6 +41,8 @@ describe('Providers', () => {
         <Component />
       </Providers>,
     );
+
+    fireEvent.click(getByText('Get me snackbar'));
 
     expect(() => getByText('Hello there from snackbar')).not.toThrow();
   });

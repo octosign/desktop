@@ -71,7 +71,7 @@ const PositionPrompt: FC<Props> = ({ onChange, file, signature }) => {
   useEffect(() => {
     let unmounted = false;
     const fileReader = new FileReader();
-    const onLoad = async function(this: FileReader) {
+    const onLoad = async function (this: FileReader) {
       // TODO: Find a better way to include worker in parcel
       pdfjs.GlobalWorkerOptions.workerSrc = './pdf.worker.c654527b.js';
       const pdf = await pdfjs.getDocument(new Uint8Array(this.result as ArrayBuffer)).promise;
