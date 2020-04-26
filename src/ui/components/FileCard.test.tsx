@@ -17,7 +17,7 @@ describe('FileCard', () => {
 
     const { getByText } = render(
       <Providers>
-        <FileCard file={file} />
+        <FileCard file={file} supported={true} />
       </Providers>,
     );
 
@@ -38,7 +38,7 @@ describe('FileCard', () => {
 
     const { getByText, rerender } = render(
       <Providers>
-        <FileCard file={file} />
+        <FileCard file={file} supported={true} />
       </Providers>,
     );
 
@@ -46,7 +46,7 @@ describe('FileCard', () => {
 
     rerender(
       <Providers>
-        <FileCard file={{ ...file, size: 0 }} />
+        <FileCard file={{ ...file, size: 0 }} supported={true} />
       </Providers>,
     );
 
@@ -65,7 +65,7 @@ describe('FileCard', () => {
 
     const { getByText } = render(
       <Providers>
-        <FileCard file={file} />
+        <FileCard file={file} supported={true} />
       </Providers>,
     );
 
@@ -90,7 +90,7 @@ describe('FileCard', () => {
 
     const { getByText } = render(
       <Providers>
-        <FileCard file={file} />
+        <FileCard file={file} supported={true} />
       </Providers>,
     );
 
@@ -135,7 +135,7 @@ describe('FileCard', () => {
 
     const { getByText } = render(
       <Providers>
-        <FileCard file={file} />
+        <FileCard file={file} supported={true} />
       </Providers>,
     );
 
@@ -154,6 +154,36 @@ describe('FileCard', () => {
     jest.useRealTimers();
 
     delete window.OctoSign;
+  });
+
+  it('Disables Sign button if file is unsupported', () => {
+    const file = {
+      name: 'testFile.pdf',
+      path: 'testFile.pdf',
+      lastModified: 1578103935000 + new Date(1578103935000).getTimezoneOffset() * 60 * 1000,
+      size: 456132,
+      type: 'application/pdf',
+    } as File;
+
+    const { getByText, rerender } = render(
+      <Providers>
+        <FileCard file={file} supported={true} />
+      </Providers>,
+    );
+
+    let signButton = getByText('Sign').closest('button') as HTMLButtonElement;
+
+    expect(signButton.disabled).toBeFalsy();
+
+    rerender(
+      <Providers>
+        <FileCard file={file} supported={false} />
+      </Providers>,
+    );
+
+    signButton = getByText('Sign').closest('button') as HTMLButtonElement;
+
+    expect(signButton.disabled).toBeTruthy();
   });
 
   it.todo('Reverts status back if signing throws');
