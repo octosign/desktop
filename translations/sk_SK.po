@@ -67,7 +67,7 @@ msgid "Select files"
 msgstr "Vybrať súbory"
 
 msgid "or drag and drop your files anywhere"
-msgstr "alebo kdekoľvek chyťte a pusťte súbory"
+msgstr "alebo chyťte a kdekoľvek pusťte súbory"
 
 msgid "Help"
 msgstr "Pomoc"
