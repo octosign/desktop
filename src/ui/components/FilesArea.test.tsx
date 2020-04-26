@@ -8,7 +8,7 @@ describe('FilesArea', () => {
   it('Handles drag active', async () => {
     const { getByText, rerender } = render(
       <Providers>
-        <FilesArea files={[]} isDragActive={false} openPicker={() => 0} />
+        <FilesArea files={[]} isDragActive={false} openPicker={() => 0} supports={[]} />
       </Providers>,
     );
 
@@ -17,7 +17,7 @@ describe('FilesArea', () => {
 
     rerender(
       <Providers>
-        <FilesArea files={[]} isDragActive={true} openPicker={() => 0} />
+        <FilesArea files={[]} isDragActive={true} openPicker={() => 0} supports={[]} />
       </Providers>,
     );
 
@@ -30,7 +30,7 @@ describe('FilesArea', () => {
 
     const { container, rerender } = render(
       <Providers>
-        <FilesArea files={[]} isDragActive={false} openPicker={openPicker} />
+        <FilesArea files={[]} isDragActive={false} openPicker={openPicker} supports={[]} />
       </Providers>,
     );
 
@@ -40,7 +40,12 @@ describe('FilesArea', () => {
 
     rerender(
       <Providers>
-        <FilesArea files={[new File([], 'smt.pdf')]} isDragActive={false} openPicker={openPicker} />
+        <FilesArea
+          files={[new File([], 'smt.pdf')]}
+          isDragActive={false}
+          openPicker={openPicker}
+          supports={[]}
+        />
       </Providers>,
     );
 
@@ -52,7 +57,12 @@ describe('FilesArea', () => {
   it('Shows files', () => {
     const { findByText } = render(
       <Providers>
-        <FilesArea files={[new File([], 'smt.pdf')]} isDragActive={false} openPicker={() => 0} />
+        <FilesArea
+          files={[new File([], 'smt.pdf')]}
+          isDragActive={false}
+          openPicker={() => 0}
+          supports={[]}
+        />
       </Providers>,
     );
 
