@@ -13,6 +13,9 @@ import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import { useTranslation } from 'react-i18next';
 
 import PromptRequest from '../../shared/PromptRequest';
@@ -66,14 +69,16 @@ const Prompt: FC<Props> = ({ request, file }) => {
     },
     [t, request, canvasData, enqueueSnackbar],
   );
+  const { question, promptType, defaultValue, options } = request?.request || {};
 
-  let title = request?.request.question;
+  let title = question;
   let content: React.ReactNode;
-  let maxWidth: 'sm' | 'md' = 'md';
+  let maxWidth: 'sm' | 'md' | undefined = 'md';
   let fullScreen = false;
   let fullWidth = true;
   let useCanvasData = false;
-  switch (request?.request.promptType) {
+  let plainContent = false;
+  switch (promptType) {
     case 'text':
     case 'password':
       maxWidth = 'sm';
@@ -82,10 +87,10 @@ const Prompt: FC<Props> = ({ request, file }) => {
           autoFocus
           margin="dense"
           id="prompt-field"
-          label={request.request.promptType === 'password' ? t('Password') : t('Text')}
-          type={request.request.promptType}
+          label={promptType === 'password' ? t('Password') : t('Text')}
+          type={promptType}
           onChange={e => setValue(e.target.value)}
-          defaultValue={request.request.defaultValue}
+          defaultValue={defaultValue}
           fullWidth
         />
       );
@@ -94,13 +99,7 @@ const Prompt: FC<Props> = ({ request, file }) => {
     case 'position':
       fullScreen = true;
       title = t('Pick page and position for you signature');
-      content = (
-        <Position
-          onChange={setValue}
-          file={file}
-          signature={request.request.defaultValue as string}
-        />
-      );
+      content = <Position onChange={setValue} file={file} signature={defaultValue as string} />;
       break;
 
     case 'image':
@@ -114,6 +113,37 @@ const Prompt: FC<Props> = ({ request, file }) => {
           }
           onCanvasData={setCanvasData}
         />
+      );
+      break;
+
+    case 'single':
+      fullWidth = false;
+      maxWidth = undefined;
+      plainContent = true;
+      console.log(options);
+      content = (
+        <List>
+          {(options || []).map(option => (
+            <ListItem key={option.key} button onClick={() => onConfirm(option.key)}>
+              <ListItemText primary={option.value} />
+            </ListItem>
+          ))}
+        </List>
+      );
+      break;
+
+    case 'boolean':
+      fullWidth = false;
+      plainContent = true;
+      content = (
+        <DialogActions>
+          <Button onClick={() => onConfirm('1')} color="primary">
+            {t('Yes')}
+          </Button>
+          <Button onClick={() => onConfirm('0')} color="primary" autoFocus>
+            {t('No')}
+          </Button>
+        </DialogActions>
       );
       break;
 
@@ -165,13 +195,20 @@ const Prompt: FC<Props> = ({ request, file }) => {
       ) : (
         <>
           <DialogTitle id="prompt-dialog-title">{title}</DialogTitle>
-          <DialogContent>{content}</DialogContent>
-          <DialogActions>
-            <Button onClick={() => onConfirm()}>{t('Cancel')}</Button>
-            <Button onClick={() => onConfirm(value, useCanvasData)} color="primary">
-              {t('Confirm')}
-            </Button>
-          </DialogActions>
+          {plainContent ? (
+            content
+          ) : (
+            <>
+              {' '}
+              <DialogContent>{content}</DialogContent>
+              <DialogActions>
+                <Button onClick={() => onConfirm()}>{t('Cancel')}</Button>
+                <Button onClick={() => onConfirm(value, useCanvasData)} color="primary">
+                  {t('Confirm')}
+                </Button>
+              </DialogActions>
+            </>
+          )}
         </>
       )}
     </Dialog>

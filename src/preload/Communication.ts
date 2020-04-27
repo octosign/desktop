@@ -135,12 +135,18 @@ class Communication {
   }
 
   private messageToRequest(message: string) {
-    const parts = message.match(/^([a-z]+)"(.*)"\("(.*)"\)$/);
+    const parts = message.match(/^(\w+)"(.*)"\("(.*)"\)(?:\[(.*)\])?$/);
     if (parts === null) return undefined;
     return {
       promptType: parts[1] as PromptRequest['promptType'],
       question: parts[2],
       defaultValue: parts[3],
+      options:
+        parts[4] &&
+        Array.from(parts[4].matchAll(/(\w+)"(.*?)"/g)).map(m => ({
+          key: m[1],
+          value: m[2],
+        })),
     } as PromptRequest;
   }
 

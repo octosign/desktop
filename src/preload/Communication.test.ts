@@ -220,6 +220,39 @@ describe('Communication', () => {
     expect(processMock.stdin.write).toHaveBeenCalledWith(`--PROMPT--\nSomething\n--PROMPT--\n`);
   });
 
+  it('Handles valid STDOUT PROMPT including options with response on STDIN', async () => {
+    const onPrompt = jest.fn();
+    new Communication(
+      (processMock as unknown) as ChildProcess,
+      () => 0,
+      onPrompt,
+      () => Promise.resolve(''),
+    ).handle();
+
+    const onStdOut = processMock.stdout.on.mock.calls.find(c => c[0] === 'data');
+    const onStdOutCallback = onStdOut && onStdOut[1];
+
+    if (!onStdOutCallback) throw new Error('Callback not defined');
+
+    onPrompt.mockResolvedValueOnce('Something');
+
+    await onStdOutCallback('--PROMPT--\n');
+    await onStdOutCallback('single"Pick one wisely"("1")[1"One" 2"Two" 3"Three"]\n');
+    await onStdOutCallback('--PROMPT--\n');
+
+    expect(onPrompt).toHaveBeenCalledWith({
+      promptType: 'single',
+      question: 'Pick one wisely',
+      defaultValue: '1',
+      options: [
+        { key: '1', value: 'One' },
+        { key: '2', value: 'Two' },
+        { key: '3', value: 'Three' },
+      ],
+    });
+    expect(processMock.stdin.write).toHaveBeenCalledWith(`--PROMPT--\nSomething\n--PROMPT--\n`);
+  });
+
   it('Handles invalid STDOUT PROMPT with empty response on STDIN', async () => {
     const onPrompt = jest.fn();
     new Communication(
