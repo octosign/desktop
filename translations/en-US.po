@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-04-27T14:46:30.064Z\n"
-"PO-Revision-Date: 2020-04-27T14:46:30.064Z\n"
+"POT-Creation-Date: 2020-04-27T14:56:04.901Z\n"
+"PO-Revision-Date: 2020-04-27T14:56:04.901Z\n"
 
 msgid "Unreachable"
 msgstr ""
@@ -123,4 +123,21 @@ msgid ""
 msgstr ""
 
 msgid "Can not find supported PKCS DLL."
+msgstr ""
+
+msgid "Simple image signature"
+msgstr ""
+
+msgid ""
+"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
+"library from FoxyUtils ehf licensed under the AGPLv3."
+msgstr ""
+
+msgid "Signature file"
+msgstr ""
+
+msgid "Signature position"
+msgstr ""
+
+msgid "Output path"
 msgstr ""
