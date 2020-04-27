@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { resolve, basename } = require('path');
-const { readdir, readFile, writeFile } = require('fs-extra');
+const { resolve, basename, join } = require('path');
+const { readdir, readFile, writeFile, stat, exists } = require('fs-extra');
 const Scanner = require('i18next-scanner');
 const { i18nextToPo, gettextToI18next } = require('i18next-conv');
 
@@ -32,8 +32,25 @@ if (process.argv[2] === 'extract') {
       parser.parseFuncFromString(await readFile(file, 'utf-8'), { list: ['t'] });
     }
 
-    const converted = await i18nextToPo('en', JSON.stringify(parser.get().en.translation));
-    await writeFile('./translations/en-US.po', converted);
+    const extracted = parser.get().en.translation;
+
+    // Add translations from backends
+    const backends = await readdir('./backends/');
+    await Promise.all(
+      backends.map(async backend => {
+        const backendDir = resolve('./backends/', backend);
+        if (backend === 'dist' || !(await stat(backendDir)).isDirectory()) return;
+        const translationsFile = join(backendDir, 'translations.po');
+        if (!(await exists(translationsFile))) return;
+
+        const fromBackend = await gettextToI18next('en', await readFile(translationsFile));
+        Object.keys(JSON.parse(fromBackend)).forEach(key => (extracted[key] = ''));
+      }),
+    );
+
+    const buffer = await i18nextToPo('en', JSON.stringify(extracted));
+
+    await writeFile('./translations/en-US.po', buffer);
   })();
 }
 

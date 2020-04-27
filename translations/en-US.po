@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-04-26T22:37:55.235Z\n"
-"PO-Revision-Date: 2020-04-26T22:37:55.235Z\n"
+"POT-Creation-Date: 2020-04-27T14:46:30.064Z\n"
+"PO-Revision-Date: 2020-04-27T14:46:30.064Z\n"
 
 msgid "Unreachable"
 msgstr ""
@@ -110,4 +110,17 @@ msgid "General"
 msgstr ""
 
 msgid "Language"
+msgstr ""
+
+msgid "Advanced electronic signature"
+msgstr ""
+
+msgid ""
+"Advanced electronic signature usable on PDF and other documents using "
+"cryptography. Requires an usable certificate and signing drivers (for "
+"example ID cards and readers of EU citizens). Uses Digital Signature "
+"Service from European Commission licensed under the LGPL-2.1."
+msgstr ""
+
+msgid "Can not find supported PKCS DLL."
 msgstr ""
