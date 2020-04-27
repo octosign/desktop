@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import { format } from 'date-fns';
 import mime from 'mime-types';
 import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 
 import Prompt from './Prompt';
 import PromptRequest from '../../shared/PromptRequest';
@@ -44,6 +45,7 @@ const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) =
     onResponse: (response: string | undefined) => void;
   }>();
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation();
 
   const onSign = useCallback(async () => {
     setSigning(true);
@@ -61,14 +63,14 @@ const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) =
           }),
       );
       // TODO: Change state instead
-      enqueueSnackbar('Document was signed successfully', { variant: 'success' });
+      enqueueSnackbar(t('Document was signed successfully'), { variant: 'success' });
     } catch (err) {
       // TODO: This means it'll remain in previous state
-      enqueueSnackbar('Document was not signed successfully', { variant: 'error' });
+      enqueueSnackbar(t('Document was not signed successfully'), { variant: 'error' });
     }
 
     setSigning(false);
-  }, [enqueueSnackbar, file.path]);
+  }, [t, enqueueSnackbar, file.path]);
 
   const hrFileSize = (bytes: number) => {
     if (bytes === 0) return '0 B';
@@ -84,16 +86,20 @@ const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) =
 
   const signButton =
     signing || !supported ? (
-      <Tooltip title={signing ? 'Signing in progress' : 'File type not supported'}>
+      <Tooltip
+        title={
+          signing ? (t('Signing in progress') as string) : (t('File type not supported') as string)
+        }
+      >
         <span>
           <Button onClick={onSign} color="secondary" disabled>
-            Sign
+            {t('Sign')}
           </Button>
         </span>
       </Tooltip>
     ) : (
       <Button onClick={onSign} color="secondary">
-        Sign
+        {t('Sign')}
       </Button>
     );
 
@@ -116,12 +122,17 @@ const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) =
 
           <Status
             state={signing ? 'signing' : 'default'}
-            label={signing ? 'Signing...' : 'Unsigned'}
+            label={signing ? t('Signing...') : t('Unsigned')}
           />
 
-          <Typography color="textSecondary">Size: {hrFileSize(file.size)}</Typography>
           <Typography color="textSecondary">
-            Last modified: {format(file.lastModified, 'Pp')}
+            {t('Size: {{size}}', { size: hrFileSize(file.size) })}
+          </Typography>
+          <Typography color="textSecondary">
+            {t('Last modified: {{date}}', {
+              date: format(file.lastModified, 'Pp'),
+              interpolation: { escapeValue: false },
+            })}
           </Typography>
         </CardContent>
         <CardActions>{signButton}</CardActions>

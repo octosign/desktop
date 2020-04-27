@@ -6,6 +6,7 @@ import Backend from './Backend';
 import BackendConfig from '../shared/BackendConfig';
 import BackendState from '../shared/BackendState';
 import { BackendMetadata } from '../shared/BackendResults';
+import i18n from '../shared/i18nSetup';
 
 export default class BackendManager {
   private readonly backendsPath: string;
@@ -84,6 +85,6 @@ export default class BackendManager {
   private async fetchMetadata(slug: string) {
     const response = await this.backends[slug].meta();
 
-    return response ? response : { status: 'Unreachable' };
+    return response ? response : { status: i18n.t('Unreachable') };
   }
 }

@@ -5,6 +5,7 @@ import { Readable, Writable } from 'stream';
 import debounce from '../shared/debounce';
 import PromptRequest from '../shared/PromptRequest';
 import { BackendMetadata, BackendOption, SignatureStatus } from '../shared/BackendResults';
+import i18n from '../shared/i18nSetup';
 
 /**
  * Handles communication with child process following the protocol
@@ -55,7 +56,7 @@ class Communication {
       const errorListener = (err: Error) => {
         this.cleanUp();
         if (!this.process.killed) this.process.kill('SIGKILL');
-        this.onError(`Errored during operation: "${err.message}".`);
+        this.onError(i18n.t(`Errored during operation: "{{error}}".`, { error: err.message }));
         reject(Communication.EXIT_CODES.GENERAL_ERROR);
       };
 
@@ -70,7 +71,7 @@ class Communication {
       ) {
         this.cleanUp();
         if (!this.process.killed) this.process.kill('SIGKILL');
-        this.onError('Failed to establish communication with signing component.');
+        this.onError(i18n.t('Failed to establish communication with signing component.'));
         reject(Communication.EXIT_CODES.STDIO_ERROR);
         return;
       }

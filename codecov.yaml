@@ -1,0 +1,7 @@
+coverage:
+  round: nearest
+  status:
+    patch:
+      default:
+        threshold: 5%
+        base: auto
