@@ -183,12 +183,14 @@ describe('Backend', () => {
     let promptResult = await passedOnPrompt({
       promptType: 'save',
       question: 'Save your doc',
+      defaultValue: '',
     });
     expect(promptResult).toBe('');
 
     promptResult = await passedOnPrompt({
       promptType: 'open',
       question: 'Give me your doc',
+      defaultValue: '',
     });
     expect(promptResult).toBe('');
   });
@@ -212,10 +214,12 @@ describe('Backend', () => {
     let promptResult = await passedOnPrompt({
       promptType: 'boolean',
       question: 'Is there a meaning of life?',
+      defaultValue: '',
     });
     expect(onPrompt).toHaveBeenCalledWith({
       promptType: 'boolean',
       question: 'Is there a meaning of life?',
+      defaultValue: '',
     });
     expect(promptResult).toBe(true);
 
@@ -223,6 +227,7 @@ describe('Backend', () => {
     promptResult = await passedOnPrompt({
       promptType: 'boolean',
       question: 'Is there a meaning of life?',
+      defaultValue: '',
     });
     expect(promptResult).toBe('');
   });
@@ -247,6 +252,7 @@ describe('Backend', () => {
     const promptResult = await passedOnPrompt({
       promptType: 'boolean',
       question: 'Is there a meaning of life?',
+      defaultValue: '',
     });
     expect(onPrompt).not.toHaveBeenCalled();
     expect(promptResult).toBe('');
