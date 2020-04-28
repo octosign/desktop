@@ -53,7 +53,7 @@ const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) =
     try {
       await window.OctoSign.sign(
         file.path,
-        message => enqueueSnackbar(message, { variant: 'error' }),
+        message => enqueueSnackbar(t(message), { variant: 'error' }),
         request =>
           new Promise(resolve => {
             setPromptRequest({

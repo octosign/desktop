@@ -85,6 +85,12 @@ export default class BackendManager {
   private async fetchMetadata(slug: string) {
     const response = await this.backends[slug].meta();
 
-    return response ? response : { status: i18n.t('Unreachable') };
+    // We support translation on status
+    return response
+      ? {
+          ...response,
+          status: response.status !== 'OK' ? i18n.t(response.status) : response.status,
+        }
+      : { status: i18n.t('Unreachable') };
   }
 }

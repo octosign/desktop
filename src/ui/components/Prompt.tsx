@@ -120,7 +120,6 @@ const Prompt: FC<Props> = ({ request, file }) => {
       fullWidth = false;
       maxWidth = undefined;
       plainContent = true;
-      console.log(options);
       content = (
         <List>
           {(options || []).map(option => (

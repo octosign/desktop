@@ -192,7 +192,7 @@ const SettingsDialog: FC<Props> = ({ open, backends, onClose }) => {
                           id={`settings-${slug}-${id}`}
                           value={values?.values?.[slug]?.[id] || ''}
                           onChange={e => setValue(slug, id, e.target.value)}
-                          label={option.label}
+                          label={t(option.label)}
                           variant="outlined"
                           size="small"
                         />

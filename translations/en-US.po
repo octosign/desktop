@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-04-27T14:56:04.901Z\n"
-"PO-Revision-Date: 2020-04-27T14:56:04.901Z\n"
+"POT-Creation-Date: 2020-04-28T00:25:37.330Z\n"
+"PO-Revision-Date: 2020-04-28T00:25:37.330Z\n"
 
 msgid "Unreachable"
 msgstr ""
@@ -92,6 +92,12 @@ msgstr ""
 msgid "Draw your signature or pick saved image"
 msgstr ""
 
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
 msgid ""
 "Prompt type \"{{type}}\" is not yet supported. Please open a feature "
 "request on the Octosign repository."
@@ -125,6 +131,45 @@ msgstr ""
 msgid "Can not find supported PKCS DLL."
 msgstr ""
 
+msgid "Autoconfiguration failed. Please check Settings and Help."
+msgstr ""
+
+msgid "PKCS #11 Library Path"
+msgstr ""
+
+msgid "Timestamping Server URL"
+msgstr ""
+
+msgid "PKCS #11 library path is not configured. Please check Settings and Help."
+msgstr ""
+
+msgid "PKCS #11 library does't exist. Please check Settings and Help."
+msgstr ""
+
+msgid "Timestamping server URL is not configured."
+msgstr ""
+
+msgid "Signed file path was not chosen."
+msgstr ""
+
+msgid "Please provide the private key password."
+msgstr ""
+
+msgid "There was an error saving the signed document."
+msgstr ""
+
+msgid "Please pick a certificate for signing"
+msgstr ""
+
+msgid "Key was not chosen."
+msgstr ""
+
+msgid "Communication with device failed."
+msgstr ""
+
+msgid "Using of the PKCS #11 library failed."
+msgstr ""
+
 msgid "Simple image signature"
 msgstr ""
 
@@ -139,5 +184,5 @@ msgstr ""
 msgid "Signature position"
 msgstr ""
 
-msgid "Output path"
+msgid "Save signed file as"
 msgstr ""
