@@ -185,12 +185,17 @@ class Communication {
 
   private processVerifyResult(result: string[]): SignatureStatus {
     const [status, ...extraLines] = result;
+    const details =
+      extraLines.length > 0
+        ? // Support for translation in verification details
+          extraLines.join('\n').replace(/t{(.+?)}/g, (_, text) => i18n.t(text))
+        : undefined;
 
     return {
       status: ['SIGNED', 'UNSIGNED', 'UNKNOWN'].includes(status)
         ? (status as SignatureStatus['status'])
         : 'UNKNOWN',
-      details: extraLines.length > 0 ? extraLines.join('\n') : undefined,
+      details,
     };
   }
 }

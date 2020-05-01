@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback } from 'react';
+import React, { FC, useState, useCallback, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -6,14 +6,26 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 import mime from 'mime-types';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
 
 import Prompt from './Prompt';
 import PromptRequest from '../../shared/PromptRequest';
+import { SignatureStatus } from '../../shared/BackendResults';
+
+interface Props {
+  file: File;
+  supported: boolean;
+  chosenBackend?: string;
+}
 
 const Status = styled(Chip)<{ state: 'default' | 'signing' }>`
   width: 100%;
@@ -38,38 +50,79 @@ const TitleContainer = styled.div`
   flex-direction: row;
 `;
 
-const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) => {
-  const [signing, setSigning] = useState(false);
+const StyledReactMarkdown = styled(ReactMarkdown)`
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong {
+    font-weight: 500;
+    margin: 0 0 0.5rem 0;
+  }
+
+  p,
+  ol {
+    margin: 0;
+  }
+`;
+
+const FileCard: FC<Props> = ({ file, supported, chosenBackend }) => {
+  const [status, setStatus] = useState<'VERIFYING' | 'SIGNING' | SignatureStatus['status']>(
+    'UNKNOWN',
+  );
+  const [details, setDetails] = useState<string>();
+  const [detailsOpen, setDetailsOpen] = useState<boolean>(false);
   const [promptRequest, setPromptRequest] = useState<{
     request: PromptRequest;
     onResponse: (response: string | undefined) => void;
   }>();
+  const onPromptRequest = (request: PromptRequest) =>
+    new Promise<string | undefined>(resolve => {
+      setPromptRequest({
+        request,
+        onResponse: resolve,
+      });
+    });
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation();
+  useEffect(() => {
+    setStatus('VERIFYING');
+    (async () => {
+      try {
+        const result: SignatureStatus = await window.OctoSign.verify(
+          file.path,
+          message => enqueueSnackbar(t(message), { variant: 'error' }),
+          onPromptRequest,
+        );
+        setStatus(result.status);
+        setDetails(result.details);
+      } catch (e) {
+        enqueueSnackbar(t('Signature could not be verified'), { variant: 'error' });
+        setStatus('UNKNOWN');
+        setDetails(undefined);
+      }
+    })();
+    // We are very careful of when we fire verification
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [file.path, chosenBackend]);
 
   const onSign = useCallback(async () => {
-    setSigning(true);
+    setStatus('SIGNING');
 
     try {
       await window.OctoSign.sign(
         file.path,
         message => enqueueSnackbar(t(message), { variant: 'error' }),
-        request =>
-          new Promise(resolve => {
-            setPromptRequest({
-              request,
-              onResponse: resolve,
-            });
-          }),
+        onPromptRequest,
       );
-      // TODO: Change state instead
-      enqueueSnackbar(t('Document was signed successfully'), { variant: 'success' });
-    } catch (err) {
-      // TODO: This means it'll remain in previous state
-      enqueueSnackbar(t('Document was not signed successfully'), { variant: 'error' });
-    }
+      setStatus('SIGNED');
 
-    setSigning(false);
+      // TODO: Trigger verification instead
+    } catch (err) {
+      enqueueSnackbar(t('Document could not be signed'), { variant: 'error' });
+    }
   }, [t, enqueueSnackbar, file.path]);
 
   const hrFileSize = (bytes: number) => {
@@ -84,13 +137,14 @@ const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) =
   const ext = mime.extension(file.type);
   const name = ext !== false ? file.name.replace(/\.[^/.]+$/, '') : file.name;
 
-  const signButton =
-    signing || !supported ? (
-      <Tooltip
-        title={
-          signing ? (t('Signing in progress') as string) : (t('File type not supported') as string)
-        }
-      >
+  const tooltipTextForStatus = {
+    SIGNING: t('Signing in progress'),
+    VERIFYING: t('Verification in progress'),
+  } as { [key in typeof status]: undefined | string };
+
+  const cardButtons =
+    status === 'SIGNING' || status === 'VERIFYING' || !supported ? (
+      <Tooltip title={tooltipTextForStatus[status] || (t('File type not supported') as string)}>
         <span>
           <Button onClick={onSign} color="secondary" disabled>
             {t('Sign')}
@@ -98,14 +152,47 @@ const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) =
         </span>
       </Tooltip>
     ) : (
-      <Button onClick={onSign} color="secondary">
-        {t('Sign')}
-      </Button>
+      <>
+        <Button onClick={onSign} color="secondary">
+          {t('Sign')}
+        </Button>
+        {status === 'SIGNED' && details && (
+          <Button onClick={() => setDetailsOpen(true)} color="secondary">
+            {t('Open signature details')}
+          </Button>
+        )}
+      </>
     );
+
+  const hrStatus = {
+    SIGNING: t('Signing...'),
+    VERIFYING: t('Verifying...'),
+    SIGNED: t('Signed'),
+    UNSIGNED: t('Unsigned'),
+    UNKNOWN: t('Unknown'),
+    INVALID: t('Invalid'),
+  };
 
   return (
     <>
       <Prompt file={file} request={promptRequest} />
+      <Dialog
+        open={detailsOpen}
+        onClose={() => setDetailsOpen(false)}
+        fullWidth
+        maxWidth="sm"
+        aria-labelledby="details-dialog-title"
+      >
+        <DialogTitle id="details-dialog-title">{t('Signature details')}</DialogTitle>
+        <DialogContent>
+          <StyledReactMarkdown>{details}</StyledReactMarkdown>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDetailsOpen(false)} color="secondary">
+            {t('Close')}
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <CardContainer>
         <CardContent>
@@ -120,10 +207,7 @@ const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) =
             )}
           </TitleContainer>
 
-          <Status
-            state={signing ? 'signing' : 'default'}
-            label={signing ? t('Signing...') : t('Unsigned')}
-          />
+          <Status state={status === 'SIGNING' ? 'signing' : 'default'} label={hrStatus[status]} />
 
           <Typography color="textSecondary">
             {t('Size: {{size}}', { size: hrFileSize(file.size) })}
@@ -135,7 +219,7 @@ const FileCard: FC<{ file: File; supported: boolean }> = ({ file, supported }) =
             })}
           </Typography>
         </CardContent>
-        <CardActions>{signButton}</CardActions>
+        <CardActions>{cardButtons}</CardActions>
       </CardContainer>
     </>
   );

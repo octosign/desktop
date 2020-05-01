@@ -1,7 +1,7 @@
 declare module 'preload' {
-  import BackendConfig from './shared/BackendConfig';
   import PromptRequest from './shared/PromptRequest';
   import BackendState from './shared/BackendState';
+  import { SignatureStatus } from './shared/BackendResults';
 
   global {
     interface OctoSign {
@@ -11,12 +11,12 @@ declare module 'preload' {
         filePath: string,
         onError: (message: string) => void,
         onPrompt: (request: PromptRequest) => Promise<string | undefined>,
-      ): Promise<unknown>;
+      ): Promise<void>;
       verify(
         filePath: string,
         onError: (message: string) => void,
         onPrompt: (request: PromptRequest) => Promise<string | undefined>,
-      ): Promise<unknown>;
+      ): Promise<SignatureStatus | undefined>;
       getOptionValues(): { [backendSlug: string]: { [key: string]: string } };
       setOptionValues(values: OptionValues): void;
     }

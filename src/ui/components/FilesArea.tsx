@@ -10,6 +10,7 @@ interface Props {
   files: File[];
   isDragActive: boolean;
   supports: string[];
+  chosenBackend?: string;
   openPicker: () => void;
 }
 
@@ -31,7 +32,7 @@ const Cards = styled.div`
   max-height: calc(100vh - 7rem);
 `;
 
-const FilesArea: FC<Props> = ({ files, isDragActive, openPicker, supports }) => {
+const FilesArea: FC<Props> = ({ files, isDragActive, openPicker, supports, chosenBackend }) => {
   const { t } = useTranslation();
 
   return (
@@ -45,7 +46,12 @@ const FilesArea: FC<Props> = ({ files, isDragActive, openPicker, supports }) => 
       ) : (
         <Cards>
           {files.map(f => (
-            <FileCard key={f.path || f.name} file={f} supported={supports.includes(f.type)} />
+            <FileCard
+              key={f.path || f.name}
+              file={f}
+              supported={supports.includes(f.type)}
+              chosenBackend={chosenBackend}
+            />
           ))}
         </Cards>
       )}

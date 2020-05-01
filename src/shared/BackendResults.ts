@@ -11,6 +11,6 @@ export interface BackendMetadata {
 }
 
 export interface SignatureStatus {
-  status: 'SIGNED' | 'UNSIGNED' | 'UNKNOWN';
+  status: 'SIGNED' | 'UNSIGNED' | 'INVALID' | 'UNKNOWN';
   details?: string;
 }

@@ -60,6 +60,7 @@
     "prettier": "2.0.5",
     "react-dom": "^16.13.1",
     "react-dropzone": "^10.2.2",
+    "react-markdown": "^4.3.1",
     "react-signature-canvas": "^1.0.3",
     "roboto-fontface-material": "^0.1.0",
     "spectron": "^10.0.1",

@@ -45,15 +45,17 @@ const MainScreen = () => {
       setBackends(backends);
       const firstAvailable = backends.find(b => b.available === true);
       setChosenBackend(firstAvailable?.slug);
+      window.OctoSign.set(firstAvailable?.slug);
     })();
   }, []);
-  useEffect(() => {
-    chosenBackend && window.OctoSign.set(chosenBackend);
-  }, [chosenBackend]);
   const backend = useMemo(() => backends.find(b => b.slug === chosenBackend), [
     chosenBackend,
     backends,
   ]);
+  const onSetChosenBackend = useCallback(backend => {
+    setChosenBackend(backend);
+    window.OctoSign.set(backend);
+  }, []);
 
   const [settingsOpened, setSettingsOpened] = useState(false);
   const onSettingsOpen = useCallback(() => setSettingsOpened(true), []);
@@ -80,13 +82,14 @@ const MainScreen = () => {
         show={files.length > 0}
         backends={backends}
         chosenBackend={chosenBackend}
-        setChosenBackend={setChosenBackend}
+        setChosenBackend={onSetChosenBackend}
       />
 
       <FilesArea
         files={files}
         isDragActive={isDragActive}
         openPicker={open}
+        chosenBackend={chosenBackend}
         supports={backend?.supports || []}
       />
 

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-04-28T00:25:37.330Z\n"
-"PO-Revision-Date: 2020-04-28T00:25:37.330Z\n"
+"POT-Creation-Date: 2020-05-01T23:44:34.385Z\n"
+"PO-Revision-Date: 2020-05-01T23:44:34.385Z\n"
 
 msgid "Unreachable"
 msgstr ""
@@ -20,13 +20,16 @@ msgstr ""
 msgid "Can not parse image format"
 msgstr ""
 
-msgid "Document was signed successfully"
+msgid "Signature could not be verified"
 msgstr ""
 
-msgid "Document was not signed successfully"
+msgid "Document could not be signed"
 msgstr ""
 
 msgid "Signing in progress"
+msgstr ""
+
+msgid "Verification in progress"
 msgstr ""
 
 msgid "File type not supported"
@@ -35,10 +38,31 @@ msgstr ""
 msgid "Sign"
 msgstr ""
 
+msgid "Open signature details"
+msgstr ""
+
 msgid "Signing..."
 msgstr ""
 
+msgid "Verifying..."
+msgstr ""
+
+msgid "Signed"
+msgstr ""
+
 msgid "Unsigned"
+msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "Invalid"
+msgstr ""
+
+msgid "Signature details"
+msgstr ""
+
+msgid "Close"
 msgstr ""
 
 msgid "Size: {{size}}"
@@ -109,9 +133,6 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-msgid "Close"
-msgstr ""
-
 msgid "General"
 msgstr ""
 
@@ -168,6 +189,30 @@ msgid "Communication with device failed."
 msgstr ""
 
 msgid "Using of the PKCS #11 library failed."
+msgstr ""
+
+msgid "Signed by"
+msgstr ""
+
+msgid "Validity"
+msgstr ""
+
+msgid "Date and time"
+msgstr ""
+
+msgid "Qualification"
+msgstr ""
+
+msgid "Chain of trust"
+msgstr ""
+
+msgid "Potential problems"
+msgstr ""
+
+msgid "Valid"
+msgstr ""
+
+msgid "This is probably due to corrupted installation."
 msgstr ""
 
 msgid "Simple image signature"
