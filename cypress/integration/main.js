@@ -52,7 +52,7 @@ describe('Main Screen', function () {
     });
 
     cy.contains('filename');
-    cy.contains('Unsigned');
+    cy.contains('Unknown');
     cy.contains('Size: 3 B');
     cy.contains('Last modified: 01/01/1970');
 
@@ -70,10 +70,8 @@ describe('Main Screen', function () {
     });
 
     cy.contains('filename');
-    cy.contains('Unsigned');
+    cy.contains('Unknown');
     cy.contains('Size: 3 B');
     cy.contains('Last modified: 01/01/1970');
   });
-
-  it('Opens Settings screen from footer');
 });
