@@ -41,7 +41,9 @@ class Backend {
     onPrompt: (request: PromptRequest) => Promise<string | undefined>,
     onGetOption: (id: string) => Promise<string>,
   ) {
-    return this.handle('sign', onError, onPrompt, onGetOption, filePath);
+    return this.handle('sign', onError, onPrompt, onGetOption, filePath) as Promise<
+      string | undefined
+    >;
   }
 
   public verify(
@@ -67,7 +69,7 @@ class Backend {
       onError,
       request => this.handlePrompt(request, onPrompt),
       id => onGetOption(id),
-    ).handle(operation !== 'sign' ? operation : undefined);
+    ).handle(operation);
   }
 
   /**

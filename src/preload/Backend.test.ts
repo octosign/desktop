@@ -33,6 +33,7 @@ describe('Backend', () => {
     const backend = new Backend(
       {
         name: 'Test',
+        description: 'Some desc',
         exec: './backend',
         dist: './dist',
       },
@@ -41,6 +42,7 @@ describe('Backend', () => {
 
     expect(backend.getConfig()).toMatchObject({
       name: 'Test',
+      description: 'Some desc',
       exec: './backend',
       dist: './dist',
     });

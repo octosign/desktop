@@ -63,6 +63,9 @@ const MainScreen = () => {
 
   const [files, setFiles] = useState<File[]>([]);
   const onDrop = useCallback((acceptedFiles: File[]) => setFiles(acceptedFiles), []);
+  const onFileChanged = useCallback((oldFile: File, newFile: File) => {
+    setFiles(files => files.map(f => (f === oldFile ? newFile : f)));
+  }, []);
 
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     onDrop,
@@ -91,6 +94,7 @@ const MainScreen = () => {
         openPicker={open}
         chosenBackend={chosenBackend}
         supports={backend?.supports || []}
+        onFileChanged={onFileChanged}
       />
 
       <SettingsDialog open={settingsOpened} backends={backends} onClose={onSettingsClose} />

@@ -8,7 +8,13 @@ describe('FilesArea', () => {
   it('Handles drag active', async () => {
     const { getByText, rerender } = render(
       <Providers>
-        <FilesArea files={[]} isDragActive={false} openPicker={() => 0} supports={[]} />
+        <FilesArea
+          files={[]}
+          isDragActive={false}
+          openPicker={() => 0}
+          supports={[]}
+          onFileChanged={() => 0}
+        />
       </Providers>,
     );
 
@@ -17,7 +23,13 @@ describe('FilesArea', () => {
 
     rerender(
       <Providers>
-        <FilesArea files={[]} isDragActive={true} openPicker={() => 0} supports={[]} />
+        <FilesArea
+          files={[]}
+          isDragActive={true}
+          openPicker={() => 0}
+          supports={[]}
+          onFileChanged={() => 0}
+        />
       </Providers>,
     );
 
@@ -30,7 +42,13 @@ describe('FilesArea', () => {
 
     const { container, rerender } = render(
       <Providers>
-        <FilesArea files={[]} isDragActive={false} openPicker={openPicker} supports={[]} />
+        <FilesArea
+          files={[]}
+          isDragActive={false}
+          openPicker={openPicker}
+          supports={[]}
+          onFileChanged={() => 0}
+        />
       </Providers>,
     );
 
@@ -45,6 +63,7 @@ describe('FilesArea', () => {
           isDragActive={false}
           openPicker={openPicker}
           supports={[]}
+          onFileChanged={() => 0}
         />
       </Providers>,
     );
@@ -62,6 +81,7 @@ describe('FilesArea', () => {
           isDragActive={false}
           openPicker={() => 0}
           supports={[]}
+          onFileChanged={() => 0}
         />
       </Providers>,
     );

@@ -39,6 +39,7 @@ const settingsMock = jest.fn((options: object) => ({
   set: setSettingsMock,
 }));
 const writeFile = jest.fn();
+const stat = jest.fn();
 const isDevMock = jest.fn(() => true);
 describe('Preload', () => {
   beforeEach(() => {
@@ -58,7 +59,7 @@ describe('Preload', () => {
 
     jest.mock('./preload/BackendManager', () => managerMock);
 
-    jest.mock('fs-extra', () => ({ writeFile }));
+    jest.mock('fs-extra', () => ({ writeFile, stat }));
     jest.mock('tmp-promise', () => ({ file: () => ({ path: '/tmp/123' }) }));
 
     jest.mock('electron-is-dev', isDevMock);
@@ -174,6 +175,39 @@ describe('Preload', () => {
     await expect(window.createTmpImage('image/jpeg;base64,456456123465')).rejects.toEqual(
       new Error('Can not parse image format'),
     );
+  });
+
+  it('Allows creating file from path', async () => {
+    // @ts-ignore
+    globalThis.Blob = jest.fn();
+    globalThis.ReadableStream = jest.fn();
+    require('./preload');
+
+    stat.mockReturnValueOnce(
+      Promise.resolve({
+        size: 456156,
+        mtime: new Date(1578103935000),
+      }),
+    );
+    const result = await window.pathToFile('/smt.pdf');
+
+    expect(result).toEqual(
+      expect.objectContaining({
+        path: '/smt.pdf',
+        name: 'smt.pdf',
+        lastModified: 1578103935000,
+        size: 456156,
+        type: 'application/pdf',
+      }),
+    );
+
+    expect(result.arrayBuffer()).resolves.toBeInstanceOf(ArrayBuffer);
+    expect(result.slice()).toBeInstanceOf(globalThis.Blob);
+    expect(result.stream()).toBeInstanceOf(globalThis.ReadableStream);
+    expect(result.text()).resolves.toBe('');
+
+    delete globalThis.Blob;
+    delete globalThis.ReadableStream;
   });
 
   it('Defines require for spectron if env is right', () => {

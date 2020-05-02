@@ -433,6 +433,33 @@ describe('Communication', () => {
     });
   });
 
+  it('Handles sign optional STDOUT RESULT', async () => {
+    const communication = new Communication(
+      (processMock as unknown) as ChildProcess,
+      () => 0,
+      () => Promise.resolve(''),
+      () => Promise.resolve(''),
+    ).handle('sign');
+
+    const onStdOut = processMock.stdout.on.mock.calls.find(c => c[0] === 'data');
+    const onStdOutCallback = onStdOut && onStdOut[1];
+    if (!onStdOutCallback) throw new Error('Callback not defined');
+
+    const onExitCall = processMock.once.mock.calls.find(c => c[0] === 'exit');
+    const onExitCallback = onExitCall && onExitCall[1];
+    if (!onExitCallback) throw new Error('Callback not defined');
+
+    await onStdOutCallback('--RESULT--\n');
+    await onStdOutCallback('output/path.pdf\n');
+    await onStdOutCallback('--RESULT--\n');
+
+    onExitCallback(0);
+
+    const result = await communication;
+
+    expect(result).toStrictEqual('output/path.pdf');
+  });
+
   it('Handles verify STDOUT RESULT with known status and details', async () => {
     const communication = new Communication(
       (processMock as unknown) as ChildProcess,
@@ -492,6 +519,37 @@ describe('Communication', () => {
     expect(result).toStrictEqual({
       status: 'UNKNOWN',
       details: undefined,
+    });
+  });
+
+  it('Handles verify STDOUT RESULT with translated details', async () => {
+    const communication = new Communication(
+      (processMock as unknown) as ChildProcess,
+      () => 0,
+      () => Promise.resolve(''),
+      () => Promise.resolve(''),
+    ).handle('verify');
+
+    const onStdOut = processMock.stdout.on.mock.calls.find(c => c[0] === 'data');
+    const onStdOutCallback = onStdOut && onStdOut[1];
+    if (!onStdOutCallback) throw new Error('Callback not defined');
+
+    const onExitCall = processMock.once.mock.calls.find(c => c[0] === 'exit');
+    const onExitCallback = onExitCall && onExitCall[1];
+    if (!onExitCallback) throw new Error('Callback not defined');
+
+    await onStdOutCallback('--RESULT--\n');
+    await onStdOutCallback('SIGNED\n');
+    await onStdOutCallback('Signed by t{translated}\n');
+    await onStdOutCallback('--RESULT--\n');
+
+    onExitCallback(0);
+
+    const result = await communication;
+
+    expect(result).toStrictEqual({
+      status: 'SIGNED',
+      details: 'Signed by translated',
     });
   });
 });

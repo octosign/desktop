@@ -35,7 +35,7 @@ class Communication {
     this.onGetOption = onGetOption;
   }
 
-  public async handle(resultType?: 'meta' | 'verify') {
+  public async handle(resultType?: 'meta' | 'verify' | 'sign') {
     return new Promise((resolve, reject) => {
       let result: string[] | undefined = undefined;
 
@@ -49,6 +49,8 @@ class Communication {
           resolve(result ? this.processMetaResult(result) : undefined);
         } else if (resultType === 'verify') {
           resolve(result ? this.processVerifyResult(result) : undefined);
+        } else if (resultType === 'sign') {
+          resolve(result ? result[0] : undefined);
         } else {
           resolve(result);
         }
@@ -192,7 +194,7 @@ class Communication {
         : undefined;
 
     return {
-      status: ['SIGNED', 'UNSIGNED', 'UNKNOWN'].includes(status)
+      status: ['SIGNED', 'UNSIGNED', 'INVALID', 'UNKNOWN'].includes(status)
         ? (status as SignatureStatus['status'])
         : 'UNKNOWN',
       details,

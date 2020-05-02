@@ -1,9 +1,9 @@
 import { remote } from 'electron';
-import { join } from 'path';
+import { join, basename } from 'path';
 import isDev from 'electron-is-dev';
 import { file } from 'tmp-promise';
 import mime from 'mime-types';
-import { writeFile } from 'fs-extra';
+import { writeFile, stat } from 'fs-extra';
 
 import i18n from './shared/i18nSetup';
 import BackendManager from './preload/BackendManager';
@@ -59,6 +59,21 @@ window.createTmpImage = async data => {
   await writeFile(path, buffer);
 
   return path;
+};
+
+window.pathToFile = async path => {
+  const info = await stat(path);
+  return {
+    path,
+    name: basename(path),
+    size: info.size,
+    type: mime.lookup(path),
+    lastModified: info.mtime.valueOf(),
+    arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+    slice: () => new Blob(),
+    stream: () => new ReadableStream(),
+    text: () => Promise.resolve(''),
+  } as File;
 };
 
 window.getVersion = () => remote.app.getVersion();

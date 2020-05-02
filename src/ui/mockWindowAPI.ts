@@ -1,3 +1,5 @@
+import { SignatureStatus } from '../shared/BackendResults';
+
 const dssBackend = {
   available: 'PKCS 11 DLL not found',
   config: {
@@ -38,10 +40,19 @@ const imageBackend = {
 
 const mockWindowAPI = (window: Window) => {
   window.OctoSign = {
-    list: () => Promise.resolve([dssBackend, imageBackend]),
+    list: () => new Promise(resolve => setTimeout(() => resolve([dssBackend, imageBackend]), 500)),
     set: () => Promise.resolve(),
-    sign: () => Promise.resolve(),
-    verify: () => Promise.resolve(),
+    sign: () => new Promise(resolve => setTimeout(() => resolve(), 1000)),
+    verify: (filePath: string) => {
+      let result = { status: 'UNKNOWN' } as SignatureStatus;
+      if (filePath.includes('signed')) {
+        result = { status: 'SIGNED', details: 'Some details' };
+      } else if (filePath.includes('invalid')) {
+        result = { status: 'INVALID', details: 'Some invalid details' };
+      }
+
+      return new Promise(resolve => setTimeout(() => resolve(result), 1000));
+    },
     getOptionValues: () => ({ dss: { dllPath: 'dll/path.dll' } }),
     setOptionValues: () => {
       return;

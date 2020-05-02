@@ -11,7 +11,7 @@ declare module 'preload' {
         filePath: string,
         onError: (message: string) => void,
         onPrompt: (request: PromptRequest) => Promise<string | undefined>,
-      ): Promise<void>;
+      ): Promise<string | undefined>;
       verify(
         filePath: string,
         onError: (message: string) => void,
@@ -36,6 +36,10 @@ declare module 'preload' {
        * Create tmp file for base64-encoded image and return its path
        */
       createTmpImage: (data: string) => Promise<string>;
+      /**
+       * Returns a File object represeting file with the given absolute path
+       */
+      pathToFile: (path: string) => Promise<File>;
       /**
        * Get application version
        */
