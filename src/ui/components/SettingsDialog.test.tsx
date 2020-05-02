@@ -120,4 +120,6 @@ describe('SettingsDialog', () => {
       }),
     );
   });
+
+  it.todo('Changes language using the Language select');
 });

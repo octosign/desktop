@@ -29,7 +29,7 @@ interface Props {
 }
 
 const AlmostFullScreenDialog = styled(Dialog)`
-  &[style] {
+  & {
     /* Important neccessary because of the inline styles */
     top: ${p => p.theme.spacing(4)}px !important;
 
