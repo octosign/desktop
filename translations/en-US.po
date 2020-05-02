@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-01T23:44:34.385Z\n"
-"PO-Revision-Date: 2020-05-01T23:44:34.385Z\n"
+"POT-Creation-Date: 2020-05-02T21:15:19.039Z\n"
+"PO-Revision-Date: 2020-05-02T21:15:19.039Z\n"
 
 msgid "Unreachable"
 msgstr ""
@@ -59,16 +59,16 @@ msgstr ""
 msgid "Invalid"
 msgstr ""
 
-msgid "Signature details"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
 msgid "Size: {{size}}"
 msgstr ""
 
 msgid "Last modified: {{date}}"
+msgstr ""
+
+msgid "Signature details"
+msgstr ""
+
+msgid "Close"
 msgstr ""
 
 msgid "Drop your files here"
@@ -213,6 +213,33 @@ msgid "Valid"
 msgstr ""
 
 msgid "This is probably due to corrupted installation."
+msgstr ""
+
+msgid "Qualified Electronic Signature"
+msgstr ""
+
+msgid "Qualified Electronic Seal"
+msgstr ""
+
+msgid "Qualified Electronic Signature or Seal"
+msgstr ""
+
+msgid "Advanced Electronic Signature"
+msgstr ""
+
+msgid "Advanced Electronic Seal"
+msgstr ""
+
+msgid "Advanced Electronic Signature or Seal"
+msgstr ""
+
+msgid "Not Advanced Electronic Signature but supported by a Qualified Certificate"
+msgstr ""
+
+msgid "Not Advanced Electronic Signature"
+msgstr ""
+
+msgid "Not applicable"
 msgstr ""
 
 msgid "Simple image signature"
