@@ -1,7 +1,18 @@
-const testFile = new File(['123'], 'filename.pdf', { lastModified: 1 });
-const signedTestFile = new File(['123'], 'signed.pdf', { lastModified: 1 });
-const invalidTestFile = new File(['123'], 'invalid.pdf', { lastModified: 1 });
-const unsupportedFile = new File(['123'], 'unsupported.jpg', { lastModified: 1 });
+// We need to add the path manually as in electron (default for headless) it is empty
+// TODO: Find a better way or place for this
+const createFile = name => {
+  const realFile = new File(['123'], name, { lastModified: 1561032102 });
+  const file = {};
+  for (const name in realFile) {
+    file[name] = realFile[name];
+  }
+  file.path = name;
+  return file;
+};
+const testFile = createFile('filename.pdf');
+const signedTestFile = createFile('signed.pdf');
+const invalidTestFile = createFile('invalid.pdf');
+const unsupportedFile = createFile('unsupported.pdf');
 
 describe('Card with file', function () {
   it('Verifies and shows picked file status', function () {
