@@ -71,24 +71,20 @@ const PositionPrompt: FC<Props> = ({ onChange, file, signature }) => {
   );
   useEffect(() => {
     let unmounted = false;
-    const fileReader = new FileReader();
-    const onLoad = async function (this: FileReader) {
+    (async () => {
       // TODO: Find a better way to include worker in parcel
-      pdfjs.GlobalWorkerOptions.workerSrc = './pdf.worker.c654527b.js';
-      const pdf = await pdfjs.getDocument(new Uint8Array(this.result as ArrayBuffer)).promise;
+      pdfjs.GlobalWorkerOptions.workerSrc = './pdf.worker.a9ccb500.js';
+      const pdf = await pdfjs.getDocument(new Uint8Array(await file.arrayBuffer())).promise;
       if (!unmounted) {
         pdfRef.current = pdf;
         setTotalPages(pdf.numPages);
         if (!canvasRef.current) throw new Error('Unable to get reference to canvas');
         renderPage(pdfRef.current, 1, canvasRef.current);
       }
-    };
-    fileReader.onload = onLoad;
-    fileReader.readAsArrayBuffer(file);
+    })();
     setPageNumber(1);
 
     return () => {
-      fileReader.removeEventListener('load', onLoad);
       pdfRef.current = undefined;
       unmounted = true;
     };

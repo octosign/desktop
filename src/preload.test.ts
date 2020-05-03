@@ -39,6 +39,7 @@ const settingsMock = jest.fn((options: object) => ({
   set: setSettingsMock,
 }));
 const writeFile = jest.fn();
+const readFile = jest.fn();
 const stat = jest.fn();
 const isDevMock = jest.fn(() => true);
 describe('Preload', () => {
@@ -59,7 +60,7 @@ describe('Preload', () => {
 
     jest.mock('./preload/BackendManager', () => managerMock);
 
-    jest.mock('fs-extra', () => ({ writeFile, stat }));
+    jest.mock('fs-extra', () => ({ writeFile, readFile, stat }));
     jest.mock('tmp-promise', () => ({ file: () => ({ path: '/tmp/123' }) }));
 
     jest.mock('electron-is-dev', isDevMock);

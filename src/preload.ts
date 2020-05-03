@@ -3,7 +3,7 @@ import { join, basename } from 'path';
 import isDev from 'electron-is-dev';
 import { file } from 'tmp-promise';
 import mime from 'mime-types';
-import { writeFile, stat } from 'fs-extra';
+import { writeFile, stat, readFile } from 'fs-extra';
 
 import i18n from './shared/i18nSetup';
 import BackendManager from './preload/BackendManager';
@@ -63,13 +63,15 @@ window.createTmpImage = async data => {
 
 window.pathToFile = async path => {
   const info = await stat(path);
+  const buffer = await readFile(path);
+
   return {
     path,
     name: basename(path),
     size: info.size,
     type: mime.lookup(path),
     lastModified: info.mtime.valueOf(),
-    arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+    arrayBuffer: () => Promise.resolve(buffer),
     slice: () => new Blob(),
     stream: () => new ReadableStream(),
     text: () => Promise.resolve(''),

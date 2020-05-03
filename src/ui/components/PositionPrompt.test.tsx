@@ -40,6 +40,7 @@ describe('PositionPrompt', () => {
   it('Renders passed PDF file on canvas', async () => {
     const onChange = jest.fn();
     const file = new File([''], 'filename.pdf');
+    file.arrayBuffer = () => Promise.resolve(new ArrayBuffer(0));
     render(
       <Providers>
         <PositionPrompt onChange={onChange} file={file} signature="path/signature.png" />
@@ -57,6 +58,7 @@ describe('PositionPrompt', () => {
   it('Handles changing of page in both directions', async () => {
     const onChange = jest.fn();
     const file = new File([''], 'filename.pdf');
+    file.arrayBuffer = () => Promise.resolve(new ArrayBuffer(0));
     const { getByText, getByLabelText } = render(
       <Providers>
         <PositionPrompt onChange={onChange} file={file} signature="path/signature.png" />
@@ -82,6 +84,7 @@ describe('PositionPrompt', () => {
   it('Handles changing of position', () => {
     const onChange = jest.fn();
     const file = new File([''], 'filename.pdf');
+    file.arrayBuffer = () => Promise.resolve(new ArrayBuffer(0));
     render(
       <Providers>
         <PositionPrompt onChange={onChange} file={file} signature="path/signature.png" />
