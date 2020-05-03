@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-04-27T14:56:04.901Z\n"
-"PO-Revision-Date: 2020-04-26 22:47+0000\n"
+"POT-Creation-Date: 2020-05-02T21:15:19.039Z\n"
+"PO-Revision-Date: 2020-04-27 17:52+0000\n"
 "Last-Translator: Jakub Duras <jakub@duras.me>, 2020\n"
 "Language-Team: Slovak (Slovakia) (https://www.transifex.com/jakub-duras/teams/108443/sk_SK/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,14 +27,17 @@ msgstr "Nepodarilo sa nadviazať komunikáciu s podpisovacím komponentom."
 msgid "Can not parse image format"
 msgstr "Nepodarilo sa spracovať formát obrázku"
 
-msgid "Document was signed successfully"
-msgstr "Dokument bol úspešne podpísaný"
+msgid "Signature could not be verified"
+msgstr "Nepodarilo sa overiť podpis"
 
-msgid "Document was not signed successfully"
-msgstr "Dokument nebol úspešne podpísaný"
+msgid "Document could not be signed"
+msgstr "Nepodaril sa podpísať dokument"
 
 msgid "Signing in progress"
 msgstr "Prebieha podpisovanie"
+
+msgid "Verification in progress"
+msgstr "Prebieha overovanie"
 
 msgid "File type not supported"
 msgstr "Typ súboru nie je podporovaný"
@@ -42,17 +45,38 @@ msgstr "Typ súboru nie je podporovaný"
 msgid "Sign"
 msgstr "Podpísať"
 
+msgid "Open signature details"
+msgstr "Otvoriť detail podpisu"
+
 msgid "Signing..."
 msgstr "Podpisovanie..."
 
+msgid "Verifying..."
+msgstr "Overovanie..."
+
+msgid "Signed"
+msgstr "Podpísaný"
+
 msgid "Unsigned"
 msgstr "Nepodpísaný"
+
+msgid "Unknown"
+msgstr "Neznáme"
+
+msgid "Invalid"
+msgstr "Neplatný"
 
 msgid "Size: {{size}}"
 msgstr "Veľkosť: {{size}}"
 
 msgid "Last modified: {{date}}"
 msgstr "Naposledy upravený: {{date}}"
+
+msgid "Signature details"
+msgstr "Detail podpisu"
+
+msgid "Close"
+msgstr "Zatvoriť"
 
 msgid "Drop your files here"
 msgstr "Pustite sem súbory"
@@ -99,6 +123,12 @@ msgstr "Vyberte stránku a pozíciu pre váš podpis"
 msgid "Draw your signature or pick saved image"
 msgstr "Nakreslite svoj podpis alebo vyberte obrázok"
 
+msgid "Yes"
+msgstr "Áno"
+
+msgid "No"
+msgstr "Nie"
+
 msgid ""
 "Prompt type \"{{type}}\" is not yet supported. Please open a feature request"
 " on the Octosign repository."
@@ -111,9 +141,6 @@ msgstr "Potvrdiť"
 
 msgid "Cancel"
 msgstr "Zrušiť"
-
-msgid "Close"
-msgstr "Zatvoriť"
 
 msgid "General"
 msgstr "Všeobecné"
@@ -139,6 +166,102 @@ msgstr ""
 msgid "Can not find supported PKCS DLL."
 msgstr "Nebolo možné nájsť podporované PKCS DLL"
 
+msgid "Autoconfiguration failed. Please check Settings and Help."
+msgstr "Autokonfigurácia zlyhala. Prosím skontrolujete Nastavenia a Pomoc."
+
+msgid "PKCS #11 Library Path"
+msgstr "Cesta k PKCS #11 knižnici"
+
+msgid "Timestamping Server URL"
+msgstr "URL servera na časové pečiatky"
+
+msgid ""
+"PKCS #11 library path is not configured. Please check Settings and Help."
+msgstr ""
+"Cesta k PKCS #11 knižnici nie je nastavená. Prosím skontrolujete Nastavenia "
+"a Pomoc."
+
+msgid "PKCS #11 library does't exist. Please check Settings and Help."
+msgstr ""
+"PKCS #11 knižnica neexistuje. Prosím skontrolujete Nastavenia a Pomoc."
+
+msgid "Timestamping server URL is not configured."
+msgstr "URL servera na časové pečiatky nie je nastavená."
+
+msgid "Signed file path was not chosen."
+msgstr "Cesta pre podpísaný dokument nebola zvolená."
+
+msgid "Please provide the private key password."
+msgstr "Prosím zadajte heslo k privátnemu kľúču."
+
+msgid "There was an error saving the signed document."
+msgstr "Vyskytla sa chyba pri ukladaní podpísaného dokumentu."
+
+msgid "Please pick a certificate for signing"
+msgstr "Prosím vyberte certifikát pre podpísanie"
+
+msgid "Key was not chosen."
+msgstr "Nebol zvolený kľúč."
+
+msgid "Communication with device failed."
+msgstr "Komunikácia so zariadením zlyhala."
+
+msgid "Using of the PKCS #11 library failed."
+msgstr "Použitie PKCS #11 knižnice zlyhalo."
+
+msgid "Signed by"
+msgstr "Podpísal"
+
+msgid "Validity"
+msgstr "Platnosť"
+
+msgid "Date and time"
+msgstr "Dátum a čas"
+
+msgid "Qualification"
+msgstr "Kvalifikácia"
+
+msgid "Chain of trust"
+msgstr "Reťazec dôvery"
+
+msgid "Potential problems"
+msgstr "Potenciálne problémy"
+
+msgid "Valid"
+msgstr "Platný"
+
+msgid "This is probably due to corrupted installation."
+msgstr "Je to pravdepodobne spôsobené poškodenou inštaláciou."
+
+msgid "Qualified Electronic Signature"
+msgstr "Kvalifikovaný elektronický podpis"
+
+msgid "Qualified Electronic Seal"
+msgstr "Kvalifikovaná elektronická pečať"
+
+msgid "Qualified Electronic Signature or Seal"
+msgstr "Kvalifikovaný elektronický podpis alebo pečať"
+
+msgid "Advanced Electronic Signature"
+msgstr "Zdokonalený elektronický podpis"
+
+msgid "Advanced Electronic Seal"
+msgstr "Zdokonalená elektronická pečať"
+
+msgid "Advanced Electronic Signature or Seal"
+msgstr "Zdokonalený elektronický podpis alebo pečať"
+
+msgid ""
+"Not Advanced Electronic Signature but supported by a Qualified Certificate"
+msgstr ""
+"Nie zdokonalený elektronický podpis, ale používa kvalifikovaný certifikát"
+
+msgid "Not Advanced Electronic Signature"
+msgstr "Nie zdokonalený elektronický podpis"
+
+msgid "Not applicable"
+msgstr "Neaplikovateľné"
+
 msgid "Simple image signature"
 msgstr "Jednoduchý podpis obrázkom"
 
@@ -155,5 +278,5 @@ msgstr "Súbor s podpisom"
 msgid "Signature position"
 msgstr "Pozícia podpisu"
 
-msgid "Output path"
-msgstr "Cesta pre podpísaný"
+msgid "Save signed file as"
+msgstr "Uložiť podpísaný súbor ako"
