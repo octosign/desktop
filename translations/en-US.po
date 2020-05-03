@@ -5,11 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-02T21:15:19.039Z\n"
-"PO-Revision-Date: 2020-05-02T21:15:19.039Z\n"
-
-msgid "Unreachable"
-msgstr ""
+"POT-Creation-Date: 2020-05-03T16:43:45.405Z\n"
+"PO-Revision-Date: 2020-05-03T16:43:45.405Z\n"
 
 msgid "Errored during operation: \"{{error}}\"."
 msgstr ""
@@ -242,6 +239,9 @@ msgstr ""
 msgid "Not applicable"
 msgstr ""
 
+msgid "Unreachable"
+msgstr ""
+
 msgid "Simple image signature"
 msgstr ""
 
@@ -257,4 +257,7 @@ msgid "Signature position"
 msgstr ""
 
 msgid "Save signed file as"
+msgstr ""
+
+msgid "No answer, aborting."
 msgstr ""
