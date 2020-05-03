@@ -16,6 +16,8 @@ describe('Settings Screen', function () {
       .should('have.prop', 'tagName')
       .should('eq', 'H2');
 
+    cy.contains('Simple image signature');
+
     cy.percySnapshot();
 
     cy.contains('Close').click();
