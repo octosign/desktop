@@ -169,7 +169,7 @@ const SettingsDialog: FC<Props> = ({ open, backends, onClose }) => {
           return (
             <Box key={slug} my={3}>
               <BackendHeader>
-                <Typography variant="overline">{config.name}</Typography>
+                <Typography variant="overline">{t(config.name)}</Typography>
 
                 <Typography variant="body2">
                   v{config.version}
@@ -178,7 +178,7 @@ const SettingsDialog: FC<Props> = ({ open, backends, onClose }) => {
               </BackendHeader>
 
               <Typography variant="body2" paragraph>
-                {config.description}
+                {config.description && t(config.description)}
                 {licensedUnder}
                 {codeAtRepository}
               </Typography>

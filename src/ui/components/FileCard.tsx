@@ -95,6 +95,7 @@ const FileCard: FC<Props> = ({ file, supported, chosenBackend, onFileChanged }) 
       }
     } catch (err) {
       enqueueSnackbar(t('Document could not be signed'), { variant: 'error' });
+      setSignAttempts(v => v + 1);
     }
   }, [t, enqueueSnackbar, file.path, onFileChanged]);
 

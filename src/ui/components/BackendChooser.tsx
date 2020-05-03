@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
 import DoneIcon from '@material-ui/icons/Done';
+import { useTranslation } from 'react-i18next';
 
 import BackendState from '../../shared/BackendState';
 
@@ -20,12 +21,14 @@ const Container = styled.div`
 `;
 
 const BackendChooser: FC<Props> = ({ show, backends, chosenBackend, setChosenBackend }) => {
+  const { t } = useTranslation();
+
   const chips = backends.map(backend => {
     if (backend.available !== true) {
       return (
-        <Tooltip key={backend.slug} title={backend.available} placement="bottom">
+        <Tooltip key={backend.slug} title={t(backend.available) as string} placement="bottom">
           <span>
-            <Chip label={backend.config.name} disabled />
+            <Chip label={t(backend.config.name)} disabled />
           </span>
         </Tooltip>
       );
@@ -34,7 +37,7 @@ const BackendChooser: FC<Props> = ({ show, backends, chosenBackend, setChosenBac
     return (
       <Chip
         key={backend.slug}
-        label={backend.config.name}
+        label={t(backend.config.name)}
         clickable
         color={chosenBackend === backend.slug ? 'secondary' : 'default'}
         deleteIcon={<DoneIcon />}

@@ -5,7 +5,6 @@ import Communication from './Communication';
 import PromptRequest from '../shared/PromptRequest';
 import Exec from './Exec';
 import { BackendMetadata, SignatureStatus } from '../shared/BackendResults';
-import i18n from '../shared/i18nSetup';
 
 class Backend {
   private readonly config: BackendConfig;
@@ -15,9 +14,6 @@ class Backend {
     this.config = {
       version: 'dev',
       ...config,
-      // We support translating of backend name and decription
-      name: i18n.t(config.name),
-      description: config.description && i18n.t(config.description),
     };
     this.path = path;
   }

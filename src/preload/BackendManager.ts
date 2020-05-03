@@ -6,7 +6,6 @@ import Backend from './Backend';
 import BackendConfig from '../shared/BackendConfig';
 import BackendState from '../shared/BackendState';
 import { BackendMetadata } from '../shared/BackendResults';
-import i18n from '../shared/i18nSetup';
 
 export default class BackendManager {
   private readonly backendsPath: string;
@@ -89,8 +88,8 @@ export default class BackendManager {
     return response
       ? {
           ...response,
-          status: response.status !== 'OK' ? i18n.t(response.status) : response.status,
+          status: response.status !== 'OK' ? response.status : response.status,
         }
-      : { status: i18n.t('Unreachable') };
+      : { status: 'Unreachable' };
   }
 }
