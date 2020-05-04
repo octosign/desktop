@@ -156,7 +156,7 @@ msgid ""
 msgstr ""
 "Pokročilý elektronický podpis použitelný v PDF a jiných dokumentech za "
 "použití kryptografie. Vyžaduje použitelný certifikát (například občanský "
-"průkaz a čtečku dostupnou v některých státech EÚ). Využívá knihovnu Digital "
+"průkaz a čtečku dostupnou v některých státech EU). Využívá knihovnu Digital "
 "Signature Service od Evropské komise s licencí LGPL-2.1."
 
 msgid "Can not find supported PKCS DLL."
