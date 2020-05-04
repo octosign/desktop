@@ -19,7 +19,7 @@ msgid "Errored during operation: \"{{error}}\"."
 msgstr "Během operace nastala chyba: \"{{error}}\"."
 
 msgid "Failed to establish communication with signing component."
-msgstr "Navázáni komunikace s podpisovým komponentem se nezdařilo."
+msgstr "Navázání komunikace s podpisovým komponentem se nezdařilo."
 
 msgid "Can not parse image format"
 msgstr "Nepodařilo se zpracovat formát obrázku"
