@@ -1,0 +1,283 @@
+# 
+# Translators:
+# Peter Vnuk <workingpedro@gmail.com>, 2020
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2020-05-03T16:43:45.405Z\n"
+"PO-Revision-Date: 2020-04-27 17:52+0000\n"
+"Last-Translator: Peter Vnuk <workingpedro@gmail.com>, 2020\n"
+"Language-Team: Czech (Czech Republic) (https://www.transifex.com/jakub-duras/teams/108443/cs_CZ/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs_CZ\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"mime-version: 1.0\n"
+
+msgid "Errored during operation: \"{{error}}\"."
+msgstr "Během operace nastala chyba: \"{{error}}\"."
+
+msgid "Failed to establish communication with signing component."
+msgstr "Navázáni komunikace s podpisovým komponentem se nezdařilo."
+
+msgid "Can not parse image format"
+msgstr "Nepodařilo se zpracovat formát obrázku"
+
+msgid "Signature could not be verified"
+msgstr "Nepodařilo se ověřit podpis"
+
+msgid "Document could not be signed"
+msgstr "Nepodařilo se podepsat dokument"
+
+msgid "Signing in progress"
+msgstr "Probíhá podepisování"
+
+msgid "Verification in progress"
+msgstr "Probíhá ověřování"
+
+msgid "File type not supported"
+msgstr "Typ souboru není podporován"
+
+msgid "Sign"
+msgstr "Podepsat"
+
+msgid "Open signature details"
+msgstr "Otevřít informace o podpisu"
+
+msgid "Signing..."
+msgstr "Podepisuji..."
+
+msgid "Verifying..."
+msgstr "Ověřuji..."
+
+msgid "Signed"
+msgstr "Podepsaný"
+
+msgid "Unsigned"
+msgstr "Nepodepsaný"
+
+msgid "Unknown"
+msgstr "Neznámý"
+
+msgid "Invalid"
+msgstr "Neplatný"
+
+msgid "Size: {{size}}"
+msgstr "Velikost: {{size}}"
+
+msgid "Last modified: {{date}}"
+msgstr "Poslední úprava: {{date}}"
+
+msgid "Signature details"
+msgstr "Informace o podpisu"
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "Drop your files here"
+msgstr "Zde vložte soubory"
+
+msgid "Sign a new document"
+msgstr "Podepsat nový dokument"
+
+msgid "Logo"
+msgstr "Logo"
+
+msgid "Select files"
+msgstr "Zvolit soubory"
+
+msgid "or drag and drop your files anywhere"
+msgstr "nebo soubory chyťte a pusťte kdekoliv"
+
+msgid "Help"
+msgstr "Pomoc"
+
+msgid "Settings"
+msgstr "Nastavení"
+
+msgid "Clear"
+msgstr "Vymazat"
+
+msgid "Previous page"
+msgstr "Předchozí stránka"
+
+msgid "Next page"
+msgstr "Další stránka"
+
+msgid "You need to draw your signature or select file."
+msgstr "Musíte buď nakreslit svůj podpis nebo zvolit soubor."
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Pick page and position for you signature"
+msgstr "Zvolte stránku a pozici vašeho podpisu"
+
+msgid "Draw your signature or pick saved image"
+msgstr "Nakreslete svůj podpis nebo zvolte uložený obrázek"
+
+msgid "Yes"
+msgstr "Ano"
+
+msgid "No"
+msgstr "Ne"
+
+msgid ""
+"Prompt type \"{{type}}\" is not yet supported. Please open a feature request"
+" on the Octosign repository."
+msgstr ""
+"Prompt typu \"{{type}}\" zatím není podporován. Zadejte prosím požadavek do "
+"repozitáře Octosign."
+
+msgid "Confirm"
+msgstr "Potvrdit"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "General"
+msgstr "Všeobecné"
+
+msgid "Language"
+msgstr "Jazyk"
+
+msgid "Advanced electronic signature"
+msgstr "Pokročilý elektronický podpis"
+
+msgid ""
+"Advanced electronic signature usable on PDF and other documents using "
+"cryptography. Requires an usable certificate and signing drivers (for "
+"example ID cards and readers of EU citizens). Uses Digital Signature Service"
+" from European Commission licensed under the LGPL-2.1."
+msgstr ""
+"Pokročilý elektronický podpis použitelný v PDF a jiných dokumentech za "
+"použití kryptografie. Vyžaduje použitelný certifikát (například občanský "
+"průkaz a čtečku dostupnou v některých státech EÚ). Využívá knihovnu Digital "
+"Signature Service od Evropské komise s licencí LGPL-2.1."
+
+msgid "Can not find supported PKCS DLL."
+msgstr "Podporované PKCS DLL nenalezeno."
+
+msgid "Autoconfiguration failed. Please check Settings and Help."
+msgstr "Autokonfigurace selhala. Zkontrolujte prosím Nastavení a Pomoc."
+
+msgid "PKCS #11 Library Path"
+msgstr "Cesta ke knihovně PKCS #11"
+
+msgid "Timestamping Server URL"
+msgstr "URL serveru na časové razítka"
+
+msgid ""
+"PKCS #11 library path is not configured. Please check Settings and Help."
+msgstr ""
+"Cesta ke knihovně PKCS #11 není nastavena. Zkontrolujte prosím Nastavení a "
+"Pomoc."
+
+msgid "PKCS #11 library does't exist. Please check Settings and Help."
+msgstr "Knihovna PKCS #11 neexistuje. Zkontrolujte prosím Nastavení a Pomoc."
+
+msgid "Timestamping server URL is not configured."
+msgstr "URL serveru na časové razítka není nastavená."
+
+msgid "Signed file path was not chosen."
+msgstr "Cesta pro podepsaný dokument nebyla zadána."
+
+msgid "Please provide the private key password."
+msgstr "Prosím, zadejte heslo k privátnímu klíči."
+
+msgid "There was an error saving the signed document."
+msgstr "Při podepisování uloženého dokumentu nastala chyba."
+
+msgid "Please pick a certificate for signing"
+msgstr "Prosím, zvolte certifikát pro podepisování."
+
+msgid "Key was not chosen."
+msgstr "Klíč nebyl zadán."
+
+msgid "Communication with device failed."
+msgstr "Komunikace se zařízením selhala."
+
+msgid "Using of the PKCS #11 library failed."
+msgstr "Využití knihovny PKCS #11 se nezdařilo."
+
+msgid "Signed by"
+msgstr "Podepsal"
+
+msgid "Validity"
+msgstr "Platnost"
+
+msgid "Date and time"
+msgstr "Datum a čas"
+
+msgid "Qualification"
+msgstr "Kvalifikace"
+
+msgid "Chain of trust"
+msgstr "Řetězec důvěry"
+
+msgid "Potential problems"
+msgstr "Potenciální problémy"
+
+msgid "Valid"
+msgstr "Platný"
+
+msgid "This is probably due to corrupted installation."
+msgstr "Příčina je pravděpodobně v poškozené instalaci."
+
+msgid "Qualified Electronic Signature"
+msgstr "Kvalifikovaný elektronický podpis"
+
+msgid "Qualified Electronic Seal"
+msgstr "Kvalifikovaná elektronická pečeť"
+
+msgid "Qualified Electronic Signature or Seal"
+msgstr "Kvalifikovaný elektronický podpis nebo pečeť"
+
+msgid "Advanced Electronic Signature"
+msgstr "Zdokonalený elektronický podpis"
+
+msgid "Advanced Electronic Seal"
+msgstr "Zdokonalená elektronická pečeť"
+
+msgid "Advanced Electronic Signature or Seal"
+msgstr "Zdokonalený elektronický podpis nebo pečeť"
+
+msgid ""
+"Not Advanced Electronic Signature but supported by a Qualified Certificate"
+msgstr ""
+"Není zdokonalený elektronický podpis, ale používá kvalifikovaný certifikát"
+
+msgid "Not Advanced Electronic Signature"
+msgstr "Ne zdokonalený elektronický podpis"
+
+msgid "Not applicable"
+msgstr "Neaplikovatelné"
+
+msgid "Unreachable"
+msgstr "Nedosažitelné"
+
+msgid "Simple image signature"
+msgstr "Jednoduchý podpis obrázkem"
+
+msgid ""
+"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
+"library from FoxyUtils ehf licensed under the AGPLv3."
+msgstr ""
+"Podepisování PDF s využitím obrázku nebo nakreslením podpisu. Využívá "
+"knihovnu unipdf od FoxyUtils ehf s licencí AGPLv3."
+
+msgid "Signature file"
+msgstr "Soubor s podpisem"
+
+msgid "Signature position"
+msgstr "Umístění podpisu"
+
+msgid "Save signed file as"
+msgstr "Uložit podepsaný soubor jako"
+
+msgid "No answer, aborting."
+msgstr "Nemám odpověď. Přerušuji."
