@@ -57,19 +57,19 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'npm run build:translations'
+    script: 'yarn build:translations'
   displayName: 'Build translations'
 
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'npm test'
+    script: 'yarn test'
   displayName: 'Test'
 
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'npm run test:ui'
+    script: 'yarn test:ui'
   env:
     PERCY_TOKEN: $(PERCY_TOKEN)
   displayName: 'Test UI'
@@ -78,19 +78,19 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'npm run build'
+    script: 'yarn build'
   displayName: 'Build'
 
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'npm run build:backends'
+    script: 'yarn build:backends'
   displayName: 'Build backends'
 
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: npm run dist
+    script: yarn dist
   env:
     GH_TOKEN: $(GH_TOKEN)
   displayName: 'Create and upload distributables'
@@ -113,7 +113,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'npm run test:smoke'
+    script: 'yarn test:smoke'
   displayName: 'Run smoke test'
   condition: ne(variables['Agent.OS'], 'Linux')
 
