@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-05T00:40:49.022Z\n"
-"PO-Revision-Date: 2020-05-05T00:40:49.022Z\n"
+"POT-Creation-Date: 2020-05-13T22:19:58.506Z\n"
+"PO-Revision-Date: 2020-05-13T22:19:58.507Z\n"
 
 msgid "Errored during operation: \"{{error}}\"."
 msgstr ""
@@ -92,6 +92,9 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
+msgid "Choose image"
+msgstr ""
+
 msgid "Previous page"
 msgstr ""
 
@@ -134,6 +137,26 @@ msgid "General"
 msgstr ""
 
 msgid "Language"
+msgstr ""
+
+msgid "Simple image signature"
+msgstr ""
+
+msgid ""
+"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
+"library from FoxyUtils ehf licensed under the AGPLv3."
+msgstr ""
+
+msgid "Signature file"
+msgstr ""
+
+msgid "Signature position"
+msgstr ""
+
+msgid "Save signed file as"
+msgstr ""
+
+msgid "No answer, aborting."
 msgstr ""
 
 msgid "Advanced electronic signature"
@@ -240,24 +263,4 @@ msgid "Not applicable"
 msgstr ""
 
 msgid "Unreachable"
-msgstr ""
-
-msgid "Simple image signature"
-msgstr ""
-
-msgid ""
-"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
-"library from FoxyUtils ehf licensed under the AGPLv3."
-msgstr ""
-
-msgid "Signature file"
-msgstr ""
-
-msgid "Signature position"
-msgstr ""
-
-msgid "Save signed file as"
-msgstr ""
-
-msgid "No answer, aborting."
 msgstr ""

@@ -54,7 +54,11 @@ const ImagePrompt: FC<Props> = ({ onChange, onCanvasData }) => {
           aria-label="small contained default button group"
         >
           <Button onClick={() => apiRef.current?.clear()}>{t('Clear')}</Button>
-          <LabelButton htmlFor="button-signature-file" label="Choose image" groupPosition="right" />
+          <LabelButton
+            htmlFor="button-signature-file"
+            label={t('Choose image')}
+            groupPosition="right"
+          />
         </ButtonGroup>
       </Controls>
 
