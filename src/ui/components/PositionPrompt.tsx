@@ -27,6 +27,7 @@ const Container = styled.div`
 
 const Controls = styled.div`
   position: absolute;
+  z-index: 1;
   top: ${p => 64 + p.theme.spacing(1)}px;
   right: ${p => p.theme.spacing(3)}px;
 `;
@@ -73,7 +74,7 @@ const PositionPrompt: FC<Props> = ({ onChange, file, signature }) => {
     let unmounted = false;
     (async () => {
       // TODO: Find a better way to include worker in parcel
-      pdfjs.GlobalWorkerOptions.workerSrc = './pdf.worker.a9ccb500.js';
+      pdfjs.GlobalWorkerOptions.workerSrc = './pdf.worker.c654527b.js';
       const pdf = await pdfjs.getDocument(new Uint8Array(await file.arrayBuffer())).promise;
       if (!unmounted) {
         pdfRef.current = pdf;
