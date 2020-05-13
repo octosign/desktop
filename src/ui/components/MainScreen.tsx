@@ -93,7 +93,7 @@ const MainScreen = () => {
         isDragActive={isDragActive}
         openPicker={open}
         chosenBackend={chosenBackend}
-        supports={backend?.supports || []}
+        supports={backend?.supports}
         onFileChanged={onFileChanged}
       />
 

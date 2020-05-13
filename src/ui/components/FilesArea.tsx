@@ -9,7 +9,7 @@ import FileCard from './FileCard';
 interface Props {
   files: File[];
   isDragActive: boolean;
-  supports: string[];
+  supports?: string[];
   chosenBackend?: string;
   openPicker: () => void;
   onFileChanged: (oldFile: File, newFile: File) => void;
@@ -57,7 +57,7 @@ const FilesArea: FC<Props> = ({
             <FileCard
               key={file.path || file.name}
               file={file}
-              supported={supports.includes(file.type)}
+              supported={!supports || supports.includes(file.type)}
               chosenBackend={chosenBackend}
               onFileChanged={(newFile: File) => onFileChanged(file, newFile)}
             />
