@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import sk from '../translations/sk_SK.json';
+import cz from '../translations/cs_CZ.json';
 
 export const languages = [
   {
@@ -14,6 +15,11 @@ export const languages = [
     code: 'sk-SK',
     name: 'Slovenčina',
     translation: sk,
+  },
+  {
+    code: 'cs-CZ',
+    name: 'Česky',
+    translation: cz,
   },
 ];
 
