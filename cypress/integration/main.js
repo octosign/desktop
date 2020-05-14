@@ -6,7 +6,7 @@ describe('Main Screen', function () {
 
     cy.title().should('be', 'Octosign');
 
-    cy.contains('Sign a new document');
+    cy.contains('Select your file');
 
     cy.contains('Select files');
     cy.contains('or drag and drop your files anywhere');
@@ -35,9 +35,9 @@ describe('Main Screen', function () {
   it('Allows selecting file by drag and drop', function () {
     cy.visit('/');
 
-    cy.contains('Sign a new document');
+    cy.contains('Select your file');
 
-    cy.contains('Sign a new document').trigger('dragenter', {
+    cy.contains('Select your file').trigger('dragenter', {
       force: true,
       dataTransfer: { files: [testFile], types: ['Files'] },
     });

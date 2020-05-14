@@ -48,7 +48,7 @@ const FilesArea: FC<Props> = ({
       {files.length === 0 ? (
         <Box marginBottom={1.5}>
           <Typography align="center" color={isDragActive ? 'secondary' : 'primary'} variant="h2">
-            {isDragActive ? t('Drop your files here') : t('Sign a new document')}
+            {isDragActive ? t('Drop your files here') : t('Select your file')}
           </Typography>
         </Box>
       ) : (
