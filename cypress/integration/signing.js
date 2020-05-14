@@ -18,7 +18,7 @@ describe('Card with file', function () {
   it('Verifies and shows picked file status', function () {
     cy.visit('/');
 
-    cy.contains('Sign a new document').trigger('drop', {
+    cy.contains('Select your file').trigger('drop', {
       force: true,
       dataTransfer: { files: [signedTestFile], types: ['Files'] },
     });
@@ -31,7 +31,7 @@ describe('Card with file', function () {
   it('Allows to sign file', function () {
     cy.visit('/');
 
-    cy.contains('Sign a new document').trigger('drop', {
+    cy.contains('Select your file').trigger('drop', {
       force: true,
       dataTransfer: { files: [testFile], types: ['Files'] },
     });
@@ -51,7 +51,7 @@ describe('Card with file', function () {
   it('Does not allow to sign unsupported file', function () {
     cy.visit('/');
 
-    cy.contains('Sign a new document').trigger('drop', {
+    cy.contains('Select your file').trigger('drop', {
       force: true,
       dataTransfer: { files: [unsupportedFile], types: ['Files'] },
     });
@@ -66,7 +66,7 @@ describe('Card with file', function () {
   it('Shows file details if available', function () {
     cy.visit('/');
 
-    cy.contains('Sign a new document').trigger('drop', {
+    cy.contains('Select your file').trigger('drop', {
       force: true,
       dataTransfer: { files: [invalidTestFile], types: ['Files'] },
     });
