@@ -109,7 +109,7 @@ describe('MainScreen', () => {
     // We don't care about it in this test, but it wraps the state update with act
     await wait(() => expect(window.OctoSign.set).toHaveBeenCalledWith('image'));
 
-    fireEvent.click(getByText('Sign a new document'));
+    fireEvent.click(getByText('Select your file'));
 
     // TODO: Check if it calls open on the dropzone / change on the file input
   });

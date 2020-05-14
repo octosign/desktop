@@ -18,7 +18,7 @@ describe('FilesArea', () => {
       </Providers>,
     );
 
-    expect(() => getByText('Sign a new document')).not.toThrow();
+    expect(() => getByText('Select your file')).not.toThrow();
     expect(() => getByText('Drop your files here')).toThrow();
 
     rerender(
@@ -33,7 +33,7 @@ describe('FilesArea', () => {
       </Providers>,
     );
 
-    expect(() => getByText('Sign a new document')).toThrow();
+    expect(() => getByText('Select your file')).toThrow();
     expect(() => getByText('Drop your files here')).not.toThrow();
   });
 
