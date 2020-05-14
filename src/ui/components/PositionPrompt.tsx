@@ -74,7 +74,7 @@ const PositionPrompt: FC<Props> = ({ onChange, file, signature }) => {
     let unmounted = false;
     (async () => {
       // TODO: Find a better way to include worker in parcel
-      pdfjs.GlobalWorkerOptions.workerSrc = './pdf.worker.c654527b.js';
+      pdfjs.GlobalWorkerOptions.workerSrc = './pdf.worker.js';
       const pdf = await pdfjs.getDocument(new Uint8Array(await file.arrayBuffer())).promise;
       if (!unmounted) {
         pdfRef.current = pdf;

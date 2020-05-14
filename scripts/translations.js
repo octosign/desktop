@@ -1,3 +1,6 @@
+/**
+ * Tools for translation extraction and building
+ */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { resolve, basename, join } = require('path');
 const { readdir, readFile, writeFile, stat, exists } = require('fs-extra');
