@@ -1,22 +1,19 @@
 # 
 # Translators:
-# Jakub Duras <jakub@duras.me>, 2020
+# Jakub Ďuraš <jakub@duras.me>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-05-02T21:15:19.039Z\n"
+"POT-Creation-Date: 2020-05-14T18:42:25.121Z\n"
 "PO-Revision-Date: 2020-04-27 17:52+0000\n"
-"Last-Translator: Jakub Duras <jakub@duras.me>, 2020\n"
+"Last-Translator: Jakub Ďuraš <jakub@duras.me>, 2020\n"
 "Language-Team: Slovak (Slovakia) (https://www.transifex.com/jakub-duras/teams/108443/sk_SK/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sk_SK\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 "mime-version: 1.0\n"
-
-msgid "Unreachable"
-msgstr "Nedosiahnuteľný"
 
 msgid "Errored during operation: \"{{error}}\"."
 msgstr "Počas operácie nastala chyba: \"{{error}}\"."
@@ -81,8 +78,8 @@ msgstr "Zatvoriť"
 msgid "Drop your files here"
 msgstr "Pustite sem súbory"
 
-msgid "Sign a new document"
-msgstr "Podpíšte nový dokument"
+msgid "Select your file"
+msgstr "Vyberte váš súbor"
 
 msgid "Logo"
 msgstr "Logo"
@@ -101,6 +98,9 @@ msgstr "Nastavenia"
 
 msgid "Clear"
 msgstr "Vyčistiť"
+
+msgid "Choose image"
+msgstr "Vybrať obrázok"
 
 msgid "Previous page"
 msgstr "Predošlá stránka"
@@ -148,6 +148,28 @@ msgstr "Všeobecné"
 msgid "Language"
 msgstr "Jazyk"
 
+msgid "Simple image signature"
+msgstr "Jednoduchý podpis obrázkom"
+
+msgid ""
+"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
+"library from FoxyUtils ehf licensed under the AGPLv3."
+msgstr ""
+"Podpisovanie PDF súborov použitím obrázku alebo nakreslením podpisu. Používa"
+" knižnicu unipdf od FoxyUtils ehf s licenciou AGPLv3."
+
+msgid "Signature file"
+msgstr "Súbor s podpisom"
+
+msgid "Signature position"
+msgstr "Pozícia podpisu"
+
+msgid "Save signed file as"
+msgstr "Uložiť podpísaný súbor ako"
+
+msgid "No answer, aborting."
+msgstr "Žiadna odpoveď, prerušené."
+
 msgid "Advanced electronic signature"
 msgstr "Pokročilý elektronický podpis"
 
@@ -181,7 +203,7 @@ msgstr ""
 "Cesta k PKCS #11 knižnici nie je nastavená. Prosím skontrolujete Nastavenia "
 "a Pomoc."
 
-msgid "PKCS #11 library does't exist. Please check Settings and Help."
+msgid "PKCS #11 library doesn't exist. Please check Settings and Help."
 msgstr ""
 "PKCS #11 knižnica neexistuje. Prosím skontrolujete Nastavenia a Pomoc."
 
@@ -262,21 +284,5 @@ msgstr "Nie zdokonalený elektronický podpis"
 msgid "Not applicable"
 msgstr "Neaplikovateľné"
 
-msgid "Simple image signature"
-msgstr "Jednoduchý podpis obrázkom"
-
-msgid ""
-"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
-"library from FoxyUtils ehf licensed under the AGPLv3."
-msgstr ""
-"Podpisovanie PDF súborov použitím obrázku alebo nakreslením podpisu. Používa"
-" knižnicu unipdf od FoxyUtils ehf s licenciou AGPLv3."
-
-msgid "Signature file"
-msgstr "Súbor s podpisom"
-
-msgid "Signature position"
-msgstr "Pozícia podpisu"
-
-msgid "Save signed file as"
-msgstr "Uložiť podpísaný súbor ako"
+msgid "Unreachable"
+msgstr "Nedosiahnuteľný"
