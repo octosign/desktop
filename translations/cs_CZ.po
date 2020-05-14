@@ -1,13 +1,14 @@
 # 
 # Translators:
 # Peter Vnuk <workingpedro@gmail.com>, 2020
+# Jakub Ďuraš <jakub@duras.me>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-05-03T16:43:45.405Z\n"
+"POT-Creation-Date: 2020-05-14T18:42:25.121Z\n"
 "PO-Revision-Date: 2020-04-27 17:52+0000\n"
-"Last-Translator: Peter Vnuk <workingpedro@gmail.com>, 2020\n"
+"Last-Translator: Jakub Ďuraš <jakub@duras.me>, 2020\n"
 "Language-Team: Czech (Czech Republic) (https://www.transifex.com/jakub-duras/teams/108443/cs_CZ/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -78,8 +79,8 @@ msgstr "Zavřít"
 msgid "Drop your files here"
 msgstr "Zde vložte soubory"
 
-msgid "Sign a new document"
-msgstr "Podepsat nový dokument"
+msgid "Select your file"
+msgstr "Vyberte svůj soubor"
 
 msgid "Logo"
 msgstr "Logo"
@@ -98,6 +99,9 @@ msgstr "Nastavení"
 
 msgid "Clear"
 msgstr "Vymazat"
+
+msgid "Choose image"
+msgstr "Vyberte obrázek"
 
 msgid "Previous page"
 msgstr "Předchozí stránka"
@@ -145,6 +149,28 @@ msgstr "Všeobecné"
 msgid "Language"
 msgstr "Jazyk"
 
+msgid "Simple image signature"
+msgstr "Jednoduchý podpis obrázkem"
+
+msgid ""
+"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
+"library from FoxyUtils ehf licensed under the AGPLv3."
+msgstr ""
+"Podepisování PDF s využitím obrázku nebo nakreslením podpisu. Využívá "
+"knihovnu unipdf od FoxyUtils ehf s licencí AGPLv3."
+
+msgid "Signature file"
+msgstr "Soubor s podpisem"
+
+msgid "Signature position"
+msgstr "Umístění podpisu"
+
+msgid "Save signed file as"
+msgstr "Uložit podepsaný soubor jako"
+
+msgid "No answer, aborting."
+msgstr "Nemám odpověď. Přerušuji."
+
 msgid "Advanced electronic signature"
 msgstr "Pokročilý elektronický podpis"
 
@@ -177,7 +203,7 @@ msgstr ""
 "Cesta ke knihovně PKCS #11 není nastavena. Zkontrolujte prosím Nastavení a "
 "Pomoc."
 
-msgid "PKCS #11 library does't exist. Please check Settings and Help."
+msgid "PKCS #11 library doesn't exist. Please check Settings and Help."
 msgstr "Knihovna PKCS #11 neexistuje. Zkontrolujte prosím Nastavení a Pomoc."
 
 msgid "Timestamping server URL is not configured."
@@ -259,25 +285,3 @@ msgstr "Neaplikovatelné"
 
 msgid "Unreachable"
 msgstr "Nedosažitelné"
-
-msgid "Simple image signature"
-msgstr "Jednoduchý podpis obrázkem"
-
-msgid ""
-"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
-"library from FoxyUtils ehf licensed under the AGPLv3."
-msgstr ""
-"Podepisování PDF s využitím obrázku nebo nakreslením podpisu. Využívá "
-"knihovnu unipdf od FoxyUtils ehf s licencí AGPLv3."
-
-msgid "Signature file"
-msgstr "Soubor s podpisem"
-
-msgid "Signature position"
-msgstr "Umístění podpisu"
-
-msgid "Save signed file as"
-msgstr "Uložit podepsaný soubor jako"
-
-msgid "No answer, aborting."
-msgstr "Nemám odpověď. Přerušuji."
