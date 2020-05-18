@@ -204,7 +204,7 @@ msgid "Using of the PKCS #11 library failed."
 msgstr "Využití knihovny PKCS #11 se nezdařilo."
 
 msgid "Using of the PKCS #12 file failed."
-msgstr "Použití souboru PKCS # 12 se nezdařilo."
+msgstr "Použití souboru PKCS # 12 selhalo."
 
 msgid "Using of the MS CAPI failed."
 msgstr "Použití MS CAPI selhalo."
