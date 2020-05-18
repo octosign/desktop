@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-14T18:42:25.121Z\n"
-"PO-Revision-Date: 2020-05-14T18:42:25.121Z\n"
+"POT-Creation-Date: 2020-05-18T20:42:00.388Z\n"
+"PO-Revision-Date: 2020-05-18T20:42:00.388Z\n"
 
 msgid "Errored during operation: \"{{error}}\"."
 msgstr ""
@@ -139,26 +139,6 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-msgid "Simple image signature"
-msgstr ""
-
-msgid ""
-"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
-"library from FoxyUtils ehf licensed under the AGPLv3."
-msgstr ""
-
-msgid "Signature file"
-msgstr ""
-
-msgid "Signature position"
-msgstr ""
-
-msgid "Save signed file as"
-msgstr ""
-
-msgid "No answer, aborting."
-msgstr ""
-
 msgid "Advanced electronic signature"
 msgstr ""
 
@@ -172,28 +152,22 @@ msgstr ""
 msgid "Can not find supported PKCS DLL."
 msgstr ""
 
-msgid "Autoconfiguration failed. Please check Settings and Help."
-msgstr ""
-
-msgid "PKCS #11 Library Path"
+msgid "PKCS #11/#12 Path"
 msgstr ""
 
 msgid "Timestamping Server URL"
 msgstr ""
 
-msgid "PKCS #11 library path is not configured. Please check Settings and Help."
+msgid "PKCS #11/#12 path doesn't exist. Please check Settings and Help."
 msgstr ""
 
-msgid "PKCS #11 library doesn't exist. Please check Settings and Help."
-msgstr ""
-
-msgid "Timestamping server URL is not configured."
+msgid "PKCS #11/#12 path is not configured. Please check Settings and Help."
 msgstr ""
 
 msgid "Signed file path was not chosen."
 msgstr ""
 
-msgid "Please provide the private key password."
+msgid "Please provide the key password."
 msgstr ""
 
 msgid "There was an error saving the signed document."
@@ -205,10 +179,16 @@ msgstr ""
 msgid "Key was not chosen."
 msgstr ""
 
-msgid "Communication with device failed."
+msgid "Getting signing certificates failed. Please check Settings and Help."
 msgstr ""
 
 msgid "Using of the PKCS #11 library failed."
+msgstr ""
+
+msgid "Using of the PKCS #12 file failed."
+msgstr ""
+
+msgid "Using of the MS CAPI failed."
 msgstr ""
 
 msgid "Signed by"
@@ -263,4 +243,24 @@ msgid "Not applicable"
 msgstr ""
 
 msgid "Unreachable"
+msgstr ""
+
+msgid "Simple image signature"
+msgstr ""
+
+msgid ""
+"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
+"library from FoxyUtils ehf licensed under the AGPLv3."
+msgstr ""
+
+msgid "Signature file"
+msgstr ""
+
+msgid "Signature position"
+msgstr ""
+
+msgid "Save signed file as"
+msgstr ""
+
+msgid "No answer, aborting."
 msgstr ""
