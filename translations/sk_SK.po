@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-05-14T18:42:25.121Z\n"
+"POT-Creation-Date: 2020-05-18T20:42:00.388Z\n"
 "PO-Revision-Date: 2020-04-27 17:52+0000\n"
 "Last-Translator: Jakub Ďuraš <jakub@duras.me>, 2020\n"
 "Language-Team: Slovak (Slovakia) (https://www.transifex.com/jakub-duras/teams/108443/sk_SK/)\n"
@@ -148,28 +148,6 @@ msgstr "Všeobecné"
 msgid "Language"
 msgstr "Jazyk"
 
-msgid "Simple image signature"
-msgstr "Jednoduchý podpis obrázkom"
-
-msgid ""
-"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
-"library from FoxyUtils ehf licensed under the AGPLv3."
-msgstr ""
-"Podpisovanie PDF súborov použitím obrázku alebo nakreslením podpisu. Používa"
-" knižnicu unipdf od FoxyUtils ehf s licenciou AGPLv3."
-
-msgid "Signature file"
-msgstr "Súbor s podpisom"
-
-msgid "Signature position"
-msgstr "Pozícia podpisu"
-
-msgid "Save signed file as"
-msgstr "Uložiť podpísaný súbor ako"
-
-msgid "No answer, aborting."
-msgstr "Žiadna odpoveď, prerušené."
-
 msgid "Advanced electronic signature"
 msgstr "Pokročilý elektronický podpis"
 
@@ -188,33 +166,26 @@ msgstr ""
 msgid "Can not find supported PKCS DLL."
 msgstr "Nebolo možné nájsť podporované PKCS DLL"
 
-msgid "Autoconfiguration failed. Please check Settings and Help."
-msgstr "Autokonfigurácia zlyhala. Prosím skontrolujete Nastavenia a Pomoc."
-
-msgid "PKCS #11 Library Path"
-msgstr "Cesta k PKCS #11 knižnici"
+msgid "PKCS #11/#12 Path"
+msgstr "Cesta k PKCS #11/#12"
 
 msgid "Timestamping Server URL"
 msgstr "URL servera na časové pečiatky"
 
-msgid ""
-"PKCS #11 library path is not configured. Please check Settings and Help."
+msgid "PKCS #11/#12 path doesn't exist. Please check Settings and Help."
 msgstr ""
-"Cesta k PKCS #11 knižnici nie je nastavená. Prosím skontrolujete Nastavenia "
-"a Pomoc."
+"Cesta k PKCS #11/#12 neexistuje. Prosím skontrolujete Nastavenia a Pomoc."
 
-msgid "PKCS #11 library doesn't exist. Please check Settings and Help."
+msgid "PKCS #11/#12 path is not configured. Please check Settings and Help."
 msgstr ""
-"PKCS #11 knižnica neexistuje. Prosím skontrolujete Nastavenia a Pomoc."
-
-msgid "Timestamping server URL is not configured."
-msgstr "URL servera na časové pečiatky nie je nastavená."
+"Cesta k PKCS #11/#12 nie je nastavená. Prosím skontrolujete Nastavenia a "
+"Pomoc."
 
 msgid "Signed file path was not chosen."
 msgstr "Cesta pre podpísaný dokument nebola zvolená."
 
-msgid "Please provide the private key password."
-msgstr "Prosím zadajte heslo k privátnemu kľúču."
+msgid "Please provide the key password."
+msgstr "Prosím zadajte heslo ku kľúču."
 
 msgid "There was an error saving the signed document."
 msgstr "Vyskytla sa chyba pri ukladaní podpísaného dokumentu."
@@ -225,11 +196,18 @@ msgstr "Prosím vyberte certifikát pre podpísanie"
 msgid "Key was not chosen."
 msgstr "Nebol zvolený kľúč."
 
-msgid "Communication with device failed."
-msgstr "Komunikácia so zariadením zlyhala."
+msgid "Getting signing certificates failed. Please check Settings and Help."
+msgstr ""
+"Získavanie certifikátov zlyhalo. Prosím skontrolujete Nastavenia a Pomoc."
 
 msgid "Using of the PKCS #11 library failed."
 msgstr "Použitie PKCS #11 knižnice zlyhalo."
+
+msgid "Using of the PKCS #12 file failed."
+msgstr "Použitie PKCS #12 súboru zlyhalo."
+
+msgid "Using of the MS CAPI failed."
+msgstr "Použitie MS CAPI zlyhalo."
 
 msgid "Signed by"
 msgstr "Podpísal"
@@ -286,3 +264,25 @@ msgstr "Neaplikovateľné"
 
 msgid "Unreachable"
 msgstr "Nedosiahnuteľný"
+
+msgid "Simple image signature"
+msgstr "Jednoduchý podpis obrázkom"
+
+msgid ""
+"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
+"library from FoxyUtils ehf licensed under the AGPLv3."
+msgstr ""
+"Podpisovanie PDF súborov použitím obrázku alebo nakreslením podpisu. Používa"
+" knižnicu unipdf od FoxyUtils ehf s licenciou AGPLv3."
+
+msgid "Signature file"
+msgstr "Súbor s podpisom"
+
+msgid "Signature position"
+msgstr "Pozícia podpisu"
+
+msgid "Save signed file as"
+msgstr "Uložiť podpísaný súbor ako"
+
+msgid "No answer, aborting."
+msgstr "Žiadna odpoveď, prerušené."
