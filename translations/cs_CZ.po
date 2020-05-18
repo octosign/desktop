@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-05-14T18:42:25.121Z\n"
+"POT-Creation-Date: 2020-05-18T20:42:00.388Z\n"
 "PO-Revision-Date: 2020-04-27 17:52+0000\n"
 "Last-Translator: Jakub Ďuraš <jakub@duras.me>, 2020\n"
 "Language-Team: Czech (Czech Republic) (https://www.transifex.com/jakub-duras/teams/108443/cs_CZ/)\n"
@@ -149,28 +149,6 @@ msgstr "Všeobecné"
 msgid "Language"
 msgstr "Jazyk"
 
-msgid "Simple image signature"
-msgstr "Jednoduchý podpis obrázkem"
-
-msgid ""
-"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
-"library from FoxyUtils ehf licensed under the AGPLv3."
-msgstr ""
-"Podepisování PDF s využitím obrázku nebo nakreslením podpisu. Využívá "
-"knihovnu unipdf od FoxyUtils ehf s licencí AGPLv3."
-
-msgid "Signature file"
-msgstr "Soubor s podpisem"
-
-msgid "Signature position"
-msgstr "Umístění podpisu"
-
-msgid "Save signed file as"
-msgstr "Uložit podepsaný soubor jako"
-
-msgid "No answer, aborting."
-msgstr "Nemám odpověď. Přerušuji."
-
 msgid "Advanced electronic signature"
 msgstr "Pokročilý elektronický podpis"
 
@@ -188,32 +166,25 @@ msgstr ""
 msgid "Can not find supported PKCS DLL."
 msgstr "Podporované PKCS DLL nenalezeno."
 
-msgid "Autoconfiguration failed. Please check Settings and Help."
-msgstr "Autokonfigurace selhala. Zkontrolujte prosím Nastavení a Pomoc."
-
-msgid "PKCS #11 Library Path"
-msgstr "Cesta ke knihovně PKCS #11"
+msgid "PKCS #11/#12 Path"
+msgstr "Cesta k PKCS #11/#12"
 
 msgid "Timestamping Server URL"
 msgstr "URL serveru na časové razítka"
 
-msgid ""
-"PKCS #11 library path is not configured. Please check Settings and Help."
+msgid "PKCS #11/#12 path doesn't exist. Please check Settings and Help."
 msgstr ""
-"Cesta ke knihovně PKCS #11 není nastavena. Zkontrolujte prosím Nastavení a "
-"Pomoc."
+"Cesta k PKCS #11/#12 neexistuje. Zkontrolujte prosím Nastavení a Pomoc."
 
-msgid "PKCS #11 library doesn't exist. Please check Settings and Help."
-msgstr "Knihovna PKCS #11 neexistuje. Zkontrolujte prosím Nastavení a Pomoc."
-
-msgid "Timestamping server URL is not configured."
-msgstr "URL serveru na časové razítka není nastavená."
+msgid "PKCS #11/#12 path is not configured. Please check Settings and Help."
+msgstr ""
+"Cesta k PKCS #11/#12 není nastavena. Zkontrolujte prosím Nastavení a Pomoc."
 
 msgid "Signed file path was not chosen."
 msgstr "Cesta pro podepsaný dokument nebyla zadána."
 
-msgid "Please provide the private key password."
-msgstr "Prosím, zadejte heslo k privátnímu klíči."
+msgid "Please provide the key password."
+msgstr "Prosím, zadejte heslo ke klíči."
 
 msgid "There was an error saving the signed document."
 msgstr "Při podepisování uloženého dokumentu nastala chyba."
@@ -224,11 +195,19 @@ msgstr "Prosím, zvolte certifikát pro podepisování."
 msgid "Key was not chosen."
 msgstr "Klíč nebyl zadán."
 
-msgid "Communication with device failed."
-msgstr "Komunikace se zařízením selhala."
+msgid "Getting signing certificates failed. Please check Settings and Help."
+msgstr ""
+"Získání podpisových certifikátů se nezdařilo. Zkontrolujte prosím Nastavení "
+"a Pomoc."
 
 msgid "Using of the PKCS #11 library failed."
 msgstr "Využití knihovny PKCS #11 se nezdařilo."
+
+msgid "Using of the PKCS #12 file failed."
+msgstr "Použití souboru PKCS # 12 selhalo."
+
+msgid "Using of the MS CAPI failed."
+msgstr "Použití MS CAPI selhalo."
 
 msgid "Signed by"
 msgstr "Podepsal"
@@ -285,3 +264,25 @@ msgstr "Neaplikovatelné"
 
 msgid "Unreachable"
 msgstr "Nedosažitelné"
+
+msgid "Simple image signature"
+msgstr "Jednoduchý podpis obrázkem"
+
+msgid ""
+"Signs PDFs using chosen image or drawn signature. Based on the unipdf "
+"library from FoxyUtils ehf licensed under the AGPLv3."
+msgstr ""
+"Podepisování PDF s využitím obrázku nebo nakreslením podpisu. Využívá "
+"knihovnu unipdf od FoxyUtils ehf s licencí AGPLv3."
+
+msgid "Signature file"
+msgstr "Soubor s podpisem"
+
+msgid "Signature position"
+msgstr "Umístění podpisu"
+
+msgid "Save signed file as"
+msgstr "Uložit podepsaný soubor jako"
+
+msgid "No answer, aborting."
+msgstr "Nemám odpověď. Přerušuji."
