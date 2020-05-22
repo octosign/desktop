@@ -109,7 +109,7 @@ steps:
     script: yarn dist
   env:
     GH_TOKEN: $(GH_TOKEN)
-    CSC_LINK: $(signingCertificate.secureFilePath)
+    CSC_LINK: $[signingCertificate.secureFilePath]
     CSC_KEY_PASSWORD: $(WINPFXPASSWORD)
   displayName: 'Create and upload distributables'
 
