@@ -58,10 +58,8 @@ steps:
 # We should cache ~/.cache too for cypress & electron
 - task: CacheBeta@0
   inputs:
-    key: |
-      $(Agent.OS)
-      $(Build.SourcesDirectory)/package-lock.json
-    path: '~/.npm'
+    key: 'npm | $(Agent.OS) | $(Build.SourcesDirectory)/package-lock.json'
+    path: $(Pipeline.Workspace)/.npm
   condition: eq( variables['Agent.OS'], 'Windows_NT' )
   displayName: 'Cache node_modules'
 
