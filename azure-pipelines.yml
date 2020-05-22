@@ -109,7 +109,8 @@ steps:
     script: yarn dist
   env:
     GH_TOKEN: $(GH_TOKEN)
-    CSC_LINK: $[signingCertificate.secureFilePath]
+    ${{ if and(eq( variables['sign'], true ), ne( variables['Agent.OS'], 'Darwin' )) }}:
+    CSC_LINK: $(Agent.TempDirectory)/windows.pfx
     CSC_KEY_PASSWORD: $(WINPFXPASSWORD)
   displayName: 'Create and upload distributables'
 
