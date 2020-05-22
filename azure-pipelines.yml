@@ -55,14 +55,15 @@ steps:
 
 # Temporary disabled caching due to issues on Mac and Linux (executable permissions?)
 # https://github.com/durasj/octosign/issues/4
-# We should cache ~/.npm and ~/.cache instead of node_modules as those are cypress and npm caches
-#- task: CacheBeta@0
-#  inputs:
-#    key: |
-#      $(Agent.OS)
-#      $(Build.SourcesDirectory)/package-lock.json
-#    path: '$(Build.SourcesDirectory)/node_modules'
-#  displayName: 'Cache node_modules'
+# We should cache ~/.cache too for cypress & electron
+- task: CacheBeta@0
+  inputs:
+    key: |
+      $(Agent.OS)
+      $(Build.SourcesDirectory)/package-lock.json
+    path: '~/.npm'
+  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+  displayName: 'Cache node_modules'
 
 - task: Bash@3
   inputs:
@@ -88,8 +89,8 @@ steps:
     script: 'yarn test:ui'
   env:
     PERCY_TOKEN: $(PERCY_TOKEN)
-  displayName: 'Test UI'
   condition: eq(variables['Agent.OS'], 'Linux')
+  displayName: 'Test UI'
 
 - task: Bash@3
   inputs:
@@ -103,14 +104,17 @@ steps:
     script: 'yarn build:backends'
   displayName: 'Build backends'
 
+- bash: |
+    echo '##vso[task.setvariable variable=CSC_LINK]$(Build.TempDirectory)/windows.pfx'
+  condition: and(eq( variables['sign'], true ), ne( variables['Agent.OS'], 'Darwin' ))
+  displayName: Set CSC_LINK for signing if wanted
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: yarn dist
   env:
     GH_TOKEN: $(GH_TOKEN)
-    ${{ if and(eq( variables['sign'], true ), ne( variables['Agent.OS'], 'Darwin' )) }}:
-    CSC_LINK: $(Agent.TempDirectory)/windows.pfx
     CSC_KEY_PASSWORD: $(WINPFXPASSWORD)
   displayName: 'Create and upload distributables'
 
