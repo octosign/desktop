@@ -102,8 +102,7 @@ steps:
     script: 'yarn build:backends'
   displayName: 'Build backends'
 
-- bash: |
-    echo '##vso[task.setvariable variable=CSC_LINK]$AGENT_TEMPDIRECTORY/windows.pfx'
+- bash: echo "##vso[task.setvariable variable=CSC_LINK]$AGENT_TEMPDIRECTORY/windows.pfx"
   condition: and(eq( variables['sign'], true ), ne( variables['Agent.OS'], 'Darwin' ))
   displayName: Set CSC_LINK for signing if wanted
 
