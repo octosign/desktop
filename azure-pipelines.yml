@@ -56,12 +56,12 @@ steps:
 # Temporary disabled caching due to issues on Mac and Linux (executable permissions?)
 # https://github.com/durasj/octosign/issues/4
 # We should cache ~/.cache too for cypress & electron
-- task: CacheBeta@0
-  inputs:
-    key: 'npm | $(Agent.OS) | $(Build.SourcesDirectory)/package-lock.json'
-    path: $(Pipeline.Workspace)/.npm
-  condition: eq( variables['Agent.OS'], 'Windows_NT' )
-  displayName: 'Cache node_modules'
+#- task: CacheBeta@0
+#  inputs:
+#    key: 'npm | $(Agent.OS) | $(Build.SourcesDirectory)/package-lock.json'
+#    path: $(Pipeline.Workspace)/.npm
+#  condition: eq( variables['Agent.OS'], 'Windows_NT' )
+#  displayName: 'Cache node_modules'
 
 - task: Bash@3
   inputs:
@@ -103,9 +103,14 @@ steps:
   displayName: 'Build backends'
 
 - bash: |
-    echo '##vso[task.setvariable variable=CSC_LINK]$(Build.TempDirectory)/windows.pfx'
+    echo '##vso[task.setvariable variable=CSC_LINK]$BUILD_TEMPDIRECTORY/windows.pfx'
   condition: and(eq( variables['sign'], true ), ne( variables['Agent.OS'], 'Darwin' ))
   displayName: Set CSC_LINK for signing if wanted
+
+- bash: |
+    echo '##vso[task.setvariable variable=NOTARIZE]1'
+  condition: and(eq( variables['sign'], true ), eq( variables['Agent.OS'], 'Darwin' ))
+  displayName: Set NOTARIZE for macOS notarization if wanted
 
 - task: Bash@3
   inputs:
@@ -114,6 +119,8 @@ steps:
   env:
     GH_TOKEN: $(GH_TOKEN)
     CSC_KEY_PASSWORD: $(WINPFXPASSWORD)
+    APPLEID: $(APPLEID)
+    APPLEIDPASS: $(APPLEIDPASS)
   displayName: 'Create and upload distributables'
 
 # We are currently not able to run smoke test on the Linux
