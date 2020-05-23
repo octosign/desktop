@@ -49,8 +49,8 @@
 Backends are what is doing the actual document manipulation and what is displayed as a choosable signature type in the upper part of the application. They are simple CLI applications that are communicating with the Electron application via [STDIO](https://en.wikipedia.org/wiki/Standard_streams). If you are interested in how this works, check the [Backend specification](https://github.com/durasj/octosign/wiki/Backend-specification). If you would like to create your own backend (it's quite simple to start!), check out the [How to create backend](https://github.com/durasj/octosign/wiki/How-to-create-backend) guide.
 
 Currently available backends (signature types):
-DSS backend - Useful for people living within EEA - uses [Digital Signature Service](https://github.com/esig/dss) from the EU.
-Image backend - Places image signature on the PDF - either drawn or picked from the computer.
+* [DSS backend](https://github.com/durasj/octosign-dss) - Useful for people living within EEA - uses [Digital Signature Service](https://github.com/esig/dss) from the EU.
+* [Image backend](https://github.com/durasj/octosign-image) - Places image signature on the PDF - either drawn or picked from the computer.
 ... do you want to write your own backend? Check [How to create backend](https://github.com/durasj/octosign/wiki/How-to-create-backend) guide.
 
 ## Development
