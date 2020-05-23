@@ -34,7 +34,24 @@
 
 ## Features
 
+![Screenshot from the application](https://github.com/durasj/octosign/blob/master/res/screenshot.png?raw=true)
+
+* Simple, straightforward interface (no technical details unless you want them).
+* Ability to sign and verify document signatures.
+* Sign a PDF using image signature - picked from the computer or drawn in the application.
+* Sign any file using the cryptography within the EU - using, depending on the country, for example, your eID.
+* Localized in several languages and [open to new translations](https://www.transifex.com/jakub-duras/octosign/).
+* Open for extension with new signature types ([Backends](#backends)).
+* Available on all three major desktop platforms - Windows, macOS, and Linux.
+
 ## Backends
+
+Backends are what is doing the actual document manipulation and what is displayed as a choosable signature type in the upper part of the application. They are simple CLI applications that are communicating with the Electron application via [STDIO](https://en.wikipedia.org/wiki/Standard_streams). If you are interested in how this works, check the [Backend specification](https://github.com/durasj/octosign/wiki/Backend-specification). If you would like to create your own backend (it's quite simple to start!), check out the [How to create backend](https://github.com/durasj/octosign/wiki/How-to-create-backend) guide.
+
+Currently available backends (signature types):
+DSS backend - Useful for people living within EEA - uses [Digital Signature Service](https://github.com/esig/dss) from the EU.
+Image backend - Places image signature on the PDF - either drawn or picked from the computer.
+... do you want to write your own backend? Check [How to create backend](https://github.com/durasj/octosign/wiki/How-to-create-backend) guide.
 
 ## Development
 
@@ -49,7 +66,7 @@ npm run build
 npm start
 ```
 
-Backends that couldn't be built will be skipped. This helps getting the app up and running even if all backend-specific toolsets are not available (like JDK or Go). Those backends obviously won't be available so you can fix your local ENV looking at the logged errors if you want.
+Backends that couldn't be built will be skipped. This helps getting the app up and running even if all backend-specific toolsets are not available (like JDK or Go). Those backends won't be available so you can fix your local ENV looking at the logged errors if you want.
 
 ## Contributing
 
