@@ -30,6 +30,7 @@
 - [Backends](#backends)
 - [Development](#development)
 - [Contributing](#contributing)
+- [Thanks](#thanks)
 - [Copyright and license](#copyright-and-license)
 
 ## Features
@@ -71,6 +72,12 @@ Backends that couldn't be built will be skipped. This helps getting the app up a
 ## Contributing
 
 You are more than welcome to submit your proposed changes. Please try to match the codestyle of the existing code, include automated tests and make sure your build passes.
+
+## Thanks
+
+- [Faculty of Science, P. J. Safarik University](https://www.upjs.sk/en/faculty-of-science/) - see my [thesis](https://thesis.science.upjs.sk/~jduras/draft.pdf).
+- [Peter Vnuk](https://techguru.sk/) for Czech translation.
+- Everybody who was kind enough to share their feedback.
 
 ## Copyright and license
 
