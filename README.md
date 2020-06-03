@@ -52,7 +52,7 @@ Backends are what is doing the actual document manipulation and what is displaye
 Currently available backends (signature types):
 * [DSS backend](https://github.com/durasj/octosign-dss) - Useful for people living within EEA - uses [Digital Signature Service](https://github.com/esig/dss) from the EU.
 * [Image backend](https://github.com/durasj/octosign-image) - Places image signature on the PDF - either drawn or picked from the computer.
-... do you want to write your own backend? Check [How to create backend](https://github.com/durasj/octosign/wiki/How-to-create-backend) guide.
+* ... do you want to write your own backend? Check [How to create backend](https://github.com/durasj/octosign/wiki/How-to-create-backend) guide.
 
 ## Development
 
