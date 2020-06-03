@@ -78,6 +78,18 @@ export default class BackendManager {
     // We have to remove possible .exe on non-Windows platforms
     if (process.platform !== 'win32') configInfo.exec = configInfo.exec.replace('.exe', '');
 
+    // Allow using platform specific exec
+    if (process.platform === 'win32' && typeof configInfo.execWindows === 'string') {
+      configInfo.exec = configInfo.execWindows;
+    } else if (process.platform === 'darwin' && typeof configInfo.execMac === 'string') {
+      configInfo.exec = configInfo.execMac;
+    } else if (process.platform === 'linux' && typeof configInfo.execLinux === 'string') {
+      configInfo.exec = configInfo.execLinux;
+    }
+    delete configInfo.execWindows;
+    delete configInfo.execMac;
+    delete configInfo.execLinux;
+
     return new Backend(configInfo, backendPath);
   }
 

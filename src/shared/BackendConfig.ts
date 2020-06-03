@@ -6,6 +6,9 @@ interface BackendConfig {
   author?: string;
   license?: string;
   exec: string;
+  execWindows?: string;
+  execLinux?: string;
+  execMac?: string;
   build: string;
 }
 

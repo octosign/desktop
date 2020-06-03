@@ -30,6 +30,18 @@
       "type": "string",
       "description": "Command that should be executed when calling backend to perform some operation."
     },
+    "execWindows": {
+      "type": "string",
+      "description": "Custom command used instead of exec for Windows specifically."
+    },
+    "execLinux": {
+      "type": "string",
+      "description": "Custom command used instead of exec for Linux specifically."
+    },
+    "execMac": {
+      "type": "string",
+      "description": "Custom command used instead of exec for Mac specifically."
+    },
     "build": {
       "type": "string",
       "description": "Command that is executed to build the backend."
