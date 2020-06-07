@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-05-18T20:42:00.388Z\n"
-"PO-Revision-Date: 2020-05-18T20:42:00.388Z\n"
+"POT-Creation-Date: 2020-06-07T23:02:36.953Z\n"
+"PO-Revision-Date: 2020-06-07T23:02:36.953Z\n"
 
 msgid "Errored during operation: \"{{error}}\"."
 msgstr ""
@@ -139,6 +139,9 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+msgid "Certificate was not chosen."
+msgstr ""
+
 msgid "Advanced electronic signature"
 msgstr ""
 
@@ -147,9 +150,6 @@ msgid ""
 "cryptography. Requires an usable certificate and signing drivers (for "
 "example ID cards and readers of EU citizens). Uses Digital Signature "
 "Service from European Commission licensed under the LGPL-2.1."
-msgstr ""
-
-msgid "Can not find supported PKCS DLL."
 msgstr ""
 
 msgid "PKCS #11/#12 Path"
@@ -170,7 +170,7 @@ msgstr ""
 msgid "Please provide the key password."
 msgstr ""
 
-msgid "There was an error saving the signed document."
+msgid "There was an error saving the signed document:"
 msgstr ""
 
 msgid "Please pick a certificate for signing"
@@ -179,16 +179,16 @@ msgstr ""
 msgid "Key was not chosen."
 msgstr ""
 
-msgid "Getting signing certificates failed. Please check Settings and Help."
+msgid "Getting signing certificates failed. Please check Settings and Help. Error:"
 msgstr ""
 
-msgid "Using of the PKCS #11 library failed."
+msgid "Using of the PKCS #11 library failed:"
 msgstr ""
 
-msgid "Using of the PKCS #12 file failed."
+msgid "Using of the PKCS #12 file failed:"
 msgstr ""
 
-msgid "Using of the MS CAPI failed."
+msgid "Using of the MS CAPI failed:"
 msgstr ""
 
 msgid "Signed by"

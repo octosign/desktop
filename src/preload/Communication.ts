@@ -97,7 +97,10 @@ class Communication {
       aggregatedStdErr = '';
     }, 500);
     stderr.on('data', chunk => {
-      aggregatedStdErr += chunk;
+      aggregatedStdErr += chunk
+        .split('\n')
+        .map((line: string) => i18n.t(line.trim()))
+        .join('\n');
       debouncedOnStdError();
     });
   }

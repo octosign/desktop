@@ -85,7 +85,7 @@ const FileCard: FC<Props> = ({ file, supported, chosenBackend, onFileChanged }) 
     try {
       const outputPath = await window.OctoSign.sign(
         file.path,
-        message => enqueueSnackbar(t(message), { variant: 'error' }),
+        message => enqueueSnackbar(message, { variant: 'error' }),
         onPromptRequest,
       );
       if (outputPath && outputPath !== file.path) {
