@@ -190,6 +190,7 @@ describe('Preload', () => {
         mtime: new Date(1578103935000),
       }),
     );
+    readFile.mockReturnValueOnce('buffer');
     const result = await window.pathToFile('/smt.pdf');
 
     expect(result).toEqual(
@@ -202,10 +203,10 @@ describe('Preload', () => {
       }),
     );
 
-    expect(result.arrayBuffer()).resolves.toBeInstanceOf(ArrayBuffer);
+    await expect(result.arrayBuffer()).resolves.toBe('buffer');
     expect(result.slice()).toBeInstanceOf(globalThis.Blob);
     expect(result.stream()).toBeInstanceOf(globalThis.ReadableStream);
-    expect(result.text()).resolves.toBe('');
+    await expect(result.text()).resolves.toBe('');
 
     delete globalThis.Blob;
     delete globalThis.ReadableStream;
