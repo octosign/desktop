@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-05-18T20:42:00.388Z\n"
+"POT-Creation-Date: 2020-06-07T23:02:36.953Z\n"
 "PO-Revision-Date: 2020-04-27 17:52+0000\n"
 "Last-Translator: Jakub Ďuraš <jakub@duras.me>, 2020\n"
 "Language-Team: Slovak (Slovakia) (https://www.transifex.com/jakub-duras/teams/108443/sk_SK/)\n"
@@ -148,6 +148,9 @@ msgstr "Všeobecné"
 msgid "Language"
 msgstr "Jazyk"
 
+msgid "Certificate was not chosen."
+msgstr "Nebol vybraný certifikát."
+
 msgid "Advanced electronic signature"
 msgstr "Pokročilý elektronický podpis"
 
@@ -162,9 +165,6 @@ msgstr ""
 "občiansky preukaz a čítačku dostupnú v niektorých EU štátoch). Používa "
 "knižnicu Digital Signature Service od European Commission s licenciou "
 "LGPL-2.1."
-
-msgid "Can not find supported PKCS DLL."
-msgstr "Nebolo možné nájsť podporované PKCS DLL"
 
 msgid "PKCS #11/#12 Path"
 msgstr "Cesta k PKCS #11/#12"
@@ -187,8 +187,8 @@ msgstr "Cesta pre podpísaný dokument nebola zvolená."
 msgid "Please provide the key password."
 msgstr "Prosím zadajte heslo ku kľúču."
 
-msgid "There was an error saving the signed document."
-msgstr "Vyskytla sa chyba pri ukladaní podpísaného dokumentu."
+msgid "There was an error saving the signed document:"
+msgstr "Vyskytla sa chyba pri ukladaní podpísaného dokumentu:"
 
 msgid "Please pick a certificate for signing"
 msgstr "Prosím vyberte certifikát pre podpísanie"
@@ -196,18 +196,20 @@ msgstr "Prosím vyberte certifikát pre podpísanie"
 msgid "Key was not chosen."
 msgstr "Nebol zvolený kľúč."
 
-msgid "Getting signing certificates failed. Please check Settings and Help."
+msgid ""
+"Getting signing certificates failed. Please check Settings and Help. Error:"
 msgstr ""
-"Získavanie certifikátov zlyhalo. Prosím skontrolujete Nastavenia a Pomoc."
+"Získavanie certifikátov zlyhalo. Prosím skontrolujete Nastavenia a Pomoc. "
+"Chyba:"
 
-msgid "Using of the PKCS #11 library failed."
-msgstr "Použitie PKCS #11 knižnice zlyhalo."
+msgid "Using of the PKCS #11 library failed:"
+msgstr "Použitie PKCS #11 knižnice zlyhalo:"
 
-msgid "Using of the PKCS #12 file failed."
-msgstr "Použitie PKCS #12 súboru zlyhalo."
+msgid "Using of the PKCS #12 file failed:"
+msgstr "Použitie PKCS #12 súboru zlyhalo:"
 
-msgid "Using of the MS CAPI failed."
-msgstr "Použitie MS CAPI zlyhalo."
+msgid "Using of the MS CAPI failed:"
+msgstr "Použitie MS CAPI zlyhalo:"
 
 msgid "Signed by"
 msgstr "Podpísal"
