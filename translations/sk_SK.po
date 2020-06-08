@@ -149,7 +149,7 @@ msgid "Language"
 msgstr "Jazyk"
 
 msgid "Certificate was not chosen."
-msgstr "Certifikát nebyl vybrán."
+msgstr "Nebol vybraný certifikát."
 
 msgid "Advanced electronic signature"
 msgstr "Pokročilý elektronický podpis"
