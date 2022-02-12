@@ -34,7 +34,7 @@
     "@types/yaml": "^1.9.7",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
-    "ajv": "^6.12.2",
+    "ajv": "^6.12.3",
     "babel-preset-es2015": "^6.24.1",
     "codecov": "^3.6.5",
     "cypress": "^4.5.0",
