@@ -1,0 +1,20 @@
+{
+  "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
+  "include": [
+    "src/renderer/**/*.tsx",
+    "src/renderer/**/*.ts",
+    "src/window.d.ts",
+    "src/global.d.ts"
+  ],
+  "exclude": ["**/*.spec.*"],
+  "compilerOptions": {
+    "composite": true,
+    "types": ["vitest/globals"],
+    "baseUrl": ".",
+    "paths": {
+      "@ui/*": [
+        "src/ui/*"
+      ]
+    }
+  }
+}

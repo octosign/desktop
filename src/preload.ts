@@ -3,12 +3,12 @@ import { join, basename } from 'path';
 import isDev from 'electron-is-dev';
 import { file } from 'tmp-promise';
 import mime from 'mime-types';
-import { writeFile, stat, readFile } from 'fs-extra';
+import { writeFile, stat, readFile } from 'node:fs/promises';
 
 import i18n from './shared/i18nSetup';
-import BackendManager from './preload/BackendManager';
-import Backend from './preload/Backend';
-import Settings from './preload/Settings';
+import BackendManager from './main/BackendManager';
+import Backend from './main/Backend';
+import Settings from './main/Settings';
 import { BackendOption } from './shared/BackendResults';
 
 const backendsPath = isDev
@@ -82,7 +82,6 @@ window.getVersion = () => remote.app.getVersion();
 
 // Allow require for spectron
 if (process.env.SPECTRON === '1') {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
+    // @ts-expect-error Just during testing
   window.spectronRequire = require;
 }

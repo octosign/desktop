@@ -1,3 +1,5 @@
+import { vi } from 'vitest';
+
 module.exports = {
-  exec: jest.fn(),
+  exec: vi.fn(),
 };

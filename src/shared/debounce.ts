@@ -1,6 +1,7 @@
 // Uses any to make the typing easier
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const debounce = <F extends Function>(func: F, wait = 250): F => {
+type Fn = (...args: any[]) => unknown;
+const debounce = <F extends Fn>(func: F, wait = 250): F => {
   let timeout: NodeJS.Timeout;
 
   return function (this: any, ...args: any[]) {

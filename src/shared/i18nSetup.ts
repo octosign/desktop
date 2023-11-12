@@ -35,7 +35,7 @@ i18n
     nsSeparator: false,
     keySeparator: false,
     detection: { caches: ['localStorage'], order: ['localStorage', 'navigator'] },
-    whitelist: languages.map(lang => lang.code),
+    supportedLngs: languages.map(lang => lang.code),
   });
 
 export default i18n;

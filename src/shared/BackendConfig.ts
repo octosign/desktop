@@ -2,7 +2,7 @@ interface BackendConfig {
   name: string;
   description?: string;
   repository?: string;
-  version: string;
+  version?: string;
   author?: string;
   license?: string;
   exec: string;

@@ -1,0 +1,8 @@
+name: Simple image signature
+description: Signs PDFs using chosen image or drawn signature. Based on the unipdf library from FoxyUtils ehf licensed under the AGPLv3.
+repository: https://github.com/durasj/octosign-image
+version: 0.1.0
+author: Jakub Ďuraš <jakub@duras.me>
+license: GNU Affero General Public License v3.0
+exec: ./main.exe
+build: bash -e ./build.sh

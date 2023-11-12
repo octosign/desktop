@@ -1,1 +1,3 @@
-export default true;
+const isDev = true;
+
+export default isDev;
